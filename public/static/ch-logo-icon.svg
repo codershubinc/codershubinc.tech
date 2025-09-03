@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" fill="none">
+  <!-- Gradient Definitions -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect x="0" y="0" width="40" height="40" rx="10" ry="10" fill="url(#bgGradient)" />
+  
+  <!-- Letter C -->
+  <path d="M12 12 C12 10, 14 8, 17 8 C19 8, 20 9, 20 10 L18 12 C18 11, 17.5 10, 17 10 C15.5 10, 15 11, 15 12 L15 16 C15 17, 15.5 18, 17 18 C17.5 18, 18 17, 18 16 L20 18 C20 19, 19 20, 17 20 C14 20, 12 18, 12 16 Z" fill="white"/>
+  
+  <!-- Letter H -->
+  <path d="M22 8 L25 8 L25 13 L28 13 L28 8 L31 8 L31 20 L28 20 L28 16 L25 16 L25 20 L22 20 Z" fill="white"/>
+  
+  <!-- Subtle highlight -->
+  <rect x="0" y="0" width="40" height="40" rx="10" ry="10" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+</svg>

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" fill="none">
+  <!-- Gradient Definitions -->
+  <defs>
+    <linearGradient id="modernGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#6366f1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Modern rounded square background -->
+  <rect x="2" y="2" width="36" height="36" rx="12" ry="12" fill="url(#modernGradient)" />
+  
+  <!-- Modern styled CH -->
+  <g fill="white" font-family="system-ui, -apple-system, sans-serif" font-weight="700">
+    <!-- Letter C -->
+    <path d="M11.5 20 C11.5 16.5, 13.5 14, 17 14 C19 14, 20.5 14.8, 21.2 16.2 L19.5 17.5 C19.2 16.8, 18.3 16.2, 17 16.2 C15.2 16.2, 14.2 17.5, 14.2 20 C14.2 22.5, 15.2 23.8, 17 23.8 C18.3 23.8, 19.2 23.2, 19.5 22.5 L21.2 23.8 C20.5 25.2, 19 26, 17 26 C13.5 26, 11.5 23.5, 11.5 20 Z"/>
+    
+    <!-- Letter H -->
+    <path d="M23 14.2 L25.5 14.2 L25.5 18.8 L28.5 18.8 L28.5 14.2 L31 14.2 L31 25.8 L28.5 25.8 L28.5 21 L25.5 21 L25.5 25.8 L23 25.8 Z"/>
+  </g>
+</svg>

@@ -1,0 +1,45 @@
+<svg width="450" height="375" viewBox="0 0 180 150" xmlns="http://www.w3.org/2000/svg" aria-label="CodersHub Inc Logo Exact Match">
+  <defs>
+    <style>
+      .logo-shape {
+        fill: #0099FF; /* Keeping the vibrant blue */
+      }
+      .logo-text {
+        font-family: 'Montserrat', 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        font-size: 15px;
+        font-weight: 600;
+        fill: #0099FF;
+        text-anchor: middle;
+        letter-spacing: 0.5px;
+      }
+    </style>
+  </defs>
+
+  <g id="logo-group-exact">
+    <path class="logo-shape" d="
+      M 10,31.8
+      A 21.8,21.8 0 0 1 31.8,10
+      H 65
+      V 31.8
+      H 43
+      V 108.2
+      A 21.8,21.8 0 0 0 65,130
+      H 118
+      V 10
+      H 140
+      V 90
+      L 107.5,130
+      H 65
+      V 65
+      H 118
+      V 31.8
+      H 65
+      V 10
+      Z
+    "/>
+
+    <text x="75" y="146" class="logo-text">
+      CODERSHUBINC
+    </text>
+  </g>
+</svg>
