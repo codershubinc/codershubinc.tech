@@ -1,4 +1,4 @@
-import { ProjectData } from "../types";
+import { ProjectData } from "../../lib/project.types";
 
 const vsMusic: ProjectData = {
     name: "VS Music",

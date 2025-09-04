@@ -1,4 +1,4 @@
-import { ProjectSummary } from "../types";
+import { ProjectSummary } from "../../lib/project.types";
 import { detailedProjects } from "./index";
 
 // Helper function to map detailed project data to summary format

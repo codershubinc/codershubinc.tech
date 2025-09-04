@@ -12,8 +12,11 @@ export {
 // Re-export types for convenience
 export type {
     ProjectData,
-    ProjectSummary,
+    ProjectSummary
+} from "./project.types";
+
+export type {
     SiteConfig,
     Author,
     SocialLinks
-} from "@/data";
+} from "./site.types";

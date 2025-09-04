@@ -1,4 +1,4 @@
-import { SiteConfig } from "../types";
+import { SiteConfig } from "../../lib/site.types";
 
 export const siteConfig: SiteConfig = {
     name: "CodersHub Inc",

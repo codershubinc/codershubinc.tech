@@ -1,6 +1,6 @@
 import githubNewtab from "./github-newtab";
 import vsMusic from "./vs-music";
-import { ProjectData } from "../types";
+import { ProjectData } from "../../lib/project.types";
 
 // Detailed project data for individual project pages
 export const detailedProjects: Record<string, ProjectData> = {

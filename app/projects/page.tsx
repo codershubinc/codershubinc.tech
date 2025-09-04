@@ -74,7 +74,7 @@ export default function ProjectsPage() {
 
                                     <div className="flex flex-col sm:flex-row gap-3">
                                         <Link
-                                            href={`/projects/${project.id}`}
+                                            href={`/project/${project.id}`}
                                             className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg text-center transition-colors duration-200"
                                         >
                                             View Details
