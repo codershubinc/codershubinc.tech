@@ -1,5 +1,5 @@
 // Export all types
-export * from "./types";
+export * from './projects';
 
 // Export site configuration
 export { siteConfig } from "./site/config";
