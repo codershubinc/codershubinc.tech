@@ -1,6 +1,6 @@
 // Example of how to add a new project to the data structure
 
-import { ProjectData } from "../../lib/project.types";
+import { ProjectData } from "../../lib/project.type";
 
 const newProject: ProjectData = {
     name: "Project Name",

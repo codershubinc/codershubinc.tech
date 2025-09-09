@@ -1,7 +1,7 @@
 // Server Components - for async operations and metadata
 import React from "react";
 import { getAllProjectIds, getProjectById } from "@/data";
-import { ProjectData } from "@/lib/project.types";
+import { ProjectData } from "@/lib/project.type";
 import { Metadata } from "next";
 
 interface PageProps {

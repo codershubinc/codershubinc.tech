@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link";
 import { detailedProjects } from "@/data";
-import { ProjectData } from "@/lib/project.types";
+import { ProjectData } from "@/lib/project.type";
 import { useRouter } from "next/navigation";
 
 // Project Sidebar Component
@@ -51,8 +51,8 @@ function ProjectSidebar({ currentProject }: { currentProject: string }) {
                                     key={projectId}
                                     href={`/projects/${projectId}`}
                                     className={`block px-4 py-3 rounded-lg transition-all duration-200 ${isActive
-                                            ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-md'
-                                            : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700'
+                                        ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-md'
+                                        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700'
                                         }`}
                                 >
                                     <div className="font-medium">{project.name}</div>

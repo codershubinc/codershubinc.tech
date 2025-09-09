@@ -1,4 +1,4 @@
-import { ProjectData } from "../../lib/project.types";
+import { ProjectData } from "../../lib/project.type";
 
 const githubNewtab: ProjectData = {
     name: "GitHub NewTab",

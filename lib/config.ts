@@ -13,10 +13,10 @@ export {
 export type {
     ProjectData,
     ProjectSummary
-} from "./project.types";
+} from "./project.type";
 
 export type {
     SiteConfig,
     Author,
     SocialLinks
-} from "./site.types";
+} from "./site.type";
