@@ -1,142 +1,23 @@
 "use client"
-import Link from "next/link";
 import Footer from "@/components/Footer";
+import Hero from "@/components/Hero";
+import ProjectCarousel from "@/components/ProjectCarousel";
+import { getFeaturedProjects } from "@/data";
 
 export default function Home() {
+  const featuredProjects = getFeaturedProjects();
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
       {/* Hero Section */}
-      <section className="relative px-6 py-20 sm:py-32 lg:px-8 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10 dark:from-blue-400/5 dark:to-purple-400/5"></div>
-        <div className="relative mx-auto max-w-4xl text-center">
-          {/* Logo */}
-          <div className="mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl mb-4">
-              <span className="text-2xl font-bold text-white">CH</span>
-            </div>
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl">
-              CodersHub Inc
-            </h1>
-          </div>
-
-          {/* Main Headline */}
-          <h2 className="text-2xl sm:text-3xl font-semibold text-gray-800 dark:text-gray-200 mb-6">
-            Smart, open-source utilities for the modern developer.
-          </h2>
-
-          {/* Sub-headline */}
-          <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed">
-            A collection of practical, open-source projects designed to solve real-world developer problems.
-          </p>
-
-          {/* Primary CTA */}
-          <div className="flex justify-center">
-            <Link
-              href="/projects"
-              className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200"
-            >
-              View All Projects
-            </Link>
-          </div>
-        </div>
-      </section>
+      <Hero />
 
       {/* Featured Projects Section */}
-      <section id="projects" className="py-20 px-6 lg:px-8 bg-white/50 dark:bg-slate-800/50">
-        <div className="mx-auto max-w-6xl">
-          <div className="text-center mb-16">
-            <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              Featured Projects
-            </h3>
-            <p className="text-lg text-gray-600 dark:text-gray-300">
-              Open-source tools built to enhance your development workflow
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* GitHub NewTab Project Card */}
-            <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-slate-700 hover:border-blue-200 dark:hover:border-blue-800">
-              <div className="w-12 h-12 bg-gradient-to-br from-gray-800 to-gray-600 rounded-xl flex items-center justify-center mb-6">
-                <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                </svg>
-              </div>
-              <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
-                GitHub NewTab
-              </h4>
-              <p className="text-gray-600 dark:text-gray-300 mb-6">
-                Your GitHub dashboard in every new tab.
-              </p>
-              <div className="flex gap-3">
-                <Link
-                  href="/projects/github-newtab"
-                  className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg text-center transition-colors duration-200"
-                >
-                  View Details
-                </Link>
-                <a
-                  href="#"
-                  className="flex-1 border border-gray-300 dark:border-slate-600 hover:border-blue-300 dark:hover:border-blue-600 text-gray-700 dark:text-gray-300 font-medium py-2 px-4 rounded-lg text-center transition-colors duration-200"
-                >
-                  Download
-                </a>
-              </div>
-            </div>
-
-            {/* VS Music Project Card */}
-            <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-slate-700 hover:border-blue-200 dark:hover:border-blue-800">
-              <div className="w-12 h-12 bg-gradient-to-br from-purple-600 to-pink-600 rounded-xl flex items-center justify-center mb-6">
-                <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
-                </svg>
-              </div>
-              <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
-                VS Music
-              </h4>
-              <p className="text-gray-600 dark:text-gray-300 mb-6">
-                Control your music directly from VS Code.
-              </p>
-              <div className="flex gap-3">
-                <Link
-                  href="/projects/vs-music"
-                  className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg text-center transition-colors duration-200"
-                >
-                  View Details
-                </Link>
-                <a
-                  href="#"
-                  className="flex-1 border border-gray-300 dark:border-slate-600 hover:border-blue-300 dark:hover:border-blue-600 text-gray-700 dark:text-gray-300 font-medium py-2 px-4 rounded-lg text-center transition-colors duration-200"
-                >
-                  Download
-                </a>
-              </div>
-            </div>
-
-            {/* Placeholder for future project */}
-            <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-slate-700 hover:border-blue-200 dark:hover:border-blue-800">
-              <div className="w-12 h-12 bg-gradient-to-br from-green-600 to-blue-600 rounded-xl flex items-center justify-center mb-6">
-                <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
-                </svg>
-              </div>
-              <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
-                More Coming Soon
-              </h4>
-              <p className="text-gray-600 dark:text-gray-300 mb-6">
-                New developer tools in development.
-              </p>
-              <div className="flex gap-3">
-                <button
-                  disabled
-                  className="flex-1 bg-gray-300 dark:bg-slate-600 text-gray-500 dark:text-slate-400 font-medium py-2 px-4 rounded-lg text-center cursor-not-allowed"
-                >
-                  Coming Soon
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <ProjectCarousel
+        projects={featuredProjects}
+        title="Featured Projects"
+        description="Open-source tools built to enhance your development workflow"
+      />
 
       {/* Philosophy Section */}
       <section className="py-20 px-6 lg:px-8">
@@ -270,7 +151,7 @@ export default function Home() {
               className="bg-gray-900 hover:bg-gray-800 dark:bg-gray-700 dark:hover:bg-gray-600 text-white font-semibold px-6 py-3 rounded-lg transition-colors duration-200 flex items-center gap-2"
             >
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
               </svg>
               View on GitHub
             </a>
