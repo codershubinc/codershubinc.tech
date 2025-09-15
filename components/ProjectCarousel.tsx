@@ -8,15 +8,18 @@ interface ProjectCarouselProps {
     projects: ProjectSummary[];
     title?: string;
     description?: string;
+    autoPlay?: boolean;
 }
 
 export default function ProjectCarousel({
     projects,
     title = "Featured Projects",
-    description = "Open-source tools built to enhance your development workflow"
+    description = "Open-source tools built to enhance your development workflow",
+    autoPlay = true
 }: ProjectCarouselProps) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [itemsPerView, setItemsPerView] = useState(1);
+    const [isHovered, setIsHovered] = useState(false);
 
     // Update items per view based on screen size
     useEffect(() => {
@@ -37,28 +40,52 @@ export default function ProjectCarousel({
 
     const maxIndex = Math.max(0, projects.length - itemsPerView);
 
+    const [isTransitioning, setIsTransitioning] = useState(false);
+
     const nextSlide = useCallback(() => {
-        setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
-    }, [maxIndex]);
+        if (isTransitioning) return;
+        setIsTransitioning(true);
+        setTimeout(() => {
+            setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+            setTimeout(() => setIsTransitioning(false), 100);
+        }, 50);
+    }, [maxIndex, isTransitioning]);
 
-    const prevSlide = () => {
-        setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
-    };
+    const prevSlide = useCallback(() => {
+        if (isTransitioning) return;
+        setIsTransitioning(true);
+        setTimeout(() => {
+            setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
+            setTimeout(() => setIsTransitioning(false), 100);
+        }, 50);
+    }, [maxIndex, isTransitioning]);
 
-    const goToSlide = (index: number) => {
-        setCurrentIndex(Math.min(index, maxIndex));
-    };
+    const goToSlide = useCallback((index: number) => {
+        if (isTransitioning) return;
+        setIsTransitioning(true);
+        setTimeout(() => {
+            setCurrentIndex(Math.min(index, maxIndex));
+            setTimeout(() => setIsTransitioning(false), 100);
+        }, 50);
+    }, [maxIndex, isTransitioning]);
 
-    // Auto-play functionality
+    // Auto-play functionality with pause on hover
     useEffect(() => {
-        if (!isAutoPlay) return;
+        if (!autoPlay || projects.length <= itemsPerView || isHovered) return;
 
         const timer = setInterval(() => {
-            nextSlide();
-        }, 4000); // Change slide every 4 seconds
+            if (!isTransitioning) {
+                nextSlide();
+            }
+        }, 5000); // Increased delay to 5 seconds for better UX
 
         return () => clearInterval(timer);
-    }, [currentIndex, maxIndex, nextSlide]);
+    }, [autoPlay, projects.length, itemsPerView, nextSlide, isTransitioning, isHovered]);
+
+    // Don't render if no projects
+    if (!projects || projects.length === 0) {
+        return null;
+    }
 
     return (
         <section className="py-20 px-6 lg:px-8 bg-white/30 dark:bg-slate-800/30 backdrop-blur-sm">
@@ -74,7 +101,11 @@ export default function ProjectCarousel({
                 </div>
 
                 {/* Carousel Container */}
-                <div className="relative">
+                <div
+                    className="relative"
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}
+                >
                     {/* Navigation Buttons */}
                     {projects.length > itemsPerView && (
                         <>
@@ -82,6 +113,7 @@ export default function ProjectCarousel({
                                 onClick={prevSlide}
                                 className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-12 h-12 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:scale-110 border border-gray-200/50 dark:border-slate-600/50"
                                 aria-label="Previous projects"
+                                type="button"
                             >
                                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                                     <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -92,6 +124,7 @@ export default function ProjectCarousel({
                                 onClick={nextSlide}
                                 className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-12 h-12 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:scale-110 border border-gray-200/50 dark:border-slate-600/50"
                                 aria-label="Next projects"
+                                type="button"
                             >
                                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                                     <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
@@ -101,19 +134,20 @@ export default function ProjectCarousel({
                     )}
 
                     {/* Cards Container */}
-                    <div className="overflow-hidden rounded-2xl">
+                    <div className="overflow-hidden">
                         <div
-                            className="flex transition-transform duration-500 ease-in-out gap-8"
+                            className={`flex transition-all duration-700 ease-out ${isTransitioning ? 'transform-gpu' : ''
+                                }`}
                             style={{
                                 transform: `translateX(-${currentIndex * (100 / itemsPerView)}%)`,
-                                width: `${(projects.length / itemsPerView) * 100}%`
+                                willChange: 'transform'
                             }}
                         >
                             {projects.map((project) => (
                                 <div
                                     key={project.id}
-                                    className="flex-shrink-0"
-                                    style={{ width: `${100 / projects.length}%` }}
+                                    className="flex-shrink-0 px-4"
+                                    style={{ width: `${100 / itemsPerView}%` }}
                                 >
                                     <ProjectCard project={project} />
                                 </div>
@@ -129,10 +163,11 @@ export default function ProjectCarousel({
                                     key={index}
                                     onClick={() => goToSlide(index)}
                                     className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentIndex
-                                            ? "bg-blue-600 dark:bg-blue-400 scale-125"
-                                            : "bg-gray-300 dark:bg-slate-600 hover:bg-gray-400 dark:hover:bg-slate-500"
+                                        ? "bg-blue-600 dark:bg-blue-400 scale-125"
+                                        : "bg-gray-300 dark:bg-slate-600 hover:bg-gray-400 dark:hover:bg-slate-500"
                                         }`}
                                     aria-label={`Go to slide ${index + 1}`}
+                                    type="button"
                                 />
                             ))}
                         </div>
