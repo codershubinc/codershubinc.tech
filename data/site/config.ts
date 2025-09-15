@@ -8,7 +8,8 @@ export const siteConfig: SiteConfig = {
     author: {
         name: "Swapnil Ingle",
         url: "https://portfolio.codershubinc.tech",
-        twitter: "@codershubinc"
+        twitter: "https://twitter.com/codershubinc",
+        github: "https://github.com/codershubinc"
     },
     social: {
         github: "https://github.com/codershubinc",

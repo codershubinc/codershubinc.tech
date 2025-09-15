@@ -4,6 +4,7 @@ export interface Author {
     name: string;
     url: string;
     twitter: string;
+    github: string;
 }
 
 export interface SocialLinks {
