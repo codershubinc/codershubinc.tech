@@ -1,5 +1,6 @@
 "use client"
 import { ProjectData } from "@/lib/project.type";
+import Image from "next/image";
 
 // Project Showcase Component
 function ProjectShowcase({ project }: { project: ProjectData }) {
@@ -15,16 +16,25 @@ function ProjectShowcase({ project }: { project: ProjectData }) {
                 </p>
             </section>
 
-            {/* Image Showcase - Placeholder for now */}
-            <section className="mb-8">
-                <div className="bg-gradient-to-br from-gray-100 to-gray-200 dark:from-slate-700 dark:to-slate-800 rounded-xl h-64 md:h-80 flex items-center justify-center shadow-lg">
-                    <div className="text-center">
-                        <div className="text-4xl mb-2">🖼️</div>
-                        <p className="text-gray-600 dark:text-gray-400">Project Screenshot</p>
-                        <p className="text-sm text-gray-500 dark:text-gray-500">Coming Soon</p>
+            {/* Screenshot Showcase */}
+            {Array.isArray(project.screenshots) && project.screenshots.length > 0 && (
+                <section className="mb-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {project.screenshots.map((src: string, i: number) => (
+                            <div key={i} className="bg-gradient-to-br from-gray-100 to-gray-200 dark:from-slate-700 dark:to-slate-800 rounded-xl shadow-lg flex items-center justify-center h-64 md:h-80 overflow-hidden">
+                                {/* TODO: Use next/image for optimization */}
+                                <Image
+                                    src={src}
+                                    alt={`Screenshot ${i + 1}`}
+                                    className="object-contain w-full h-full rounded-xl"
+                                    width={640}
+                                    height={400}
+                                />
+                            </div>
+                        ))}
                     </div>
-                </div>
-            </section>
+                </section>
+            )}
 
             {/* Description Section */}
             <section className="mb-8">

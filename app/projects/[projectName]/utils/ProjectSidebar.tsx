@@ -1,12 +1,14 @@
 "use client"
 import Link from "next/link";
-import { detailedProjects } from "@/data";
 import { useRouter } from "next/navigation";
 
 // Project Sidebar Component
-function ProjectSidebar({ currentProject }: { currentProject: string }) {
+function ProjectSidebar(
+    {
+        currentProject,
+        allProjects
+    }: { currentProject: string, allProjects: [string, { name: string; tagline: string }][] }) {
     const router = useRouter();
-    const allProjects = Object.entries(detailedProjects);
 
     const handleProjectChange = (selectedProject: string) => {
         router.push(`/projects/${selectedProject}`);

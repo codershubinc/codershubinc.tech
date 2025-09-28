@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { projectsData } from "@/lib/config";
+// import removed: projectsData
 import { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -16,8 +16,29 @@ export const metadata: Metadata = {
     },
 };
 
-export default function ProjectsPage() {
-    const featuredProjects = projectsData.filter(project => project.featured);
+export default async function ProjectsPage() {
+    let featuredProjects = [];
+    try {
+        const res = await fetch("https://api.codershubinc.tech/projects/list/all", {
+            next: { revalidate: 60 },
+        });
+        if (res.ok) {
+            const projectNames: string[] = await res.json();
+            // Fetch details for each project
+            const projectDetails = await Promise.all(
+                projectNames.map(async (name) => {
+                    const detailRes = await fetch(`https://api.codershubinc.tech/projects/${encodeURIComponent(name)}`);
+                    if (detailRes.ok) return await detailRes.json();
+                    return null;
+                })
+            );
+            featuredProjects = projectDetails
+            console.log(projectDetails);
+            
+        }
+    } catch {
+        // ignore
+    }
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
@@ -51,9 +72,9 @@ export default function ProjectsPage() {
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            {featuredProjects.map((project) => (
+                            {featuredProjects.map((project, idx) => (
                                 <div
-                                    key={project.id}
+                                    key={project.id ?? project.name ?? idx}
                                     className="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-slate-700 hover:border-blue-200 dark:hover:border-blue-800 group"
                                 >
                                     <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-200">
@@ -80,7 +101,7 @@ export default function ProjectsPage() {
                                             View Details
                                         </Link>
                                         <Link
-                                            href={project.downloadLink}
+                                            href={project.links.downloadLink}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="flex-1 border border-gray-300 dark:border-slate-600 hover:border-blue-300 dark:hover:border-blue-600 text-gray-700 dark:text-gray-300 font-medium py-3 px-4 rounded-lg text-center transition-colors duration-200"
@@ -88,7 +109,7 @@ export default function ProjectsPage() {
                                             Download
                                         </Link>
                                         <Link
-                                            href={project.githubLink}
+                                            href={project.links.githubLink}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="flex-none w-12 h-12 border border-gray-300 dark:border-slate-600 hover:border-blue-300 dark:hover:border-blue-600 text-gray-700 dark:text-gray-300 rounded-lg flex items-center justify-center transition-colors duration-200"
