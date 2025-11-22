@@ -38,7 +38,7 @@ export default function RootLayout({
       >
         <ThemeProvider
           attribute="data-theme"
-          defaultTheme="backend"
+          defaultTheme="black"
           themes={['og', 'retro', 'black', 'backend']}
           enableSystem={false}
           disableTransitionOnChange
