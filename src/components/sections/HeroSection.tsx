@@ -49,18 +49,17 @@ export function HeroSection() {
                                 </div>
                                 <div className="w-14"></div> {/* Spacer for centering */}
                             </div>
-                            
+
                             {/* API Navigation Tabs */}
                             <div className="flex border-b border-[#27272a] bg-[#0c0c0c]">
                                 {(['overview', 'stack', 'languages', 'projects', 'github'] as const).map((tab) => (
                                     <button
                                         key={tab}
                                         onClick={() => setActiveEndpoint(tab)}
-                                        className={`px-4 py-2 text-xs font-mono transition-all border-r border-[#27272a] hover:bg-[#18181b] hover:text-[#e4e4e7] ${
-                                            activeEndpoint === tab 
-                                                ? 'bg-[#18181b] text-[#e4e4e7] border-b-2 border-b-[#e4e4e7]' 
+                                        className={`px-4 py-2 text-xs font-mono transition-all border-r border-[#27272a] hover:bg-[#18181b] hover:text-[#e4e4e7] ${activeEndpoint === tab
+                                                ? 'bg-[#18181b] text-[#e4e4e7] border-b-2 border-b-[#e4e4e7]'
                                                 : 'text-[#71717a] bg-[#0c0c0c]'
-                                        }`}
+                                            }`}
                                     >
                                         {tab.toUpperCase()}
                                     </button>
@@ -71,9 +70,9 @@ export function HeroSection() {
                                 <div className="flex items-center mb-4 text-[#e4e4e7]">
                                     <span className="mr-2 text-[#27c93f]">➜</span>
                                     <span className="mr-2 text-[#27c93f]">~</span>
-                                    <span 
-                                        className="typing-command" 
-                                        key={activeEndpoint} 
+                                    <span
+                                        className="typing-command"
+                                        key={activeEndpoint}
                                         style={{ '--typing-width': `${(`curl -X GET ${apiData[activeEndpoint].endpoint}`).length}ch` } as React.CSSProperties}
                                     >
                                         curl -X GET {apiData[activeEndpoint].endpoint}
@@ -123,13 +122,13 @@ export function HeroSection() {
                                                     ONLINE
                                                 </span>
                                             </div>
-                                            
+
                                             <div className="space-y-6">
                                                 <div>
                                                     <div className="text-[#a1a1aa] text-xs uppercase tracking-wider mb-1">Organization</div>
                                                     <div className="text-[#e4e4e7] text-3xl font-bold tracking-tight">CodersHub Inc</div>
                                                 </div>
-                                                
+
                                                 <div>
                                                     <div className="text-[#a1a1aa] text-xs uppercase tracking-wider mb-1">Mission Protocol</div>
                                                     <div className="text-[#e4e4e7] text-lg">Building Developer Excellence</div>
@@ -234,8 +233,8 @@ export function HeroSection() {
                                                             <span className="text-[#a1a1aa]">{lang.usage}</span>
                                                         </div>
                                                         <div className="h-2 bg-[#27272a] rounded-full overflow-hidden">
-                                                            <div 
-                                                                className="h-full bg-[#e4e4e7] transition-all duration-1000 ease-out" 
+                                                            <div
+                                                                className="h-full bg-[#e4e4e7] transition-all duration-1000 ease-out"
                                                                 style={{ width: lang.usage }}
                                                             ></div>
                                                         </div>
@@ -303,7 +302,7 @@ export function HeroSection() {
                                                 </svg>
                                                 GitHub Activity
                                             </h3>
-                                            
+
                                             <div className="grid grid-cols-1 gap-6">
                                                 {/* Total Contributions */}
                                                 <div className="bg-[#18181b] border border-[#27272a] p-5 rounded-lg">
@@ -349,9 +348,9 @@ export function HeroSection() {
                                                     <div className="text-[#a1a1aa] text-xs uppercase tracking-wider mb-3">Contribution Graph</div>
                                                     <div className="relative w-full h-32 bg-[#18181b] border border-[#27272a] rounded-lg overflow-hidden flex items-center justify-center">
                                                         {/* Using the image URL provided by user but with theme param */}
-                                                        <Image 
-                                                            src="https://github-readme-streak-stats-chi-three.vercel.app/?user=codershubinc&theme=dark&hide_border=true&background=00000000&ring=e4e4e7&fire=e4e4e7&currStreakLabel=e4e4e7" 
-                                                            alt="GitHub Streak Stats" 
+                                                        <Image
+                                                            src="https://github-readme-streak-stats-chi-three.vercel.app/?user=codershubinc&theme=dark&hide_border=true&background=00000000&ring=e4e4e7&fire=e4e4e7&currStreakLabel=e4e4e7"
+                                                            alt="GitHub Streak Stats"
                                                             width={500}
                                                             height={200}
                                                             className="max-w-full max-h-full object-contain opacity-90 hover:opacity-100 transition-opacity"
@@ -365,8 +364,8 @@ export function HeroSection() {
                                 )}
                             </AnimatePresence>
 
-                            <Link 
-                                href="/projects" 
+                            <Link
+                                href="/projects"
                                 className="block w-full py-4 text-center border border-[#e4e4e7] text-[#e4e4e7] hover:bg-[#e4e4e7] hover:text-black transition-all duration-300 font-mono text-lg group rounded-lg relative overflow-hidden"
                             >
                                 <span className="relative z-10 flex items-center justify-center">

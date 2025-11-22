@@ -30,7 +30,7 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
       </Button>
       <h1 className="text-4xl font-bold mb-4">{project.title}</h1>
       <p className="text-xl text-muted-foreground mb-8">{project.description}</p>
-      
+
       <div className="mb-8">
         <h2 className="text-2xl font-semibold mb-4">Tech Stack</h2>
         <div className="flex flex-wrap gap-2">

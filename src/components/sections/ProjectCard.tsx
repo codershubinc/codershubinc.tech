@@ -57,7 +57,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
           <p className="text-gray-600 dark:text-gray-300 leading-relaxed line-clamp-3">
             {project.description}
           </p>
-          
+
           {/* Tech Stack */}
           <div className="flex flex-wrap gap-2 mt-2">
             {project.techStack.map((tech) => (

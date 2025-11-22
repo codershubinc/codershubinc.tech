@@ -1,5 +1,26 @@
 import { siteConfig } from "@/data/site";
 
+// Helper to generate mock contribution data
+const generateContributions = () => {
+    const contributions = [];
+    const today = new Date("2025-11-22");
+    const oneYearAgo = new Date(today);
+    oneYearAgo.setFullYear(today.getFullYear() - 1);
+
+    for (let d = new Date(oneYearAgo); d <= today; d.setDate(d.getDate() + 1)) {
+        const dateStr = d.toISOString().split('T')[0];
+        // Mock random contributions
+        const count = Math.random() > 0.5 ? Math.floor(Math.random() * 5) + 1 : 0;
+        contributions.push({
+            color: count > 0 ? "#9be9a8" : "#ebedf0",
+            contributionCount: count,
+            contributionLevel: count > 0 ? "FIRST_QUARTILE" : "NONE",
+            date: dateStr
+        });
+    }
+    return contributions;
+};
+
 export const terminalData = {
     overview: {
         endpoint: "https://api.codershub.inc/v1/portfolio",
@@ -63,24 +84,12 @@ export const terminalData = {
         }
     },
     github: {
-        endpoint: "https://api.github.com/users/codershubinc/stats",
+        endpoint: "https://github-contributions-api.deno.dev/codershubinc.json?flat=true&to=2025-11-22",
         response: {
             status: 200,
             data: {
-                mode: "daily",
-                totalContributions: 1788,
-                firstContribution: "2021-09-11",
-                longestStreak: {
-                    start: "2025-06-20",
-                    end: "2025-11-21",
-                    length: 155
-                },
-                currentStreak: {
-                    start: "2025-06-20",
-                    end: "2025-11-21",
-                    length: 155
-                },
-                excludedDays: []
+                contributions: generateContributions(),
+                totalContributions: 1169
             },
             timestamp: new Date().toISOString()
         }
