@@ -75,6 +75,31 @@ body {
   font-family: var(--font-mono), monospace;
 }
 
+/* Backend Theme Scrollbar */
+[data-theme='backend'] ::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+[data-theme='backend'] ::-webkit-scrollbar-track {
+  background: #0c0c0c;
+  border-left: 1px solid #27272a;
+}
+
+[data-theme='backend'] ::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border: 2px solid #0c0c0c;
+  border-radius: 4px;
+}
+
+[data-theme='backend'] ::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46;
+}
+
+[data-theme='backend'] ::-webkit-scrollbar-corner {
+  background: #0c0c0c;
+}
+
 /* Slight radius for backend theme */
 [data-theme='backend'] .rounded-lg,
 [data-theme='backend'] .rounded-xl,

@@ -6,18 +6,115 @@ import Image from "next/image";
 import { siteConfig } from "@/data/site";
 import { useTheme } from "next-themes";
 import { motion, AnimatePresence } from "framer-motion";
-import { terminalData, type TerminalEndpoint } from "@/data/terminal";
+import { terminalData, type TerminalEndpoint, fetchGithubActivity, fetchGithubProfile } from "@/data/terminal";
 
 export function HeroSection() {
     const { theme } = useTheme();
     const [mounted, setMounted] = useState(false);
+    const [timestamp, setTimestamp] = useState(0);
     const [activeEndpoint, setActiveEndpoint] = useState<TerminalEndpoint>('overview');
+    const [apiData, setApiData] = useState(terminalData);
 
     useEffect(() => {
-        setMounted(true);
+        const timer = setTimeout(() => {
+            setMounted(true);
+            setTimestamp(Date.now());
+        }, 0);
+
+        const loadData = async () => {
+            const [activityData, profileData] = await Promise.all([
+                fetchGithubActivity(),
+                fetchGithubProfile()
+            ]);
+
+            setApiData(prev => {
+                const newData = { ...prev };
+                
+                if (activityData) {
+                    newData.activity = {
+                        ...prev.activity,
+                        response: {
+                            ...prev.activity.response,
+                            data: {
+                                contributions: activityData.contributions,
+                                totalContributions: activityData.totalContributions
+                            }
+                        }
+                    };
+                }
+
+                if (profileData) {
+                    newData.github = {
+                        ...prev.github,
+                        response: {
+                            ...prev.github.response,
+                            data: {
+                                login: profileData.login,
+                                public_repos: profileData.public_repos,
+                                followers: profileData.followers,
+                                following: profileData.following,
+                                created_at: profileData.created_at
+                            }
+                        }
+                    };
+
+                    newData.overview = {
+                        ...prev.overview,
+                        response: {
+                            ...prev.overview.response,
+                            data: {
+                                ...prev.overview.response.data,
+                                github_stats: {
+                                    public_repos: profileData.public_repos,
+                                    followers: profileData.followers,
+                                    bio: profileData.bio || "",
+                                    location: profileData.location || "",
+                                    blog: profileData.blog || "",
+                                    avatar_url: profileData.avatar_url
+                                }
+                            }
+                        }
+                    };
+                }
+
+                return newData;
+            });
+        };
+        loadData();
+
+        return () => clearTimeout(timer);
     }, []);
 
-    const apiData = terminalData;
+    // Helper to calculate streaks from contributions
+    const getStreakStats = () => {
+        if (!apiData.activity?.response.data.contributions) return { current: 0, longest: 0 };
+        
+        const contributions = apiData.activity.response.data.contributions;
+        let current = 0;
+        let longest = 0;
+        let temp = 0;
+
+        // Calculate streaks
+        for (let i = 0; i < contributions.length; i++) {
+            if (contributions[i].contributionCount > 0) {
+                temp++;
+                if (temp > longest) longest = temp;
+            } else {
+                temp = 0;
+            }
+        }
+
+        // Calculate current streak (working backwards from end)
+        for (let i = contributions.length - 1; i >= 0; i--) {
+            if (contributions[i].contributionCount > 0) {
+                current++;
+            } else {
+                break;
+            }
+        }
+
+        return { current, longest };
+    };
 
     if (!mounted) {
         return (
@@ -33,7 +130,7 @@ export function HeroSection() {
                 <div className="w-full max-w-7xl mx-auto">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
                         {/* Left Column: Terminal */}
-                        <div className="group relative bg-[#0c0c0c]/90 backdrop-blur-md border border-[#3f3f46] rounded-xl overflow-hidden shadow-[0_0_40px_-10px_rgba(0,0,0,0.5)] flex flex-col h-full min-h-[500px] transition-all duration-300 hover:shadow-[0_0_50px_-10px_rgba(255,255,255,0.05)] hover:border-[#52525b]">
+                        <div className="group relative bg-[#0c0c0c]/90 backdrop-blur-md border border-[#3f3f46] rounded-xl overflow-hidden shadow-[0_0_40px_-10px_rgba(0,0,0,0.5)] flex flex-col h-full min-h-[500px] max-h-[85vh] transition-all duration-300 hover:shadow-[0_0_50px_-10px_rgba(255,255,255,0.05)] hover:border-[#52525b]">
                             {/* Terminal Header */}
                             <div className="flex items-center justify-between px-4 py-3 bg-[#18181b] border-b border-[#27272a]">
                                 <div className="flex space-x-2 group-hover:opacity-100 transition-opacity">
@@ -52,7 +149,7 @@ export function HeroSection() {
 
                             {/* API Navigation Tabs */}
                             <div className="flex border-b border-[#27272a] bg-[#0c0c0c]">
-                                {(['overview', 'stack', 'languages', 'projects', 'github'] as const).map((tab) => (
+                                {(['overview', 'stack', 'languages', 'projects', 'github', 'activity'] as const).map((tab) => (
                                     <button
                                         key={tab}
                                         onClick={() => setActiveEndpoint(tab)}
@@ -66,7 +163,7 @@ export function HeroSection() {
                                 ))}
                             </div>
 
-                            <div className="p-6 overflow-x-auto flex-1 bg-[#0c0c0c]/50">
+                            <div className="p-6 overflow-auto flex-1 bg-[#0c0c0c]/50">
                                 <div className="flex items-center mb-4 text-[#e4e4e7]">
                                     <span className="mr-2 text-[#27c93f]">➜</span>
                                     <span className="mr-2 text-[#27c93f]">~</span>
@@ -149,26 +246,44 @@ export function HeroSection() {
 
                                         {/* Secondary Info / Stats */}
                                         <div className="grid grid-cols-2 gap-6">
-                                            <div className="bg-[#0c0c0c]/90 backdrop-blur-md border border-[#3f3f46] p-5 rounded-xl hover:border-[#e4e4e7] transition-colors group">
+                                            <div className="bg-[#0c0c0c]/90 backdrop-blur-md border border-[#3f3f46] p-5 rounded-xl hover:border-[#e4e4e7] transition-colors group col-span-2 sm:col-span-1">
                                                 <div className="text-[#71717a] text-xs uppercase tracking-wider mb-2 group-hover:text-[#a1a1aa]">Maintainer</div>
-                                                <div className="flex items-center gap-3">
-                                                    <div className="w-10 h-10 bg-[#18181b] rounded-md flex items-center justify-center text-sm font-bold border border-[#27272a] group-hover:border-[#e4e4e7] transition-colors">
-                                                        {siteConfig.author.name.split(' ').map(n => n[0]).join('')}
-                                                    </div>
-                                                    <div>
-                                                        <div className="text-[#e4e4e7] text-sm font-medium">{siteConfig.author.name}</div>
-                                                        <a href={siteConfig.author.github} target="_blank" rel="noopener noreferrer" className="text-[#71717a] text-xs hover:text-[#e4e4e7] hover:underline">
-                                                            @github
-                                                        </a>
+                                                <div className="flex items-start gap-3">
+                                                    {apiData.overview.response.data.github_stats?.avatar_url ? (
+                                                        <Image 
+                                                            src={apiData.overview.response.data.github_stats.avatar_url} 
+                                                            alt="Avatar" 
+                                                            width={40} 
+                                                            height={40} 
+                                                            className="rounded-md border border-[#27272a] group-hover:border-[#e4e4e7] transition-colors"
+                                                        />
+                                                    ) : (
+                                                        <div className="w-10 h-10 bg-[#18181b] rounded-md flex items-center justify-center text-sm font-bold border border-[#27272a] group-hover:border-[#e4e4e7] transition-colors shrink-0">
+                                                            {siteConfig.author.name.split(' ').map(n => n[0]).join('')}
+                                                        </div>
+                                                    )}
+                                                    <div className="min-w-0">
+                                                        <div className="text-[#e4e4e7] text-sm font-medium truncate">{siteConfig.author.name}</div>
+                                                        <div className="text-[#71717a] text-xs truncate">{apiData.overview.response.data.github_stats?.location || "Earth"}</div>
+                                                        {apiData.overview.response.data.github_stats?.bio && (
+                                                            <div className="text-[#a1a1aa] text-[10px] mt-1 line-clamp-2 leading-tight">
+                                                                {apiData.overview.response.data.github_stats.bio}
+                                                            </div>
+                                                        )}
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="bg-[#0c0c0c]/90 backdrop-blur-md border border-[#3f3f46] p-5 rounded-xl hover:border-[#e4e4e7] transition-colors group">
-                                                <div className="text-[#71717a] text-xs uppercase tracking-wider mb-1 group-hover:text-[#a1a1aa]">Projects</div>
-                                                <div className="text-[#e4e4e7] text-3xl font-bold">10+</div>
+                                            <div className="bg-[#0c0c0c]/90 backdrop-blur-md border border-[#3f3f46] p-5 rounded-xl hover:border-[#e4e4e7] transition-colors group col-span-2 sm:col-span-1">
+                                                <div className="text-[#71717a] text-xs uppercase tracking-wider mb-1 group-hover:text-[#a1a1aa]">Open Source</div>
+                                                <div className="flex items-baseline gap-2">
+                                                    <div className="text-[#e4e4e7] text-3xl font-bold">
+                                                        {apiData.overview.response.data.github_stats?.public_repos || "10+"}
+                                                    </div>
+                                                    <div className="text-xs text-[#a1a1aa]">Repositories</div>
+                                                </div>
                                                 <div className="text-xs text-green-500 mt-1 flex items-center">
                                                     <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
-                                                    Active Development
+                                                    {apiData.overview.response.data.github_stats?.followers ? `${apiData.overview.response.data.github_stats.followers} Followers` : "Active Development"}
                                                 </div>
                                             </div>
                                         </div>
@@ -218,29 +333,24 @@ export function HeroSection() {
                                         transition={{ duration: 0.3, ease: "easeOut" }}
                                         className="h-full"
                                     >
-                                        <div className="bg-[#0c0c0c]/90 backdrop-blur-md border border-[#3f3f46] p-6 rounded-xl shadow-lg h-full hover:border-[#52525b] transition-colors">
-                                            <h3 className="text-xl text-[#e4e4e7] font-bold mb-6 flex items-center gap-2 border-b border-[#27272a] pb-4">
+                                        <div className="bg-[#0c0c0c]/90 backdrop-blur-md border border-[#3f3f46] p-6 rounded-xl shadow-lg h-full hover:border-[#52525b] transition-colors flex flex-col">
+                                            <h3 className="text-xl text-[#e4e4e7] font-bold mb-6 flex items-center gap-2 border-b border-[#27272a] pb-4 shrink-0">
                                                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                                                 </svg>
                                                 Languages
                                             </h3>
-                                            <div className="space-y-6">
-                                                {apiData.languages.response.data.map((lang) => (
-                                                    <div key={lang.name}>
-                                                        <div className="flex justify-between text-sm mb-2">
-                                                            <span className="text-[#e4e4e7] font-medium">{lang.name}</span>
-                                                            <span className="text-[#a1a1aa]">{lang.usage}</span>
-                                                        </div>
-                                                        <div className="h-2 bg-[#27272a] rounded-full overflow-hidden">
-                                                            <div
-                                                                className="h-full bg-[#e4e4e7] transition-all duration-1000 ease-out"
-                                                                style={{ width: lang.usage }}
-                                                            ></div>
-                                                        </div>
-                                                        <div className="text-xs text-[#a1a1aa] mt-1 text-right">{lang.proficiency}</div>
-                                                    </div>
-                                                ))}
+                                            <div className="flex-1 flex items-center justify-center min-h-[300px]">
+                                                {timestamp > 0 && (
+                                                    <Image 
+                                                        src={`https://github-readme-states-repo-self-inst.vercel.app/api/top-langs/?username=codershubinc&exclude_repo=R-lang&langs_count=10&layout=donut&theme=radical&nocache=${timestamp}`}
+                                                        alt="Most Used Languages"
+                                                        width={400}
+                                                        height={400}
+                                                        className="w-full h-auto max-w-[400px] object-contain"
+                                                        unoptimized
+                                                    />
+                                                )}
                                             </div>
                                         </div>
                                     </motion.div>
@@ -300,18 +410,30 @@ export function HeroSection() {
                                                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                                                     <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
                                                 </svg>
-                                                GitHub Activity
+                                                GitHub Profile
                                             </h3>
 
                                             <div className="grid grid-cols-1 gap-6">
+                                                {/* Profile Info */}
+                                                <div className="grid grid-cols-2 gap-4">
+                                                    <div className="bg-[#18181b] border border-[#27272a] p-4 rounded-lg">
+                                                        <div className="text-[#a1a1aa] text-xs uppercase tracking-wider mb-1">Repositories</div>
+                                                        <div className="text-[#e4e4e7] text-2xl font-bold">{apiData.github.response.data.public_repos}</div>
+                                                    </div>
+                                                    <div className="bg-[#18181b] border border-[#27272a] p-4 rounded-lg">
+                                                        <div className="text-[#a1a1aa] text-xs uppercase tracking-wider mb-1">Followers</div>
+                                                        <div className="text-[#e4e4e7] text-2xl font-bold">{apiData.github.response.data.followers}</div>
+                                                    </div>
+                                                </div>
+
                                                 {/* Total Contributions */}
                                                 <div className="bg-[#18181b] border border-[#27272a] p-5 rounded-lg">
                                                     <div className="text-[#a1a1aa] text-xs uppercase tracking-wider mb-1">Total Contributions</div>
                                                     <div className="text-[#e4e4e7] text-3xl font-bold">
-                                                        {apiData.github.response.data.totalContributions.toLocaleString()}
+                                                        {apiData.activity.response.data.totalContributions.toLocaleString()}
                                                     </div>
                                                     <div className="text-xs text-[#a1a1aa] mt-1">
-                                                        Since {new Date(apiData.github.response.data.firstContribution).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}
+                                                        Last Year
                                                     </div>
                                                 </div>
 
@@ -323,10 +445,7 @@ export function HeroSection() {
                                                             <div className="text-[#a1a1aa] text-xs uppercase tracking-wider">Current Streak</div>
                                                         </div>
                                                         <div className="text-[#e4e4e7] text-2xl font-bold">
-                                                            {apiData.github.response.data.currentStreak.length} <span className="text-sm font-normal text-[#a1a1aa]">days</span>
-                                                        </div>
-                                                        <div className="text-[10px] text-[#71717a] mt-1">
-                                                            {apiData.github.response.data.currentStreak.start} — Present
+                                                            {getStreakStats().current} <span className="text-sm font-normal text-[#a1a1aa]">days</span>
                                                         </div>
                                                     </div>
                                                     <div className="bg-[#18181b] border border-[#27272a] p-4 rounded-lg">
@@ -335,29 +454,63 @@ export function HeroSection() {
                                                             <div className="text-[#a1a1aa] text-xs uppercase tracking-wider">Longest Streak</div>
                                                         </div>
                                                         <div className="text-[#e4e4e7] text-2xl font-bold">
-                                                            {apiData.github.response.data.longestStreak.length} <span className="text-sm font-normal text-[#a1a1aa]">days</span>
-                                                        </div>
-                                                        <div className="text-[10px] text-[#71717a] mt-1">
-                                                            {apiData.github.response.data.longestStreak.start} — {apiData.github.response.data.longestStreak.end}
+                                                            {getStreakStats().longest} <span className="text-sm font-normal text-[#a1a1aa]">days</span>
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                )}
 
-                                                {/* Visual Graph Image */}
-                                                <div className="mt-2">
-                                                    <div className="text-[#a1a1aa] text-xs uppercase tracking-wider mb-3">Contribution Graph</div>
-                                                    <div className="relative w-full h-32 bg-[#18181b] border border-[#27272a] rounded-lg overflow-hidden flex items-center justify-center">
-                                                        {/* Using the image URL provided by user but with theme param */}
-                                                        <Image
-                                                            src="https://github-readme-streak-stats-chi-three.vercel.app/?user=codershubinc&theme=dark&hide_border=true&background=00000000&ring=e4e4e7&fire=e4e4e7&currStreakLabel=e4e4e7"
-                                                            alt="GitHub Streak Stats"
-                                                            width={500}
-                                                            height={200}
-                                                            className="max-w-full max-h-full object-contain opacity-90 hover:opacity-100 transition-opacity"
-                                                            unoptimized
-                                                        />
+                                {activeEndpoint === 'activity' && (
+                                    <motion.div
+                                        key="activity"
+                                        initial={{ opacity: 0, scale: 0.95 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        exit={{ opacity: 0, scale: 0.95 }}
+                                        transition={{ duration: 0.3, ease: "easeOut" }}
+                                        className="h-full"
+                                    >
+                                        <div className="bg-[#0c0c0c]/90 backdrop-blur-md border border-[#3f3f46] p-6 rounded-xl shadow-lg h-full hover:border-[#52525b] transition-colors">
+                                            <h3 className="text-xl text-[#e4e4e7] font-bold mb-6 flex items-center gap-2 border-b border-[#27272a] pb-4">
+                                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                                                </svg>
+                                                Contribution Graph
+                                            </h3>
+
+                                            <div className="w-full overflow-x-auto pb-4">
+                                                <div className="min-w-[600px] bg-[#18181b] border border-[#27272a] rounded-lg p-6 flex items-center justify-center">
+                                                    <div className="grid grid-rows-7 grid-flow-col gap-[3px]">
+                                                        {apiData.activity.response.data.contributions.slice(-364).map((day) => {
+                                                            // Manual color mapping for better visibility on dark theme
+                                                            let bgColor = "#27272a"; // Empty (Zinc 800)
+                                                            
+                                                            // Use brighter greens for visibility against dark background
+                                                            if (day.contributionCount > 0) bgColor = "#166534"; // Green 800
+                                                            if (day.contributionCount > 2) bgColor = "#22c55e"; // Green 500
+                                                            if (day.contributionCount > 4) bgColor = "#4ade80"; // Green 400
+                                                            
+                                                            return (
+                                                                <div
+                                                                    key={day.date}
+                                                                    className="w-3 h-3 rounded-[1px] hover:ring-1 hover:ring-[#e4e4e7] hover:z-10 transition-all cursor-pointer"
+                                                                    style={{ backgroundColor: bgColor }}
+                                                                    title={`${day.contributionCount} contributions on ${day.date}`}
+                                                                />
+                                                            );
+                                                        })}
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div className="flex items-center justify-end gap-2 mt-4 text-xs text-[#a1a1aa]">
+                                                <span>Less</span>
+                                                <div className="w-3 h-3 rounded-[1px] bg-[#27272a]"></div>
+                                                <div className="w-3 h-3 rounded-[1px] bg-[#166534]"></div>
+                                                <div className="w-3 h-3 rounded-[1px] bg-[#22c55e]"></div>
+                                                <div className="w-3 h-3 rounded-[1px] bg-[#4ade80]"></div>
+                                                <span>More</span>
                                             </div>
                                         </div>
                                     </motion.div>

@@ -21,6 +21,28 @@ const generateContributions = () => {
     return contributions;
 };
 
+export const fetchGithubActivity = async () => {
+    try {
+        const response = await fetch("https://github-contributions-api.deno.dev/codershubinc.json?flat=true&to=2025-11-22");
+        if (!response.ok) throw new Error("Failed to fetch GitHub activity");
+        return await response.json();
+    } catch (error) {
+        console.error("Error fetching GitHub activity:", error);
+        return null;
+    }
+};
+
+export const fetchGithubProfile = async () => {
+    try {
+        const response = await fetch("https://api.github.com/users/codershubinc");
+        if (!response.ok) throw new Error("Failed to fetch GitHub profile");
+        return await response.json();
+    } catch (error) {
+        console.error("Error fetching GitHub profile:", error);
+        return null;
+    }
+};
+
 export const terminalData = {
     overview: {
         endpoint: "https://api.codershub.inc/v1/portfolio",
@@ -35,6 +57,14 @@ export const terminalData = {
                 maintainer: {
                     name: siteConfig.author.name,
                     github: siteConfig.author.github
+                },
+                github_stats: {
+                    public_repos: 64,
+                    followers: 5,
+                    bio: "just coding && listening music @codershubinc",
+                    location: "Earth",
+                    blog: "codershubinc.tech",
+                    avatar_url: "https://avatars.githubusercontent.com/u/90494823?v=4"
                 },
                 projects: {
                     count: "10+",
@@ -84,6 +114,20 @@ export const terminalData = {
         }
     },
     github: {
+        endpoint: "https://api.github.com/users/codershubinc",
+        response: {
+            status: 200,
+            data: {
+                login: "codershubinc",
+                public_repos: 42,
+                followers: 150,
+                following: 20,
+                created_at: "2020-01-01T00:00:00Z"
+            },
+            timestamp: new Date().toISOString()
+        }
+    },
+    activity: {
         endpoint: "https://github-contributions-api.deno.dev/codershubinc.json?flat=true&to=2025-11-22",
         response: {
             status: 200,
