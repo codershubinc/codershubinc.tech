@@ -29,7 +29,7 @@ export function HeroSection() {
 
             setApiData(prev => {
                 const newData = { ...prev };
-                
+
                 if (activityData) {
                     newData.activity = {
                         ...prev.activity,
@@ -88,7 +88,7 @@ export function HeroSection() {
     // Helper to calculate streaks from contributions
     const getStreakStats = () => {
         if (!apiData.activity?.response.data.contributions) return { current: 0, longest: 0 };
-        
+
         const contributions = apiData.activity.response.data.contributions;
         let current = 0;
         let longest = 0;
@@ -154,8 +154,8 @@ export function HeroSection() {
                                         key={tab}
                                         onClick={() => setActiveEndpoint(tab)}
                                         className={`px-4 py-2 text-xs font-mono transition-all border-r border-[#27272a] hover:bg-[#18181b] hover:text-[#e4e4e7] ${activeEndpoint === tab
-                                                ? 'bg-[#18181b] text-[#e4e4e7] border-b-2 border-b-[#e4e4e7]'
-                                                : 'text-[#71717a] bg-[#0c0c0c]'
+                                            ? 'bg-[#18181b] text-[#e4e4e7] border-b-2 border-b-[#e4e4e7]'
+                                            : 'text-[#71717a] bg-[#0c0c0c]'
                                             }`}
                                     >
                                         {tab.toUpperCase()}
@@ -250,11 +250,11 @@ export function HeroSection() {
                                                 <div className="text-[#71717a] text-xs uppercase tracking-wider mb-2 group-hover:text-[#a1a1aa]">Maintainer</div>
                                                 <div className="flex items-start gap-3">
                                                     {apiData.overview.response.data.github_stats?.avatar_url ? (
-                                                        <Image 
-                                                            src={apiData.overview.response.data.github_stats.avatar_url} 
-                                                            alt="Avatar" 
-                                                            width={40} 
-                                                            height={40} 
+                                                        <Image
+                                                            src={apiData.overview.response.data.github_stats.avatar_url}
+                                                            alt="Avatar"
+                                                            width={40}
+                                                            height={40}
                                                             className="rounded-md border border-[#27272a] group-hover:border-[#e4e4e7] transition-colors"
                                                         />
                                                     ) : (
@@ -342,7 +342,7 @@ export function HeroSection() {
                                             </h3>
                                             <div className="flex-1 flex items-center justify-center min-h-[300px]">
                                                 {timestamp > 0 && (
-                                                    <Image 
+                                                    <Image
                                                         src={`https://github-readme-states-repo-self-inst.vercel.app/api/top-langs/?username=codershubinc&exclude_repo=R-lang&langs_count=10&layout=donut&theme=radical&nocache=${timestamp}`}
                                                         alt="Most Used Languages"
                                                         width={400}
@@ -486,12 +486,12 @@ export function HeroSection() {
                                                         {apiData.activity.response.data.contributions.slice(-364).map((day) => {
                                                             // Manual color mapping for better visibility on dark theme
                                                             let bgColor = "#27272a"; // Empty (Zinc 800)
-                                                            
+
                                                             // Use brighter greens for visibility against dark background
                                                             if (day.contributionCount > 0) bgColor = "#166534"; // Green 800
                                                             if (day.contributionCount > 2) bgColor = "#22c55e"; // Green 500
                                                             if (day.contributionCount > 4) bgColor = "#4ade80"; // Green 400
-                                                            
+
                                                             return (
                                                                 <div
                                                                     key={day.date}
