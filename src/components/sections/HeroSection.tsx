@@ -11,14 +11,12 @@ import { terminalData, type TerminalEndpoint, fetchGithubActivity, fetchGithubPr
 export function HeroSection() {
     const { theme } = useTheme();
     const [mounted, setMounted] = useState(false);
-    const [timestamp, setTimestamp] = useState(0);
     const [activeEndpoint, setActiveEndpoint] = useState<TerminalEndpoint>('overview');
     const [apiData, setApiData] = useState(terminalData);
 
     useEffect(() => {
         const timer = setTimeout(() => {
             setMounted(true);
-            setTimestamp(Date.now());
         }, 0);
 
         const loadData = async () => {
@@ -128,9 +126,9 @@ export function HeroSection() {
         return (
             <section className="relative min-h-screen flex items-center justify-center px-4 py-8 overflow-hidden bg-[#09090b] font-mono selection:bg-[#3f3f46] selection:text-white">
                 <div className="w-full max-w-7xl mx-auto">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8 items-start">
                         {/* Left Column: Terminal */}
-                        <div className="group relative bg-[#0c0c0c]/90 backdrop-blur-md border border-[#3f3f46] rounded-xl overflow-hidden shadow-[0_0_40px_-10px_rgba(0,0,0,0.5)] flex flex-col h-full min-h-[500px] max-h-[85vh] transition-all duration-300 hover:shadow-[0_0_50px_-10px_rgba(255,255,255,0.05)] hover:border-[#52525b]">
+                        <div className="group sticky lg:relative top-4 lg:top-auto z-20 lg:z-auto bg-[#0c0c0c]/90 backdrop-blur-md border border-[#3f3f46] rounded-xl overflow-hidden shadow-[0_0_40px_-10px_rgba(0,0,0,0.5)] flex flex-col h-auto lg:h-full min-h-0 lg:min-h-[500px] max-h-none lg:max-h-[85vh] transition-all duration-300 hover:shadow-[0_0_50px_-10px_rgba(255,255,255,0.05)] hover:border-[#52525b]">
                             {/* Terminal Header */}
                             <div className="flex items-center justify-between px-4 py-3 bg-[#18181b] border-b border-[#27272a]">
                                 <div className="flex space-x-2 group-hover:opacity-100 transition-opacity">
@@ -148,22 +146,51 @@ export function HeroSection() {
                             </div>
 
                             {/* API Navigation Tabs */}
-                            <div className="flex border-b border-[#27272a] bg-[#0c0c0c]">
+                            <div className="flex border-b border-[#27272a] bg-[#0c0c0c] overflow-x-auto no-scrollbar">
                                 {(['overview', 'stack', 'languages', 'projects', 'github', 'activity'] as const).map((tab) => (
                                     <button
                                         key={tab}
                                         onClick={() => setActiveEndpoint(tab)}
-                                        className={`px-4 py-2 text-xs font-mono transition-all border-r border-[#27272a] hover:bg-[#18181b] hover:text-[#e4e4e7] ${activeEndpoint === tab
-                                            ? 'bg-[#18181b] text-[#e4e4e7] border-b-2 border-b-[#e4e4e7]'
+                                        className={`relative px-4 py-2 text-xs font-mono transition-colors border-r border-[#27272a] hover:bg-[#18181b] hover:text-[#e4e4e7] whitespace-nowrap shrink-0 flex items-center ${activeEndpoint === tab
+                                            ? 'text-[#27c93f]'
                                             : 'text-[#71717a] bg-[#0c0c0c]'
                                             }`}
                                     >
-                                        {tab.toUpperCase()}
+                                        {activeEndpoint === tab && (
+                                            <>
+                                                <motion.div
+                                                    layoutId="activeTabBg"
+                                                    className="absolute inset-0 bg-[#27c93f]/10"
+                                                    initial={false}
+                                                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                                                />
+                                                <motion.div
+                                                    layoutId="activeTabBorder"
+                                                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#27c93f] overflow-hidden"
+                                                    initial={false}
+                                                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                                                >
+                                                    <motion.div
+                                                        className="absolute inset-0 bg-linear-to-r from-transparent via-[#ffffff] to-transparent opacity-50"
+                                                        animate={{ x: ['-100%', '100%'] }}
+                                                        transition={{
+                                                            repeat: Infinity,
+                                                            duration: 1.5,
+                                                            ease: "linear",
+                                                        }}
+                                                    />
+                                                </motion.div>
+                                            </>
+                                        )}
+                                        <span className="relative z-10 flex items-center">
+                                            {activeEndpoint === tab && <span className="mr-1.5 animate-pulse">&gt;_</span>}
+                                            {tab.toUpperCase()}
+                                        </span>
                                     </button>
                                 ))}
                             </div>
 
-                            <div className="p-6 overflow-auto flex-1 bg-[#0c0c0c]/50">
+                            <div className="hidden lg:block p-6 overflow-auto flex-1 bg-[#0c0c0c]/50">
                                 <div className="flex items-center mb-4 text-[#e4e4e7]">
                                     <span className="mr-2 text-[#27c93f]">➜</span>
                                     <span className="mr-2 text-[#27c93f]">~</span>
@@ -245,8 +272,8 @@ export function HeroSection() {
                                         </div>
 
                                         {/* Secondary Info / Stats */}
-                                        <div className="grid grid-cols-2 gap-6">
-                                            <div className="bg-[#0c0c0c]/90 backdrop-blur-md border border-[#3f3f46] p-5 rounded-xl hover:border-[#e4e4e7] transition-colors group col-span-2 sm:col-span-1">
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                                            <div className="bg-[#0c0c0c]/90 backdrop-blur-md border border-[#3f3f46] p-4 sm:p-5 rounded-xl hover:border-[#e4e4e7] transition-colors group col-span-1 sm:col-span-1">
                                                 <div className="text-[#71717a] text-xs uppercase tracking-wider mb-2 group-hover:text-[#a1a1aa]">Maintainer</div>
                                                 <div className="flex items-start gap-3">
                                                     {apiData.overview.response.data.github_stats?.avatar_url ? (
@@ -273,7 +300,7 @@ export function HeroSection() {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="bg-[#0c0c0c]/90 backdrop-blur-md border border-[#3f3f46] p-5 rounded-xl hover:border-[#e4e4e7] transition-colors group col-span-2 sm:col-span-1">
+                                            <div className="bg-[#0c0c0c]/90 backdrop-blur-md border border-[#3f3f46] p-4 sm:p-5 rounded-xl hover:border-[#e4e4e7] transition-colors group col-span-1 sm:col-span-1">
                                                 <div className="text-[#71717a] text-xs uppercase tracking-wider mb-1 group-hover:text-[#a1a1aa]">Open Source</div>
                                                 <div className="flex items-baseline gap-2">
                                                     <div className="text-[#e4e4e7] text-3xl font-bold">
@@ -341,16 +368,14 @@ export function HeroSection() {
                                                 Languages
                                             </h3>
                                             <div className="flex-1 flex items-center justify-center min-h-[300px]">
-                                                {timestamp > 0 && (
-                                                    <Image
-                                                        src={`https://github-readme-states-repo-self-inst.vercel.app/api/top-langs/?username=codershubinc&exclude_repo=R-lang&langs_count=10&layout=donut&theme=radical&nocache=${timestamp}`}
-                                                        alt="Most Used Languages"
-                                                        width={400}
-                                                        height={400}
-                                                        className="w-full h-auto max-w-[400px] object-contain"
-                                                        unoptimized
-                                                    />
-                                                )}
+                                                <Image
+                                                    src="https://github-readme-states-repo-self-inst.vercel.app/api/top-langs/?username=codershubinc&exclude_repo=R-lang&langs_count=10&layout=donut&theme=dark"
+                                                    alt="Most Used Languages"
+                                                    width={400}
+                                                    height={400}
+                                                    className="w-full h-auto max-w-[400px] object-contain"
+                                                    unoptimized
+                                                />
                                             </div>
                                         </div>
                                     </motion.div>
