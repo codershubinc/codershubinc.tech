@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
-import { ThemeToggle } from '@/components/ui/ThemeToggle';
 
 export function Header() {
   return (
@@ -17,7 +16,6 @@ export function Header() {
           <Link href="/contact" className="text-sm font-medium text-muted-foreground hover:text-foreground hover:underline underline-offset-4 transition-colors">
             Contact
           </Link>
-          <ThemeToggle />
           <Button asChild size="sm" className="bg-blue-600 hover:bg-blue-700 text-white border-none">
             <Link href="/contact">Hire Me</Link>
           </Button>

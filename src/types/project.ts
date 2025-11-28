@@ -10,4 +10,9 @@ export interface Project {
     tagline?: string;
     featured?: boolean;
     downloadLink?: string;
+    content?: string; // Markdown content
+    languages?: string[]; // List of languages used in the project
+    roadmap?: string;
+    contributing?: string;
+    fileTree?: string;
 }
