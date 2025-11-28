@@ -227,7 +227,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
           </div>
 
           {/* Sidebar */}
-          <div className="space-y-6">
+          <div className="">
             <div className="bg-white dark:bg-[#18181b] rounded-2xl p-6 border border-gray-200 dark:border-gray-800 shadow-sm sticky top-24">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Project Details</h3>
 

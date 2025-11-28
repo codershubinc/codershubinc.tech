@@ -112,13 +112,13 @@ export function fileTreeToHtml(treeStr: string): string {
     const extEntries = Object.entries(extCounts).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
     const summaryHtml = extEntries.length
       ? `<div class="mt-3 flex flex-wrap gap-2">${extEntries
-          .map(([ext, count]) => {
-            const lang = extToLang[ext] ?? null;
-            const colorClass = lang ? getLanguageColor(lang) : 'bg-gray-800 text-gray-200 border-gray-700';
-            const label = ext === 'no-ext' ? '* (no ext)' : `*.${ext}`;
-            return `<span class="px-2 py-0.5 text-xs rounded ${colorClass} border ${lang ? '' : ''}">${label} <span class="ml-1 font-semibold">${count}</span></span>`;
-          })
-          .join('')}
+        .map(([ext, count]) => {
+          const lang = extToLang[ext] ?? null;
+          const colorClass = lang ? getLanguageColor(lang) : 'bg-gray-800 text-gray-200 border-gray-700';
+          const label = ext === 'no-ext' ? '* (no ext)' : `*.${ext}`;
+          return `<span class="px-2 py-0.5 text-xs rounded ${colorClass} border ${lang ? '' : ''}">${label} <span class="ml-1 font-semibold">${count}</span></span>`;
+        })
+        .join('')}
           <span class="px-2 py-0.5 text-xs rounded bg-blue-900 text-blue-100 border border-blue-800">Total <span class="ml-1 font-semibold">${totalFiles}</span></span>
         </div>`
       : '';
@@ -154,29 +154,29 @@ export function fileTreeToHtml(treeStr: string): string {
   const extEntries = Object.entries(extCounts).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
   const summaryHtml = extEntries.length
     ? `<div class="mt-3 flex flex-wrap gap-2">${extEntries
-        .map(([ext, count]) => {
-          const lang = ({
-            ts: 'TypeScript',
-            tsx: 'TypeScript',
-            js: 'JavaScript',
-            jsx: 'React',
-            py: 'Python',
-            go: 'Go',
-            rs: 'Rust',
-            java: 'Java',
-            html: 'HTML',
-            css: 'CSS',
-            vue: 'Vue',
-            php: 'PHP',
-            rb: 'Ruby',
-            swift: 'Swift',
-            kt: 'Kotlin',
-          } as Record<string, string>)[ext] ?? null;
-          const colorClass = lang ? getLanguageColor(lang) : 'bg-gray-800 text-gray-200 border-gray-700';
-          const label = ext === 'no-ext' ? '* (no ext)' : `*.${ext}`;
-          return `<span class="px-2 py-0.5 text-xs rounded ${colorClass} border">${label} <span class="ml-1 font-semibold">${count}</span></span>`;
-        })
-        .join('')}
+      .map(([ext, count]) => {
+        const lang = ({
+          ts: 'TypeScript',
+          tsx: 'TypeScript',
+          js: 'JavaScript',
+          jsx: 'React',
+          py: 'Python',
+          go: 'Go',
+          rs: 'Rust',
+          java: 'Java',
+          html: 'HTML',
+          css: 'CSS',
+          vue: 'Vue',
+          php: 'PHP',
+          rb: 'Ruby',
+          swift: 'Swift',
+          kt: 'Kotlin',
+        } as Record<string, string>)[ext] ?? null;
+        const colorClass = lang ? getLanguageColor(lang) : 'bg-gray-800 text-gray-200 border-gray-700';
+        const label = ext === 'no-ext' ? '* (no ext)' : `*.${ext}`;
+        return `<span class="px-2 py-0.5 text-xs rounded ${colorClass} border">${label} <span class="ml-1 font-semibold">${count}</span></span>`;
+      })
+      .join('')}
         <span class="px-2 py-0.5 text-xs rounded bg-blue-900 text-blue-100 border border-blue-800">Total <span class="ml-1 font-semibold">${totalFiles}</span></span>
       </div>`
     : '';

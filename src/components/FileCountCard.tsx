@@ -26,7 +26,7 @@ export default function FileCountCard({ counts }: { counts: FileCounts }) {
     };
 
     return (
-        <div className="bg-white dark:bg-[#18181b]  p-6 m-0 shadow-sm w-full">
+        <div className="bg-white dark:bg-[#18181b] rounded-2xl px-3 py-4 border border-gray-200 dark:border-gray-800 shadow-sm w-full mx-0">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">File Counts</h3>
             <div className="flex flex-wrap gap-2 mb-3">
                 {entries.length > 0 ? entries.map(([ext, count]) => {
@@ -34,7 +34,7 @@ export default function FileCountCard({ counts }: { counts: FileCounts }) {
                     const lang = extToLang[ext] ?? '';
                     const color = getLanguageColor(lang);
                     return (
-                        <span key={ext} className={`px-2 py-0.5 text-xs rounded ${color} border`}>
+                        <span key={ext} className={`px-2 py-0.5 text-xs rounded ${color} border ${lang ? '' : 'border-gray-700 text-gray-200 bg-gray-800'}`}>
                             {label} <span className="ml-1 font-semibold">{count}</span>
                         </span>
                     );
