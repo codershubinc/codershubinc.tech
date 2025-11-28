@@ -7,7 +7,8 @@ import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import rehypeHighlight from 'rehype-highlight';
 import 'highlight.js/styles/github-dark.css';
-import { getGitHubThemeStyles } from '@/lib/utils';
+import { fileTreeToHtml, getGitHubThemeStyles, markdownToHtml, parseFileTreeStats } from '@/lib/utils';
+import FileCountCard from '@/components/FileCountCard';
 import { AnimatedTags } from '@/components/ui/AnimatedTags';
 import { ProjectTabs } from '@/components/projects/ProjectTabs';
 
@@ -35,18 +36,17 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
     }
   };
 
+  const readmeHtml = project.content ? await markdownToHtml(project.content) : null;
+  const contributingHtml = project.contributing ? await markdownToHtml(project.contributing) : null;
+
   const tabs = [
     {
       id: 'readme',
       label: 'README',
-      content: project.content ? (
-        <article
-          className={
-            `${getGitHubThemeStyles()} prose prose-neutral dark:prose-invert max-w-none prose-pre:bg-[#0d1117] prose-pre:text-gray-100 prose-code:before:content-[''] prose-code:after:content-[''] prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-blockquote:border-blue-400 prose-blockquote:pl-4 prose-blockquote:italic`
-          }
-        >
-          <MDXRemote source={project.content} options={mdxOptions} />
-        </article>
+      content: readmeHtml ? (
+        <div
+          dangerouslySetInnerHTML={{ __html: readmeHtml }}
+        />
       ) : (
         <div className="text-center py-12 text-gray-500 dark:text-gray-400">
           <p>No detailed documentation available for this project.</p>
@@ -77,14 +77,22 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
     project.contributing ? {
       id: 'contributing',
       label: 'Contributing',
-      content: (
-        <article
-          className={
-            `${getGitHubThemeStyles()} prose prose-neutral dark:prose-invert max-w-none prose-pre:bg-[#0d1117] prose-pre:text-gray-100 prose-code:before:content-[''] prose-code:after:content-[''] prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-blockquote:border-blue-400 prose-blockquote:pl-4 prose-blockquote:italic`
-          }
-        >
-          <MDXRemote source={project.contributing} options={mdxOptions} />
-        </article>
+      content: contributingHtml ? (
+        <div
+          dangerouslySetInnerHTML={{ __html: contributingHtml }}
+        />
+      ) : (
+        <div className="text-center py-12 text-gray-500 dark:text-gray-400">
+          <p>No contributing guidelines available for this project.</p>
+          <a
+            href={project.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 hover:underline mt-2 inline-block"
+          >
+            Check the contributing guidelines on GitHub
+          </a>
+        </div>
       )
     } : null,
     project.fileTree ? {
@@ -96,11 +104,10 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
             </svg>
-            <span className="text-sm font-medium">Project Structure</span>
           </div>
-          <pre className="text-sm text-gray-300 font-mono leading-relaxed whitespace-pre">
-            {project.fileTree}
-          </pre>
+          <div
+            dangerouslySetInnerHTML={{ __html: fileTreeToHtml(project.fileTree) }}
+          />
         </div>
       )
     } : null
@@ -265,6 +272,11 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                     baseClassName="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded text-xs font-medium border-transparent"
                   />
                 </div>
+                {project.fileTree && (
+                  <div>
+                    <FileCountCard counts={parseFileTreeStats(project.fileTree)} />
+                  </div>
+                )}
               </div>
             </div>
           </div>
