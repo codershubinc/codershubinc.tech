@@ -1,4 +1,4 @@
-import React from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Project } from '@/types/project';
 import { getLanguageColor } from '@/types/language';
@@ -10,17 +10,15 @@ interface ProjectCardProps {
 export function ProjectCard({ project }: ProjectCardProps) {
   return (
     <div className="project-card rounded-2xl border border-border shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden w-full">
-      <div className="bg-white dark:bg-gray-50/5 px-4 py-3 flex items-center justify-between gap-3 border-b border-border">
-        <div className="flex items-center gap-3">
-          <div className="text-xs text-muted-foreground">codershubinc/</div>
-          <div className="text-sm font-semibold text-foreground truncate">{project.slug}</div>
-        </div>
-        <div className="w-10 h-10 bg-gray-100 dark:bg-gray-800 rounded-md flex items-center justify-center text-sm">
-          {project.icon ? (
-            <div className="w-8 h-8" dangerouslySetInnerHTML={{ __html: project.icon }} />
-          ) : (
-            <div className="text-sm font-bold">{project.title.charAt(0)}</div>
-          )}
+      <div className="bg-white dark:bg-gray-50/5 border-b border-border">
+        <div className="relative w-full h-36 md:h-44 lg:h-56 overflow-hidden">
+          <Image
+            src={`https://opengraph.githubassets.com/1/codershubinc/${project.slug}`}
+            alt={`${project.title} Open Graph`}
+            fill
+            className="object-cover hover:scale-105 transition-transform duration-300  "
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          />
         </div>
       </div>
 

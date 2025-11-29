@@ -17,6 +17,21 @@ export default function CoverflowCarousel({ children, initialIndex = 0, loop = t
     const prev = () => setActive((i) => (i - 1 + items.length) % items.length);
     const next = () => setActive((i) => (i + 1) % items.length);
 
+    // dynamic card sizing for better centering
+    const [cardWidth, setCardWidth] = useState(320);
+
+    useEffect(() => {
+        const update = () => {
+            if (!containerRef.current) return;
+            const w = containerRef.current.clientWidth;
+            // approximate card width based on container width
+            setCardWidth(w < 640 ? Math.round(w * 0.7) : 320);
+        };
+        update();
+        window.addEventListener('resize', update);
+        return () => window.removeEventListener('resize', update);
+    }, []);
+
     useEffect(() => {
         const handler = (e: KeyboardEvent) => {
             if (e.key === 'ArrowLeft') prev();
@@ -37,7 +52,17 @@ export default function CoverflowCarousel({ children, initialIndex = 0, loop = t
             </button>
 
             <div ref={containerRef} className="w-full overflow-hidden select-none">
-                <div className="flex items-center justify-center w-full pointer-events-none" style={{ height: 420 }}>
+                <motion.div
+                    className="flex items-center justify-center w-full pointer-events-none"
+                    style={{ height: 420 }}
+                    drag="x"
+                    dragElastic={0.25}
+                    onDragEnd={(e, info) => {
+                        const threshold = Math.max(60, cardWidth / 4);
+                        if (info.offset.x > threshold) prev();
+                        if (info.offset.x < -threshold) next();
+                    }}
+                >
                     {items.map((child, idx) => {
                         const distance = Math.abs(active - idx);
                         // allow wrap-around minimal distance
@@ -46,7 +71,7 @@ export default function CoverflowCarousel({ children, initialIndex = 0, loop = t
                         const scale = isActive ? 1 : wrapDist === 1 ? 0.86 : 0.7;
                         const zIndex = isActive ? 30 : 20 - wrapDist;
                         const rotateY = isActive ? 0 : idx < active ? 15 : -15;
-                        const xOffset = (idx - active) * 260; // spacing
+                        const xOffset = (idx - active) * Math.round(cardWidth * 0.75); // spacing
 
                         return (
                             <motion.div
@@ -54,13 +79,14 @@ export default function CoverflowCarousel({ children, initialIndex = 0, loop = t
                                 className="pointer-events-auto transition-transform duration-300"
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1, transform: `translateX(${xOffset}px) scale(${scale}) rotateY(${rotateY}deg)` }}
+                                data-active={isActive}
                                 style={{ zIndex, minWidth: 320 }}
                             >
                                 {child}
                             </motion.div>
                         );
                     })}
-                </div>
+                </motion.div>
             </div>
 
             <button
