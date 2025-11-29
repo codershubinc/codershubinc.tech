@@ -1,5 +1,5 @@
 import React from 'react';
-import { fetchProjects, fetchProjectBySlug } from '@/lib/api/github';
+import { fetchProjects, fetchProjectBySlug } from '@/lib/api';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { MDXRemote } from 'next-mdx-remote-client/rsc';
@@ -253,7 +253,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                     })}
                     <p>
                       <span className='text-red-300'>( </span>
-                      {" "+formatCreationDate(project.createdAt)}
+                      {" " + formatCreationDate(project.createdAt)}
                       <span className='text-red-300'> )</span>
                     </p>
                   </div>

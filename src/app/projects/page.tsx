@@ -1,5 +1,5 @@
 import React from 'react';
-import { fetchProjects } from '@/lib/api/github';
+import { fetchProjects } from '@/lib/api';
 import { ProjectShowcase } from '@/components/sections/ProjectShowcase';
 
 export default async function ProjectsPage() {

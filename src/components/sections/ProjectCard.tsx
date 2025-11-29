@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Project } from '@/types/project';
-import { getLanguageColor } from '@/lib/utils';
+import { getLanguageColor } from '@/types/language';
 
 interface ProjectCardProps {
   project: Project;

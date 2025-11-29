@@ -29,9 +29,9 @@ export async function GET(req: NextRequest) {
         const filePath = path.join(process.cwd(), 'temp', fileName);
         await writeFile(filePath, content, 'utf8');
 
-        const html = markdownToHtml(content);
+        const html = await markdownToHtml(content);
         return NextResponse.json({ content, html, saved: true, file: `/temp/${fileName}` });
-    } catch (e) {
-        return NextResponse.json({ error: 'Failed to fetch or save README' }, { status: 500 });
+    } catch (err) {
+        return NextResponse.json({ error: 'Failed to fetch or save README', message: (err as Error).message }, { status: 500 });
     }
 }
