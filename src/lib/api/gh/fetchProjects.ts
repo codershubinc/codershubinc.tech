@@ -14,6 +14,7 @@ interface GitHubRepo {
     archived: boolean;
     default_branch: string;
     created_at: string;
+    stargazer_count: number;
 }
 
 export async function fetchProjects(): Promise<Project[]> {
@@ -24,6 +25,8 @@ export async function fetchProjects(): Promise<Project[]> {
         });
         if (!response.ok) throw new Error('Failed to fetch projects');
         const repos: GitHubRepo[] = await response.json();
+        console.log("Got repos", repos);
+
         const filteredRepos = repos
             .filter((repo) => !repo.archived && !repo.description?.includes('[ARCHIVED]'))
             .sort((a, b) => {
@@ -60,6 +63,8 @@ export async function fetchProjects(): Promise<Project[]> {
                     languages,
                     icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.586 7.586"></path><circle cx="11" cy="11" r="2"></circle></svg>',
                     createdAt: repo.created_at,
+                    stargazerCount: repo.stargazers_count,
+
                 };
             })
         );
