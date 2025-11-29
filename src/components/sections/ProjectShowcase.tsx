@@ -4,19 +4,21 @@ import React, { useState, useMemo } from 'react';
 import { Project } from '@/types/project';
 import { ProjectCard } from './ProjectCard';
 import { motion, AnimatePresence } from 'framer-motion';
+import CoverflowCarousel from '@/components/ui/CoverflowCarousel';
+import featuredProjects from '@/data/featuredProjects';
 
 interface ProjectShowcaseProps {
     projects: Project[];
 }
 
-type Category = 'All' | 'Frontend' | 'Backend' | 'Fullstack' | 'Tools';
+type Category = 'All' | 'Featured' | 'Frontend' | 'Backend' | 'Fullstack' | 'Tools';
 
-const CATEGORIES: Category[] = ['All', 'Frontend', 'Backend', 'Fullstack', 'Tools'];
+const CATEGORIES: Category[] = ['All', 'Featured', 'Frontend', 'Backend', 'Fullstack', 'Tools'];
 
 export function ProjectShowcase({ projects }: ProjectShowcaseProps) {
-    const [activeCategory, setActiveCategory] = useState<Category>('All');
+    const [activeCategory, setActiveCategory] = useState<Category>('Featured');
     const [searchQuery, setSearchQuery] = useState('');
-    const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+    const [viewMode, setViewMode] = useState<'grid' | 'list' | 'carousel'>('grid');
 
     const getCategory = (project: Project): Category => {
         const stack = project.techStack.map(t => t.toLowerCase());
@@ -34,15 +36,23 @@ export function ProjectShowcase({ projects }: ProjectShowcaseProps) {
         return 'Frontend'; // Default fallback
     };
 
+    const featuredSlugs = featuredProjects.reduce<Set<string>>((set, slug) => {
+        set.add(slug);
+        return set;
+    }, new Set<string>());
+    console.log("featured slugs", featuredSlugs);
+
+
     const filteredProjects = useMemo(() => {
+
         return projects.filter(project => {
-            const matchesCategory = activeCategory === 'All' || getCategory(project) === activeCategory;
+            const matchesCategory = activeCategory === 'All' || activeCategory === 'Featured' && featuredSlugs.has(project.slug) || getCategory(project) === activeCategory;
             const matchesSearch = project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                 project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
                 project.techStack.some(t => t.toLowerCase().includes(searchQuery.toLowerCase()));
             return matchesCategory && matchesSearch;
         });
-    }, [projects, activeCategory, searchQuery]);
+    }, [projects, activeCategory, searchQuery, featuredSlugs]);
 
     return (
         <div className="space-y-8">
@@ -107,33 +117,52 @@ export function ProjectShowcase({ projects }: ProjectShowcaseProps) {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                             </svg>
                         </button>
+                        <button
+                            onClick={() => setViewMode('carousel')}
+                            className={`p-2 rounded-lg transition-all ${viewMode === 'carousel'
+                                ? 'bg-card text-blue-600 shadow-sm'
+                                : 'text-muted-foreground hover:text-foreground'
+                                }`}
+                        >
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12h18M3 6h6M3 18h6" />
+                            </svg>
+                        </button>
                     </div>
                 </div>
             </div>
 
             {/* Projects Grid/List */}
-            <motion.div
-                layout
-                className={`grid gap-6 ${viewMode === 'grid'
-                    ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
-                    : 'grid-cols-1'
-                    }`}
-            >
-                <AnimatePresence mode="popLayout">
+            {viewMode === 'carousel' ? (
+                <CoverflowCarousel>
                     {filteredProjects.map((project) => (
-                        <motion.div
-                            key={project.id}
-                            layout
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0.9 }}
-                            transition={{ duration: 0.3 }}
-                        >
-                            <ProjectCard project={project} />
-                        </motion.div>
+                        <ProjectCard key={project.id} project={project} />
                     ))}
-                </AnimatePresence>
-            </motion.div>
+                </CoverflowCarousel>
+            ) : (
+                <motion.div
+                    layout
+                    className={`grid gap-6 ${viewMode === 'grid'
+                        ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+                        : 'grid-cols-1'
+                        }`}
+                >
+                    <AnimatePresence mode="popLayout">
+                        {filteredProjects.map((project) => (
+                            <motion.div
+                                key={project.id}
+                                layout
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.9 }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <ProjectCard project={project} />
+                            </motion.div>
+                        ))}
+                    </AnimatePresence>
+                </motion.div>
+            )}
 
             {filteredProjects.length === 0 && (
                 <div className="text-center py-20">

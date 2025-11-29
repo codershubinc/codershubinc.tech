@@ -455,7 +455,7 @@ export function HeroSection() {
                                                 <div className="bg-[#18181b] border border-[#27272a] p-5 rounded-lg">
                                                     <div className="text-[#a1a1aa] text-xs uppercase tracking-wider mb-1">Total Contributions</div>
                                                     <div className="text-[#e4e4e7] text-3xl font-bold">
-                                                        {apiData.activity.response.data.totalContributions.toLocaleString()}
+                                                        {apiData.activity.response.data.totalContributions.toLocaleString('en-US')}
                                                     </div>
                                                     <div className="text-xs text-[#a1a1aa] mt-1">
                                                         Last Year

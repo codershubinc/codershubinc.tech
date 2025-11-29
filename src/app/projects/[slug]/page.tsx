@@ -8,7 +8,10 @@ import rehypeRaw from 'rehype-raw';
 import rehypeHighlight from 'rehype-highlight';
 import 'highlight.js/styles/github-dark.css';
 import { fileTreeToHtml, getGitHubThemeStyles, markdownToHtml, parseFileTreeStats, formatCreationDate } from '@/lib/utils';
+const markdownToHtmlWithRaw = markdownToHtml as unknown as (md: string, variant?: 'default'|'blue'|'card'|'minimal', rawBase?: string) => Promise<string>;
+import RelativeTime from '@/components/ui/RelativeTime';
 import FileCountCard from '@/components/FileCountCard';
+// ProjectCard & featuredProjects are not used in this page; showcase uses them
 import { AnimatedTags } from '@/components/ui/AnimatedTags';
 import { ProjectTabs } from '@/components/projects/ProjectTabs';
 
@@ -36,8 +39,9 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
     }
   };
 
-  const readmeHtml = project.content ? await markdownToHtml(project.content) : null;
-  const contributingHtml = project.contributing ? await markdownToHtml(project.contributing) : null;
+  const rawBase = `https://raw.githubusercontent.com/codershubinc/${project.slug}/main`;
+  const readmeHtml = project.content ? await markdownToHtmlWithRaw(project.content, 'default', rawBase) : null;
+  const contributingHtml = project.contributing ? await markdownToHtmlWithRaw(project.contributing, 'default', rawBase) : null;
 
   const tabs = [
     {
@@ -246,18 +250,37 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                 <div>
                   <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">Created At</div>
                   <div className="text-gray-900 dark:text-gray-200 font-medium  flex">
-                    {new Date(project.createdAt).toLocaleDateString(undefined, {
+                    {new Date(project.createdAt).toLocaleDateString('en-US', {
                       year: 'numeric',
                       month: 'long',
                       day: 'numeric'
                     })}
                     <p>
                       <span className='text-red-300'>( </span>
-                      {" " + formatCreationDate(project.createdAt)}
+                      {" "}
+                      <RelativeTime date={project.createdAt} initial={formatCreationDate(project.createdAt)} />
                       <span className='text-red-300'> )</span>
                     </p>
                   </div>
                 </div>
+                {project.firstCommitDate && (
+                  <div>
+                    <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">First Commit</div>
+                    <div className="text-gray-900 dark:text-gray-200 font-medium  flex">
+                      {new Date(project.firstCommitDate).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                      })}
+                      <p>
+                        <span className='text-red-300'>( </span>
+                        {" "}
+                        <RelativeTime date={project.firstCommitDate!} initial={formatCreationDate(project.firstCommitDate!)} />
+                        <span className='text-red-300'> )</span>
+                      </p>
+                    </div>
+                  </div>
+                )}
                 <hr className='text-gray-500 ' />
 
                 {project.tagline && (

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { writeFile } from 'fs/promises';
 import path from 'path';
 import { markdownToHtml } from '@/lib/utils';
+const markdownToHtmlWithRaw = markdownToHtml as unknown as (md: string, variant?: 'default'|'blue'|'card'|'minimal', rawBase?: string) => Promise<string>;
 
 // GET /api/readme?repo=codershubinc/Quazaar
 export async function GET(req: NextRequest) {
@@ -29,7 +30,8 @@ export async function GET(req: NextRequest) {
         const filePath = path.join(process.cwd(), 'temp', fileName);
         await writeFile(filePath, content, 'utf8');
 
-        const html = await markdownToHtml(content);
+        const base = `https://raw.githubusercontent.com/${repo}/main`;
+        const html = await markdownToHtmlWithRaw(content, 'default', base);
         return NextResponse.json({ content, html, saved: true, file: `/temp/${fileName}` });
     } catch (err) {
         return NextResponse.json({ error: 'Failed to fetch or save README', message: (err as Error).message }, { status: 500 });

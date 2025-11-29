@@ -16,4 +16,7 @@ export interface Project {
     contributing?: string;
     fileTree?: string;
     createdAt: string;
+    /** ISO date timestamp of the first commit in the repository (if available) */
+    firstCommitDate?: string;
+    stars?: number;
 }

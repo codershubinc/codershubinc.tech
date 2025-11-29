@@ -6,3 +6,4 @@ export * from './fetchRepoFile';
 export * from './fetchReadme';
 export * from './fetchRoadmap';
 export * from './fetchContributing';
+export * from './fetchFirstCommit';

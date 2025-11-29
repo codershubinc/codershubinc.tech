@@ -3,6 +3,7 @@ import { BASE_URL, GITHUB_USERNAME, getHeaders } from './headers';
 import { fetchReadme } from './fetchReadme';
 import { fetchRoadmap } from './fetchRoadmap';
 import { fetchContributing } from './fetchContributing';
+import { fetchFirstCommitDate } from './fetchFirstCommit';
 
 interface GitHubRepo {
     id: number;
@@ -37,6 +38,7 @@ export async function fetchProjectBySlug(slug: string): Promise<Project | null> 
         const languages = Object.keys(languagesData || {});
         let fileTree = '';
         if (treeData && treeData.tree) fileTree = treeData.tree.map((item: { path: string }) => item.path).join('\n');
+        const firstCommit = await fetchFirstCommitDate(slug);
         return {
             id: repo.id.toString(),
             title: repo.name.replace(/-/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase()),
@@ -54,6 +56,7 @@ export async function fetchProjectBySlug(slug: string): Promise<Project | null> 
             fileTree: fileTree || undefined,
             icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.586 7.586"></path><circle cx="11" cy="11" r="2"></circle></svg>',
             createdAt: repo.created_at,
+            firstCommitDate: firstCommit?.date,
         };
     } catch (error) {
         console.error(`Error fetching project ${slug}:`, error);

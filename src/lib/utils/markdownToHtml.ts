@@ -1,7 +1,37 @@
 import { marked } from 'marked';
 
-export async function markdownToHtml(markdown: string, variant: 'default' | 'blue' | 'card' | 'minimal' = 'default'): Promise<string> {
-    let html = await marked.parse(markdown);
+export async function markdownToHtml(
+    markdown: string,
+    variant: 'default' | 'blue' | 'card' | 'minimal' = 'default',
+    rawBaseUrl?: string
+): Promise<string> {
+    let processedMd = markdown;
+
+    // If a rawBaseUrl is provided, rewrite relative image links to point to raw.githubusercontent
+    if (rawBaseUrl) {
+        const isAbsolute = (u: string) => /^(https?:)?\/\//i.test(u) || /^data:/i.test(u) || /^mailto:/i.test(u);
+
+        // Replace markdown image syntax: ![alt](url)
+        processedMd = processedMd.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (match, alt, url) => {
+            const trimmed = url.trim();
+            if (isAbsolute(trimmed) || trimmed.startsWith('#')) return match; // keep external or anchors
+            const cleaned = trimmed.replace(/^(?:\.\/|\/+|\.\.\/)+/, '');
+            const newUrl = `${rawBaseUrl}/${cleaned}`;
+            return `![${alt}](${newUrl})`;
+        });
+
+        // Replace HTML img src attributes: <img src="...">
+        processedMd = processedMd.replace(/<img\b([^>]*?)\bsrc=(['"]?)([^'"\s>]+)\2([^>]*)>/gi, (match, pre, quote, src, post) => {
+            if (isAbsolute(src) || src.startsWith('#')) return match;
+            const cleaned = src.replace(/^(?:\.\/|\/+|\.\.\/)+/, '');
+            const newUrl = `${rawBaseUrl}/${cleaned}`;
+            // Preserve quotes/unquoted and other attributes
+            const q = quote || '"';
+            return `<img${pre}src=${q}${newUrl}${q}${post}>`;
+        });
+    }
+
+    let html = await marked.parse(processedMd);
 
     // Style variants
     const variants: Record<string, { wrapper: string; custom: Record<string, string> }> = {
