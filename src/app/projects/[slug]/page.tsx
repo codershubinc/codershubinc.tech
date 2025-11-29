@@ -7,7 +7,7 @@ import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import rehypeHighlight from 'rehype-highlight';
 import 'highlight.js/styles/github-dark.css';
-import { fileTreeToHtml, getGitHubThemeStyles, markdownToHtml, parseFileTreeStats } from '@/lib/utils';
+import { fileTreeToHtml, getGitHubThemeStyles, markdownToHtml, parseFileTreeStats, formatCreationDate } from '@/lib/utils';
 import FileCountCard from '@/components/FileCountCard';
 import { AnimatedTags } from '@/components/ui/AnimatedTags';
 import { ProjectTabs } from '@/components/projects/ProjectTabs';
@@ -243,6 +243,22 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                     {project.slug}
                   </a>
                 </div>
+                <div>
+                  <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">Created At</div>
+                  <div className="text-gray-900 dark:text-gray-200 font-medium  flex">
+                    {new Date(project.createdAt).toLocaleDateString(undefined, {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}
+                    <p>
+                      <span className='text-red-300'>( </span>
+                      {" "+formatCreationDate(project.createdAt)}
+                      <span className='text-red-300'> )</span>
+                    </p>
+                  </div>
+                </div>
+                <hr className='text-gray-500 ' />
 
                 {project.tagline && (
                   <div>

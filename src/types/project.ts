@@ -15,4 +15,5 @@ export interface Project {
     roadmap?: string;
     contributing?: string;
     fileTree?: string;
+    createdAt: string;
 }
