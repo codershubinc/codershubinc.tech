@@ -103,6 +103,7 @@ Contributions are welcome. To keep the repo clean, please open an issue first fo
 This repo is licensed under the MIT License.
 
 ---
+
 Made with ❤️ by Swapnil Ingle • @codershubinc
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
