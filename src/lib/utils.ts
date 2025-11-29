@@ -1,3 +1,11 @@
+// Barrel file: re-export utils from the utils directory so imports can remain as '@/lib/utils'
+export * from './utils/fileTree';
+export * from './utils/parseFileTreeStats';
+export * from './utils/markdownToHtml';
+export * from './utils/cn';
+export * from './utils/language';
+export * from './utils/githubTheme';
+export * from './utils/date';
 export function fileTreeToHtml(treeStr: string): string {
   if (!treeStr) return '';
   const lines = treeStr.split(/\r?\n/).filter(Boolean);
