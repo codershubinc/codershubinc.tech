@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { writeFile } from 'fs/promises';
 import path from 'path';
 import { markdownToHtml } from '@/lib/utils';
-const markdownToHtmlWithRaw = markdownToHtml as unknown as (md: string, variant?: 'default'|'blue'|'card'|'minimal', rawBase?: string) => Promise<string>;
+const markdownToHtmlWithRaw = markdownToHtml as unknown as (md: string, variant?: 'default' | 'blue' | 'card' | 'minimal', rawBase?: string) => Promise<string>;
 
 // GET /api/readme?repo=codershubinc/Quazaar
 export async function GET(req: NextRequest) {

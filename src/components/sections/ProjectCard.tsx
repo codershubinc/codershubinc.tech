@@ -41,7 +41,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 <span className="ml-1 inline-flex items-center px-2 py-0.5 text-xs font-medium rounded bg-yellow-500/20 text-yellow-400 border border-yellow-500/15">★ Featured</span>
               )}
             </div>
-              {project.tagline && <p className="text-sm text-gray-300 mt-2">{project.tagline}</p>}
+            {project.tagline && <p className="text-sm text-gray-300 mt-2">{project.tagline}</p>}
           </div>
         </div>
 

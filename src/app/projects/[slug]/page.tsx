@@ -8,7 +8,7 @@ import rehypeRaw from 'rehype-raw';
 import rehypeHighlight from 'rehype-highlight';
 import 'highlight.js/styles/github-dark.css';
 import { fileTreeToHtml, getGitHubThemeStyles, markdownToHtml, parseFileTreeStats, formatCreationDate } from '@/lib/utils';
-const markdownToHtmlWithRaw = markdownToHtml as unknown as (md: string, variant?: 'default'|'blue'|'card'|'minimal', rawBase?: string) => Promise<string>;
+const markdownToHtmlWithRaw = markdownToHtml as unknown as (md: string, variant?: 'default' | 'blue' | 'card' | 'minimal', rawBase?: string) => Promise<string>;
 import RelativeTime from '@/components/ui/RelativeTime';
 import FileCountCard from '@/components/FileCountCard';
 // ProjectCard & featuredProjects are not used in this page; showcase uses them
