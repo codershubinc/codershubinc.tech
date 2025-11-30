@@ -19,7 +19,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
             className="object-cover hover:scale-105 transition-transform duration-300"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
-          <div className="absolute inset-0 bg-black/35 dark:bg-black/45 pointer-events-none" />
+          {/* <div className="absolute inset-0 bg-black/35 dark:bg-black/45 pointer-events-none" /> */}
         </div>
       </div>
 
