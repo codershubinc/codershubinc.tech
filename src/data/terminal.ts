@@ -47,7 +47,7 @@ export const terminalData = {
     overview: {
         endpoint: "https://api.codershub.inc/v1/portfolio",
         response: {
-            status: 200,
+            status: 200, 
             message: "OK",
             data: {
                 organization: "CodersHub Inc",
