@@ -55,9 +55,9 @@ export default async function GitHubContributions() {
     if (!data) {
         return (
             <div className="bg-gradient-to-br from-[#0a0a0a] to-black border border-white/5 p-6 rounded-2xl shadow-xl">
-                <h3 className="text-white font-bold mb-4 flex items-center gap-2">
+                <h3 className="text-white font-mono font-bold mb-4 flex items-center gap-2">
                     <Activity size={16} className="text-zinc-400" />
-                    GitHub Activity
+                    git log --graph --oneline
                 </h3>
                 <div className="text-zinc-500 text-sm">Unable to load activity data</div>
             </div>
@@ -74,9 +74,9 @@ export default async function GitHubContributions() {
             <div className="absolute top-0 left-0 w-40 h-40 bg-white/5 blur-[80px] rounded-full pointer-events-none group-hover:bg-white/10 transition-all duration-500"></div>
 
             <div className="relative z-10">
-                <h3 className="text-white font-bold mb-4 flex items-center gap-2">
+                <h3 className="text-white font-mono font-bold mb-4 flex items-center gap-2">
                     <Activity size={16} className="text-zinc-400" />
-                    GitHub Activity
+                    git log --graph --oneline
                 </h3>
 
                 {/* Contribution Graph */}

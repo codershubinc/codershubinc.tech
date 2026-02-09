@@ -38,6 +38,7 @@ export default function SpotifyWidget() {
             console.error('Failed to fetch Spotify data:', error);
         } finally {
             setIsLoading(false);
+
         }
     };
 
@@ -110,7 +111,7 @@ export default function SpotifyWidget() {
             <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2 text-green-500 font-mono text-xs font-bold">
                     <Headphones size={14} />
-                    {spotifyData.is_playing ? ' Now Listening the ...' : 'Last Played'}
+                    {spotifyData.is_playing ? 'spotify-cli --now-playing' : 'spotify-cli --last-played'}
                 </div>
                 {spotifyData.is_playing ? (
                     <Play size={14} className="text-green-500 animate-pulse" />

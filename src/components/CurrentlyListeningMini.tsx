@@ -54,7 +54,7 @@ export default function CurrentlyListeningMini() {
     // Calculate remaining time
     const formatRemainingTime = () => {
         if (!data.raw?.progress_ms || !data.raw?.item?.duration_ms) return null;
-        
+
         const remainingMs = data.raw.item.duration_ms - data.raw.progress_ms;
         const totalSeconds = Math.floor(remainingMs / 1000);
         const minutes = Math.floor(totalSeconds / 60);
@@ -68,8 +68,8 @@ export default function CurrentlyListeningMini() {
         <div className="p-4 rounded-lg bg-gradient-to-br from-black/40 to-black/20 border border-white/5 backdrop-blur-sm">
             <div className="flex items-center gap-2 mb-3">
                 <Music size={14} className="text-green-400 animate-pulse" />
-                <span className="text-xs font-mono text-zinc-400 uppercase tracking-wider">
-                    Now Playing
+                <span className="text-xs font-mono text-zinc-400 tracking-wider">
+                    spotify-cli --now
                 </span>
             </div>
             <div className="flex gap-3">

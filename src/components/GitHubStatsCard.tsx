@@ -39,9 +39,9 @@ export default async function GitHubStatsCard() {
     if (!stats) {
         return (
             <div className="bg-gradient-to-br from-[#111] to-[#0a0a0a] border border-white/5 p-6 rounded-2xl shadow-xl">
-                <h3 className="text-white font-bold mb-4 flex items-center gap-2">
+                <h3 className="text-white font-mono font-bold mb-4 flex items-center gap-2">
                     <Github size={16} className="text-[#007acc]" />
-                    GitHub Stats
+                    gh api user --json stats
                 </h3>
                 <div className="text-[#666] text-sm">Unable to load stats</div>
             </div>
@@ -55,9 +55,9 @@ export default async function GitHubStatsCard() {
 
             <div className="relative z-10">
                 <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-white font-bold flex items-center gap-2">
+                    <h3 className="text-white font-mono font-bold flex items-center gap-2">
                         <Github size={16} className="text-[#007acc]" />
-                        GitHub Stats
+                        gh api user --json stats
                     </h3>
                     <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-[#007acc]/20 border border-[#007acc]/30">
                         <Award size={12} className="text-[#007acc]" />

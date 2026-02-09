@@ -1,45 +1,56 @@
 import React from 'react';
-import Image from 'next/image';
+import { Terminal, GitBranch } from 'lucide-react';
 
-export default function ProfileCapsules() {
-    const username = 'codershubinc';
-
-    const badges = [
-        {
-            label: 'GitHub',
-            url: `https://img.shields.io/github/followers/${username}?style=for-the-badge&logo=github&logoColor=white&labelColor=181717&color=007acc`,
-            link: `https://github.com/${username}?tab=followers`
-        },
-        {
-            label: 'Repos',
-            url: `https://img.shields.io/badge/dynamic/json?style=for-the-badge&logo=github&logoColor=white&labelColor=181717&color=007acc&label=Repos&query=$.public_repos&url=https://api.github.com/users/${username}`,
-            link: `https://github.com/${username}?tab=repositories`
+async function fetchGitHubProfile() {
+    try {
+        const res = await fetch('https://api.github.com/users/codershubinc', {
+            next: { revalidate: 3600 }
+        });
+        if (res.ok) {
+            const data = await res.json();
+            return {
+                followers: data.followers,
+                repos: data.public_repos
+            };
         }
-    ];
+    } catch (error) {
+        console.error('Failed to fetch GitHub profile:', error);
+    }
+    return { followers: 0, repos: 0 };
+}
+
+export default async function ProfileCapsules() {
+    const profile = await fetchGitHubProfile();
 
     return (
         <div className="hidden lg:flex items-center gap-3">
-            {badges.map((badge) => (
-                <a
-                    key={badge.label}
-                    href={badge.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group relative hover:scale-105 transition-all duration-300"
-                >
-                    <div className="absolute inset-0 bg-[#007acc]/0 group-hover:bg-[#007acc]/10 blur-sm rounded-md transition-all duration-300 group-hover:blur-md"></div>
-                    <div className="relative rounded-md overflow-hidden shadow-md group-hover:shadow-lg group-hover:shadow-[#007acc]/30 transition-all duration-300 ring-1 ring-white/5 group-hover:ring-[#007acc]/50">
-                        <Image
-                            src={badge.url}
-                            alt={badge.label}
-                            width={120}
-                            height={28}
-                            className="h-7 w-auto"
-                            unoptimized
-                        />
-                    </div>
-                </a>
-            ))}
+            {/* Followers */}
+            <a
+                href="https://github.com/codershubinc?tab=followers"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative"
+            >
+                <div className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-black/60 border border-white/10 hover:border-[#007acc]/50 transition-all font-mono text-xs hover:scale-105">
+                    <Terminal size={12} className="text-[#007acc]" />
+                    <span className="text-zinc-500">--followers</span>
+                    <span className="text-white font-bold">{profile.followers}</span>
+                </div>
+            </a>
+
+            {/* Repos */}
+            <a
+                href="https://github.com/codershubinc?tab=repositories"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative"
+            >
+                <div className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-black/60 border border-white/10 hover:border-[#007acc]/50 transition-all font-mono text-xs hover:scale-105">
+                    <GitBranch size={12} className="text-[#007acc]" />
+                    <span className="text-zinc-500">--repos</span>
+                    <span className="text-white font-bold">{profile.repos}</span>
+                </div>
+            </a>
         </div>
     );
 }

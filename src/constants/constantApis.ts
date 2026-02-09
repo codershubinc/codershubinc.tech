@@ -44,6 +44,13 @@ export const github = {
          */
         userProfile: (username: string = GITHUB_USERNAME) =>
             `https://api.github.com/users/${username}`,
+
+        /**
+         * GitHub Streak Stats - Returns contribution streak data
+         * Revalidate: 1 hour
+         */
+        streak: (username: string = GITHUB_USERNAME) =>
+            `https://github-readme-streak-stats-chi-three.vercel.app/?user=${username}&type=json`,
     },
 } as const;
 
@@ -163,4 +170,21 @@ export type VSMusicStats = {
     version: string;
     forks: number;
     issues: number;
+};
+
+export type GitHubStreakData = {
+    mode: string;
+    totalContributions: number;
+    firstContribution: string;
+    longestStreak: {
+        start: string;
+        end: string;
+        length: number;
+    };
+    currentStreak: {
+        start: string;
+        end: string;
+        length: number;
+    };
+    excludedDays: string[];
 };

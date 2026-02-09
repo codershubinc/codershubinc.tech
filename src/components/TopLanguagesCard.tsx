@@ -69,9 +69,9 @@ export default async function TopLanguagesCard() {
     if (!data) {
         return (
             <div className="bg-gradient-to-br from-[#111] to-[#0a0a0a] border border-white/5 p-6 rounded-2xl shadow-xl">
-                <h3 className="text-white font-bold mb-4 flex items-center gap-2">
+                <h3 className="text-white font-mono font-bold mb-4 flex items-center gap-2">
                     <Code2 size={16} className="text-[#007acc]" />
-                    Top Languages
+                    git log --pretty=format: | sort | uniq -c
                 </h3>
                 <div className="text-[#666] text-sm">Unable to load language data</div>
             </div>
@@ -93,9 +93,9 @@ export default async function TopLanguagesCard() {
             <div className="absolute top-0 right-0 w-40 h-40 bg-[#007acc]/10 blur-[80px] rounded-full pointer-events-none group-hover:bg-[#007acc]/20 transition-all duration-500"></div>
 
             <div className="relative z-10">
-                <h3 className="text-white font-bold mb-4 flex items-center gap-2">
+                <h3 className="text-white font-mono font-bold mb-4 flex items-center gap-2">
                     <Code2 size={16} className="text-[#007acc]" />
-                    Top Languages
+                    git log --pretty=format: | sort | uniq -c
                 </h3>
 
                 <div className="space-y-3">

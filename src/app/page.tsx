@@ -9,6 +9,7 @@ import GitHubContributions from "@/components/GitHubContributions";
 import TodayContributionsBadge from "@/components/TodayContributionsBadge";
 import ProfileCapsules from "@/components/ProfileCapsules";
 import CurrentlyListeningMini from "@/components/CurrentlyListeningMini";
+import GitHubStreakMini from "@/components/GitHubStreakMini";
 import ServerBootPanel from "@/components/ServerBootPanel";
 import { Terminal, Github, Command, Coffee, BookOpen, Zap, MapPin, Clock, Cpu, Activity, Code2, Music, TrendingUp } from "lucide-react";
 import Link from "next/link";
@@ -97,10 +98,10 @@ export default async function Home() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 relative z-10">
           {/* Left: Main Hero Content */}
-          <div className="lg:col-span-8 flex flex-col gap-8">
+          <div className="lg:col-span-8 flex flex-col gap-8 animate-in fade-in slide-in-from-left duration-700">
             {/* Status Badges */}
-            <div className="flex flex-wrap items-center gap-3">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#007acc]/10 to-[#0066b3]/10 border border-[#007acc]/30 w-fit text-xs font-mono font-bold text-[#007acc] uppercase tracking-wider shadow-lg shadow-[#007acc]/10">
+            <div className="flex flex-wrap items-center gap-3 animate-in fade-in slide-in-from-top duration-500">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#007acc]/10 to-[#0066b3]/10 border border-[#007acc]/30 w-fit text-xs font-mono font-bold text-[#007acc] uppercase tracking-wider shadow-lg shadow-[#007acc]/10 hover:shadow-[#007acc]/30 transition-all">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#007acc] opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-[#007acc]"></span>
@@ -110,15 +111,16 @@ export default async function Home() {
               <TodayContributionsBadge />
             </div>
 
-            <h1 className="text-6xl md:text-9xl font-mono font-bold gap-0.5  text-white tracking-tighter leading-[0.9] bg-gradient-to-b from-white to-gray-400 bg-clip-text">
-              Swapnil Ingle<span className="text-[#007acc]">.</span>
+            <h1 className="text-6xl md:text-9xl font-mono font-bold gap-0.5 text-white tracking-tighter leading-[0.9] bg-gradient-to-b from-white to-gray-400 bg-clip-text animate-in fade-in zoom-in duration-700 delay-200">
+              Swapnil Ingle<span className="text-[#007acc] animate-pulse">.</span>
             </h1>
 
-            <div className="max-w-2xl space-y-5">
-              <p className="text-2xl md:text-3xl text-transparent bg-gradient-to-r from-white to-gray-500 bg-clip-text font-medium">
-                Backend Engineer & Linux Enthusiast.
+            <div className="max-w-2xl space-y-5 animate-in fade-in slide-in-from-bottom duration-700 delay-300">
+              <p className="text-2xl md:text-3xl text-transparent bg-gradient-to-r from-white to-gray-500 bg-clip-text font-medium font-mono">
+                $ whoami
               </p>
-              <p className="text-[#888] leading-relaxed max-w-lg text-lg">
+              <p className="text-[#888] leading-relaxed max-w-lg text-base">
+                Backend Engineer & Linux Enthusiast.
                 Building high-performance tools and self-hosted infrastructure.
                 Converting caffeine into{" "}
                 <strong className="text-[#00D9FF]">Go</strong> and{" "}
@@ -126,23 +128,24 @@ export default async function Home() {
               </p>
             </div>
 
-            <div className="flex flex-wrap gap-4 pt-6 font-mono text-sm">
+            <div className="flex flex-wrap gap-4 pt-6 font-mono text-sm animate-in fade-in slide-in-from-bottom duration-700 delay-500">
               <a
                 href="https://github.com/codershubinc"
                 target="_blank"
-                className="group flex items-center gap-2 bg-white text-black px-8 py-4 rounded-xl font-bold hover:bg-[#007acc] hover:text-white transition-all hover:scale-105 hover:shadow-xl hover:shadow-[#007acc]/30"
+                className="group flex items-center gap-2 bg-white text-black px-8 py-4 rounded-xl font-bold hover:bg-[#007acc] hover:text-white transition-all hover:scale-110 hover:shadow-xl hover:shadow-[#007acc]/30 active:scale-95"
               >
-                <Github
+                <Terminal
                   size={18}
-                  className="group-hover:rotate-12 transition-transform"
+                  className="group-hover:rotate-12 transition-transform duration-300"
                 />
-                GitHub
+                gh repo view
               </a>
               <a
                 href="#projects"
-                className="flex items-center gap-2 border-2 border-white/10 bg-white/5 text-white px-8 py-4 rounded-xl font-medium hover:border-[#007acc] hover:bg-[#007acc]/10 transition-all hover:scale-105 backdrop-blur-sm"
+                className="flex items-center gap-2 border-2 border-white/10 bg-white/5 text-white px-8 py-4 rounded-xl font-medium hover:border-[#007acc] hover:bg-[#007acc]/10 transition-all hover:scale-110 backdrop-blur-sm active:scale-95"
               >
-                View Deployments
+                <Terminal size={18} className="group-hover:translate-x-1 transition-transform duration-300" />
+                cd ~/projects
               </a>
             </div>
           </div>
@@ -151,10 +154,10 @@ export default async function Home() {
           <ServerBootPanel>
             <div className="lg:col-span-4 hidden lg:block space-y-4">
               {/* Top 3 Languages */}
-              <div className="p-4 rounded-lg bg-gradient-to-br from-black/40 to-black/20 border border-white/5 backdrop-blur-sm">
+              <div className="p-4 rounded-lg bg-gradient-to-br from-black/40 to-black/20 border border-white/5 backdrop-blur-sm hover:border-white/20 transition-all duration-300 hover:translate-x-1">
                 <div className="flex items-center gap-2 mb-3">
                   <Code2 size={14} className="text-[#007acc]" />
-                  <span className="text-xs font-mono text-zinc-400 uppercase tracking-wider">Top Languages</span>
+                  <span className="text-xs font-mono text-zinc-400 tracking-wider">ls ~/.languages/</span>
                 </div>
                 <div className="space-y-2">
                   {topLanguages.map((lang: any, idx: number) => (
@@ -172,12 +175,15 @@ export default async function Home() {
               {/* Currently Listening */}
               <CurrentlyListeningMini />
 
+              {/* GitHub Streak */}
+              <GitHubStreakMini />
+
               {/* GitHub Stats */}
               {githubStats && (
-                <div className="p-4 rounded-lg bg-gradient-to-br from-black/40 to-black/20 border border-white/5 backdrop-blur-sm">
+                <div className="p-4 rounded-lg bg-gradient-to-br from-black/40 to-black/20 border border-white/5 backdrop-blur-sm hover:border-white/20 transition-all duration-300 hover:translate-x-1">
                   <div className="flex items-center gap-2 mb-3">
                     <Github size={14} className="text-zinc-400" />
-                    <span className="text-xs font-mono text-zinc-400 uppercase tracking-wider">GitHub</span>
+                    <span className="text-xs font-mono text-zinc-400 tracking-wider">gh api user/stats --year</span>
                   </div>
                   <div className="grid grid-cols-3 gap-2">
                     <div className="text-center">
@@ -209,24 +215,30 @@ export default async function Home() {
         <div className="absolute top-0 right-0 w-96 h-96 bg-purple-500/5 blur-[100px] rounded-full pointer-events-none"></div>
 
         <div className="flex items-end justify-between mb-16 relative z-10">
-          <div>
-            <h2 className="text-4xl font-bold text-white flex items-center gap-3 mb-2">
-              <Terminal className="text-[#007acc]" size={28} />
-              Featured Projects
+          <div className="animate-in fade-in slide-in-from-left duration-700">
+            <h2 className="text-4xl font-bold  font-mono text-white flex items-center gap-3 mb-2 hover:text-[#007acc] transition-colors duration-300">
+              <Terminal className="text-[#007acc] animate-pulse" size={28} />
+              ls -la ./projects
             </h2>
             <p className="font-mono text-sm text-[#666]">
-              Building tools that matter
+              drwxr-xr-x 3 codershubinc staff
             </p>
           </div>
           <span className="font-mono text-xs text-[#444] hidden md:block px-3 py-1 bg-white/5 rounded-lg border border-white/5">
-            3 projects
+            total 3
           </span>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
-          <VSMusicCard />
-          <OrbitCard />
-          <QuazaarCard />
+          <div className="animate-in fade-in slide-in-from-left duration-700 delay-100">
+            <VSMusicCard />
+          </div>
+          <div className="animate-in fade-in slide-in-from-right duration-700 delay-200">
+            <OrbitCard />
+          </div>
+          <div className="animate-in fade-in slide-in-from-bottom duration-700 delay-300">
+            <QuazaarCard />
+          </div>
         </div>
       </section>
 
@@ -249,13 +261,13 @@ export default async function Home() {
 
         <div className="grid md:grid-cols-12 gap-12 relative z-10">
           {/* Left Column: Bio & Story */}
-          <div className="md:col-span-7 space-y-8">
-            <div className="inline-flex items-center gap-2 text-[#007acc] font-mono text-xs font-bold uppercase tracking-widest mb-2 px-3 py-1 bg-[#007acc]/10 rounded-full border border-[#007acc]/20">
-              <Coffee size={14} />
-              About Me
+          <div className="md:col-span-7 space-y-8 animate-in fade-in slide-in-from-left duration-700 delay-200">
+            <div className="inline-flex items-center gap-2 text-[#007acc] font-mono text-xs font-bold uppercase tracking-widest mb-2 px-3 py-1 bg-[#007acc]/10 rounded-full border border-[#007acc]/20 hover:bg-[#007acc]/20 hover:scale-105 transition-all">
+              <Terminal size={14} className="animate-pulse" />
+              whoami
             </div>
 
-            <h2 className="text-4xl md:text-5xl font-bold text-transparent bg-gradient-to-r from-white to-gray-500 bg-clip-text leading-tight">
+            <h2 className="text-4xl md:text-5xl font-bold font-mono text-transparent bg-gradient-to-r from-white to-gray-500 bg-clip-text leading-tight hover:scale-105 transition-transform duration-300">
               B.Tech Student & <br />{" "}
               <span className="text-[#888]">Systems Explorer.</span>
             </h2>
@@ -280,9 +292,9 @@ export default async function Home() {
 
             {/* Tech Stack List (Casual) */}
             <div className="pt-6">
-              <h3 className="text-white font-bold mb-4 flex items-center gap-2">
-                <Zap size={16} className="text-yellow-400" />
-                Current Stack
+              <h3 className="text-white font-mono font-bold mb-4 flex items-center gap-2">
+                <Terminal size={16} className="text-yellow-400" />
+                ls ~/tech-stack
               </h3>
               <div className="flex flex-wrap gap-3">
                 {[
@@ -305,7 +317,7 @@ export default async function Home() {
           </div>
 
           {/* Right Column: "The Vibe" (Music & Stats) */}
-          <div className="md:col-span-5 space-y-6">
+          <div className="md:col-span-5 space-y-6 animate-in fade-in slide-in-from-right duration-700 delay-300">
             {/* 1. The Music Widget */}
             <SpotifyWidget />
 
@@ -320,9 +332,9 @@ export default async function Home() {
 
             {/* 4. University Status */}
             <div className="bg-gradient-to-br from-[#111] to-[#0a0a0a] border border-white/5 p-6 rounded-2xl shadow-xl hover:border-white/10 transition-all">
-              <h3 className="text-white font-bold mb-4 flex items-center gap-2">
-                <BookOpen size={16} className="text-[#007acc]" />
-                University Status
+              <h3 className="text-white font-mono font-bold mb-4 flex items-center gap-2">
+                <Terminal size={16} className="text-[#007acc]" />
+                cat ~/education.txt
               </h3>
               <ul className="space-y-3 text-sm">
                 <li className="flex justify-between items-center group">
@@ -347,13 +359,17 @@ export default async function Home() {
             </div>
 
             {/* 5. Connect */}
-            <div className="p-6 rounded-2xl border border-[#007acc]/30 bg-gradient-to-br from-[#007acc]/10 to-[#0066b3]/5 text-center shadow-xl shadow-[#007acc]/10 hover:shadow-2xl hover:shadow-[#007acc]/20 transition-all">
-              <p className="text-white font-bold mb-3 text-lg">
+            <div className="p-6 rounded-2xl border border-[#007acc]/30 bg-gradient-to-br from-[#007acc]/10 to-[#0066b3]/5 shadow-xl shadow-[#007acc]/10 hover:shadow-2xl hover:shadow-[#007acc]/20 transition-all">
+              <div className="flex items-center gap-2 text-[#007acc] font-mono text-xs font-bold mb-3">
+                <Terminal size={14} />
+                echo $CONTACT_EMAIL
+              </div>
+              <p className="text-zinc-400 font-medium mb-3 text-sm">
                 Want to build something?
               </p>
               <a
                 href="mailto:ingleswapnil2004@gmail.com"
-                className="text-[#007acc] hover:text-white text-sm font-medium transition-colors underline decoration-[#007acc]/50 hover:decoration-white"
+                className="text-white hover:text-[#007acc] text-sm font-mono font-medium transition-colors underline decoration-white/50 hover:decoration-[#007acc]"
               >
                 ingleswapnil2004@gmail.com
               </a>
@@ -367,18 +383,18 @@ export default async function Home() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6 text-sm">
             <div className="flex items-center gap-2 text-[#888]">
-              <Command size={16} className="text-[#007acc]" />
-              <p className="font-mono">
-                &copy; 2026 CodersHubInc. Built with Next.js.
+              <Terminal size={16} className="text-[#007acc]" />
+              <p className="font-mono text-xs">
+                (c) 2026 codershubinc@localhost:~$ chmod +x portfolio.sh
               </p>
             </div>
             <div className="flex items-center gap-6 text-[#666]">
-              <span className="flex items-center gap-2">
+              <span className="flex items-center gap-2 font-mono text-xs">
                 <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                Panvel, IN
+                uptime: 99.9% | location: Panvel.IN
               </span>
-              <span className="text-[#007acc] font-mono">
-                All Systems Normal
+              <span className="text-[#007acc] font-mono text-xs">
+                systemctl status: active
               </span>
             </div>
           </div>
