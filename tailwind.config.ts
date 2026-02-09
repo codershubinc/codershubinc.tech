@@ -12,39 +12,39 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        background: "rgb(var(--background))",
+        foreground: "rgb(var(--foreground))",
         card: {
-          DEFAULT: "var(--card)",
-          foreground: "var(--card-foreground)",
+          DEFAULT: "rgb(var(--card))",
+          foreground: "rgb(var(--card-foreground))",
         },
         popover: {
-          DEFAULT: "var(--popover)",
-          foreground: "var(--popover-foreground)",
+          DEFAULT: "rgb(var(--popover))",
+          foreground: "rgb(var(--popover-foreground))",
         },
         primary: {
-          DEFAULT: "var(--primary)",
-          foreground: "var(--primary-foreground)",
+          DEFAULT: "rgb(var(--primary))",
+          foreground: "rgb(var(--primary-foreground))",
         },
         secondary: {
-          DEFAULT: "var(--secondary)",
-          foreground: "var(--secondary-foreground)",
+          DEFAULT: "rgb(var(--secondary))",
+          foreground: "rgb(var(--secondary-foreground))",
         },
         muted: {
-          DEFAULT: "var(--muted)",
-          foreground: "var(--muted-foreground)",
+          DEFAULT: "rgb(var(--muted))",
+          foreground: "rgb(var(--muted-foreground))",
         },
         accent: {
-          DEFAULT: "var(--accent)",
-          foreground: "var(--accent-foreground)",
+          DEFAULT: "rgb(var(--accent))",
+          foreground: "rgb(var(--accent-foreground))",
         },
         destructive: {
-          DEFAULT: "var(--destructive)",
-          foreground: "var(--destructive-foreground)",
+          DEFAULT: "rgb(var(--destructive))",
+          foreground: "rgb(var(--destructive-foreground))",
         },
-        border: "var(--border)",
-        input: "var(--input)",
-        ring: "var(--ring)",
+        border: "rgb(var(--border))",
+        input: "rgb(var(--input))",
+        ring: "rgb(var(--ring))",
       },
       borderRadius: {
         lg: "var(--radius)",

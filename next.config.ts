@@ -6,7 +6,10 @@ const nextConfig: NextConfig = {
     domains: [
       'avatars.githubusercontent.com',
       'github-readme-states-repo-self-inst.vercel.app',
-      "opengraph.githubassets.com"
+      "opengraph.githubassets.com",
+      "i.scdn.co",
+      "img.shields.io",
+      "cdn.jsdelivr.net"
     ],
   },
 };
