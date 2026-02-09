@@ -65,7 +65,7 @@ export default function CurrentlyListeningMini() {
     const remainingTime = formatRemainingTime();
 
     return (
-        <div className="p-4 rounded-lg bg-gradient-to-br from-black/40 to-black/20 border border-white/5 backdrop-blur-sm">
+        <div className="p-4 rounded-lg bg-linear-to-br from-black/40 to-black/20 border border-white/5 backdrop-blur-sm">
             <div className="flex items-center gap-2 mb-3">
                 <Music size={14} className="text-green-400 animate-pulse" />
                 <span className="text-xs font-mono text-zinc-400 tracking-wider">
@@ -73,7 +73,7 @@ export default function CurrentlyListeningMini() {
                 </span>
             </div>
             <div className="flex gap-3">
-                <div className="relative w-12 h-12 rounded-md overflow-hidden flex-shrink-0 bg-white/5 border border-white/10 shadow-lg">
+                <div className="relative w-12 h-12 rounded-md overflow-hidden shrink-0 bg-white/5 border border-white/10 shadow-lg">
                     {albumArt ? (
                         <Image
                             src={albumArt}
@@ -94,7 +94,7 @@ export default function CurrentlyListeningMini() {
                     <div className="flex items-center justify-between gap-2">
                         <p className="text-xs text-zinc-500 line-clamp-1">{data.artist}</p>
                         {remainingTime && (
-                            <span className="text-[10px] font-mono text-zinc-600 flex-shrink-0">
+                            <span className="text-[10px] font-mono text-zinc-600 shrink-0">
                                 {remainingTime}
                             </span>
                         )}

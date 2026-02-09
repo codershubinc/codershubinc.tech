@@ -68,7 +68,7 @@ export default async function TopLanguagesCard() {
 
     if (!data) {
         return (
-            <div className="bg-gradient-to-br from-[#111] to-[#0a0a0a] border border-white/5 p-6 rounded-2xl shadow-xl">
+            <div className="bg-linear-to-br from-[#111] to-[#0a0a0a] border border-white/5 p-6 rounded-2xl shadow-xl">
                 <h3 className="text-white font-mono font-bold mb-4 flex items-center gap-2">
                     <Code2 size={16} className="text-[#007acc]" />
                     git log --pretty=format: | sort | uniq -c
@@ -88,7 +88,7 @@ export default async function TopLanguagesCard() {
         .slice(0, 5);
 
     return (
-        <div className="bg-gradient-to-br from-[#111] to-[#0a0a0a] border border-white/5 p-6 rounded-2xl relative overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-[#007acc]/10 transition-all group">
+        <div className="bg-linear-to-br from-[#111] to-[#0a0a0a] border border-white/5 p-6 rounded-2xl relative overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-[#007acc]/10 transition-all group">
             {/* Gradient accent */}
             <div className="absolute top-0 right-0 w-40 h-40 bg-[#007acc]/10 blur-[80px] rounded-full pointer-events-none group-hover:bg-[#007acc]/20 transition-all duration-500"></div>
 
@@ -111,9 +111,8 @@ export default async function TopLanguagesCard() {
                                                 <Image
                                                     src={iconUrl}
                                                     alt={lang.name}
-                                                    width={14}
-                                                    height={14}
-                                                    className="w-3.5 h-3.5"
+                                                    width={32}
+                                                    height={32}
                                                 />
                                             ) : (
                                                 <FileCode size={14} className="text-zinc-400" />

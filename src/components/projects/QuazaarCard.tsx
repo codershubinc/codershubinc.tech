@@ -11,10 +11,10 @@ export default function QuazaarCard() {
     };
 
     return (
-        <div className="group relative bg-gradient-to-br from-[#0a0a0a] to-black border border-white/5 rounded-xl p-6 hover:border-amber-500/20 transition-all hover:-translate-y-2 overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-amber-500/10">
+        <div className="group relative bg-linear-to-br from-[#0a0a0a] to-black border border-white/5 rounded-xl p-6 hover:border-amber-500/20 transition-all hover:-translate-y-2 overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-amber-500/10">
             {/* Dual Platform Gradient */}
-            <div className="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-br from-amber-500/5 to-transparent blur-[60px] pointer-events-none group-hover:from-amber-500/10 transition-all duration-500"></div>
-            <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-bl from-slate-500/5 to-transparent blur-[60px] pointer-events-none group-hover:from-slate-500/10 transition-all duration-500"></div>
+            <div className="absolute top-0 left-0 w-1/2 h-full bg-linear-to-br from-amber-500/5 to-transparent blur-[60px] pointer-events-none group-hover:from-amber-500/10 transition-all duration-500"></div>
+            <div className="absolute top-0 right-0 w-1/2 h-full bg-linear-to-bl from-slate-500/5 to-transparent blur-[60px] pointer-events-none group-hover:from-slate-500/10 transition-all duration-500"></div>
 
             {/* Header */}
             <div className="flex justify-between items-start mb-6 relative z-10">
@@ -63,7 +63,7 @@ export default function QuazaarCard() {
             </div>
 
             {/* Bridge Visual Accent */}
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-16 bg-gradient-to-b from-transparent via-white/5 to-transparent"></div>
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-16 bg-linear-to-b from-transparent via-white/5 to-transparent"></div>
         </div>
     );
 }

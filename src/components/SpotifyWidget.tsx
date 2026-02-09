@@ -58,7 +58,7 @@ export default function SpotifyWidget() {
 
     if (isLoading) {
         return (
-            <div className="bg-gradient-to-br from-[#111] to-[#0a0a0a] border border-white/5 p-6 rounded-2xl relative overflow-hidden group shadow-xl hover:shadow-2xl hover:shadow-green-500/10 transition-all">
+            <div className="bg-linear-to-br from-[#111] to-[#0a0a0a] border border-white/5 p-6 rounded-2xl relative overflow-hidden group shadow-xl hover:shadow-2xl hover:shadow-green-500/10 transition-all">
                 <div className="absolute top-0 right-0 w-40 h-40 bg-green-500/10 blur-[60px] rounded-full pointer-events-none group-hover:bg-green-500/20 transition-all duration-500"></div>
                 <div className="flex items-center gap-2 text-green-500 font-mono text-xs font-bold mb-4 relative z-10">
                     <Headphones size={14} />
@@ -76,7 +76,7 @@ export default function SpotifyWidget() {
 
     if (!spotifyData) {
         return (
-            <div className="bg-gradient-to-br from-[#111] to-[#0a0a0a] border border-white/5 p-6 rounded-2xl relative overflow-hidden group shadow-xl hover:shadow-2xl hover:shadow-green-500/10 transition-all">
+            <div className="bg-linear-to-br from-[#111] to-[#0a0a0a] border border-white/5 p-6 rounded-2xl relative overflow-hidden group shadow-xl hover:shadow-2xl hover:shadow-green-500/10 transition-all">
                 <div className="absolute top-0 right-0 w-40 h-40 bg-green-500/10 blur-[60px] rounded-full pointer-events-none group-hover:bg-green-500/20 transition-all duration-500"></div>
                 <div className="flex items-center gap-2 text-green-500 font-mono text-xs font-bold mb-4 relative z-10">
                     <Headphones size={14} />
@@ -105,7 +105,7 @@ export default function SpotifyWidget() {
         : 0;
 
     return (
-        <div className="bg-gradient-to-br from-[#111] to-[#0a0a0a] border border-white/5 p-6 rounded-2xl relative overflow-hidden group shadow-xl hover:shadow-2xl hover:shadow-green-500/10 transition-all">
+        <div className="bg-linear-to-br from-[#111] to-[#0a0a0a] border border-white/5 p-6 rounded-2xl relative overflow-hidden group shadow-xl hover:shadow-2xl hover:shadow-green-500/10 transition-all">
             <div className="absolute top-0 right-0 w-32 h-32 bg-green-500/10 blur-[60px] rounded-full pointer-events-none group-hover:bg-green-500/20 transition-all duration-500"></div>
 
             <div className="flex items-center justify-between mb-4">
@@ -122,7 +122,7 @@ export default function SpotifyWidget() {
 
             <div className="flex items-center gap-4 relative z-10">
                 {albumArt ? (
-                    <div className="w-16 h-16 rounded-lg overflow-hidden border border-white/10 flex-shrink-0 shadow-lg group-hover:scale-105 transition-transform">
+                    <div className="w-16 h-16 rounded-lg overflow-hidden border border-white/10 shrink-0 shadow-lg group-hover:scale-105 transition-transform">
                         <Image
                             src={albumArt}
                             alt={spotifyData.album}
@@ -159,7 +159,7 @@ export default function SpotifyWidget() {
                     </div>
                     <div className="w-full h-1.5 bg-[#222] rounded-full overflow-hidden shadow-inner">
                         <div
-                            className="h-full bg-gradient-to-r from-green-500 to-green-400 rounded-full transition-all duration-1000 ease-linear shadow-lg shadow-green-500/50"
+                            className="h-full bg-linear-to-r from-green-500 to-green-400 rounded-full transition-all duration-1000 ease-linear shadow-lg shadow-green-500/50"
                             style={{ width: `${progressPercentage}%` }}
                         ></div>
                     </div>

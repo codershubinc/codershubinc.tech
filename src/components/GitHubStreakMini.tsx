@@ -1,5 +1,4 @@
-import React from "react";
-import { Flame, TrendingUp, Calendar } from "lucide-react";
+import { Flame } from "lucide-react";
 import { github, REVALIDATE } from "@/constants/constantApis";
 
 interface StreakData {
@@ -39,7 +38,7 @@ export default async function GitHubStreakMini() {
     if (!data) return null;
 
     return (
-        <div className="p-4 rounded-lg bg-gradient-to-br from-black/40 to-black/20 border border-white/5 backdrop-blur-sm">
+        <div className="p-4 rounded-lg bg-linear-to-br from-black/40 to-black/20 border border-white/5 backdrop-blur-sm">
             <div className="flex items-center gap-2 mb-3">
                 <Flame size={14} className="text-orange-400" />
                 <span className="text-xs font-mono text-zinc-400 tracking-wider">

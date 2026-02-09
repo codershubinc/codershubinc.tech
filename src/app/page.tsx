@@ -63,7 +63,7 @@ export default async function Home() {
   const topLanguages = await getTopLanguages();
   const githubStats = await getGitHubStats();
   return (
-    <main className="min-h-screen bg-gradient-to-b from-[#0a0a0a] via-[#050505] to-[#000000] text-[#b0b0b0] selection:bg-[#007acc] selection:text-white font-sans overflow-x-hidden">
+    <main className="min-h-screen bg-linear-to-b from-[#0a0a0a] via-[#050505] to-[#000000] text-[#b0b0b0] selection:bg-[#007acc] selection:text-white font-sans overflow-x-hidden">
       {/* 1. Navbar (Professional) */}
       <header className="fixed top-0 w-full z-50 border-b border-white/5 bg-black/60 backdrop-blur-xl shadow-lg shadow-black/5">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
@@ -101,7 +101,7 @@ export default async function Home() {
           <div className="lg:col-span-8 flex flex-col gap-8 animate-in fade-in slide-in-from-left duration-700">
             {/* Status Badges */}
             <div className="flex flex-wrap items-center gap-3 animate-in fade-in slide-in-from-top duration-500">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#007acc]/10 to-[#0066b3]/10 border border-[#007acc]/30 w-fit text-xs font-mono font-bold text-[#007acc] uppercase tracking-wider shadow-lg shadow-[#007acc]/10 hover:shadow-[#007acc]/30 transition-all">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-linear-to-r from-[#007acc]/10 to-[#0066b3]/10 border border-[#007acc]/30 w-fit text-xs font-mono font-bold text-[#007acc] uppercase tracking-wider shadow-lg shadow-[#007acc]/10 hover:shadow-[#007acc]/30 transition-all">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#007acc] opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-[#007acc]"></span>
@@ -111,12 +111,12 @@ export default async function Home() {
               <TodayContributionsBadge />
             </div>
 
-            <h1 className="text-6xl md:text-9xl font-mono font-bold gap-0.5 text-white tracking-tighter leading-[0.9] bg-gradient-to-b from-white to-gray-400 bg-clip-text animate-in fade-in zoom-in duration-700 delay-200">
+            <h1 className="text-6xl md:text-9xl font-mono font-bold gap-0.5 text-white tracking-tighter leading-[0.9] bg-linear-to-b from-white to-gray-400 bg-clip-text animate-in fade-in zoom-in duration-700 delay-200">
               Swapnil Ingle<span className="text-[#007acc] animate-pulse">.</span>
             </h1>
 
             <div className="max-w-2xl space-y-5 animate-in fade-in slide-in-from-bottom duration-700 delay-300">
-              <p className="text-2xl md:text-3xl text-transparent bg-gradient-to-r from-white to-gray-500 bg-clip-text font-medium font-mono">
+              <p className="text-2xl md:text-3xl text-transparent bg-linear-to-r from-white to-gray-500 bg-clip-text font-medium font-mono">
                 $ whoami
               </p>
               <p className="text-[#888] leading-relaxed max-w-lg text-base">
@@ -154,13 +154,13 @@ export default async function Home() {
           <ServerBootPanel>
             <div className="lg:col-span-4 hidden lg:block space-y-4">
               {/* Top 3 Languages */}
-              <div className="p-4 rounded-lg bg-gradient-to-br from-black/40 to-black/20 border border-white/5 backdrop-blur-sm hover:border-white/20 transition-all duration-300 hover:translate-x-1">
+              <div className="p-4 rounded-lg bg-linear-to-br from-black/40 to-black/20 border border-white/5 backdrop-blur-sm hover:border-white/20 transition-all duration-300 hover:translate-x-1">
                 <div className="flex items-center gap-2 mb-3">
                   <Code2 size={14} className="text-[#007acc]" />
                   <span className="text-xs font-mono text-zinc-400 tracking-wider">ls ~/.languages/</span>
                 </div>
                 <div className="space-y-2">
-                  {topLanguages.map((lang: any, idx: number) => (
+                  {topLanguages.map((lang: { name: string; percentage: string; color: string }, idx: number) => (
                     <div key={idx} className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <div className="w-2 h-2 rounded-full" style={{ backgroundColor: lang.color }}></div>
@@ -180,7 +180,7 @@ export default async function Home() {
 
               {/* GitHub Stats */}
               {githubStats && (
-                <div className="p-4 rounded-lg bg-gradient-to-br from-black/40 to-black/20 border border-white/5 backdrop-blur-sm hover:border-white/20 transition-all duration-300 hover:translate-x-1">
+                <div className="p-4 rounded-lg bg-linear-to-br from-black/40 to-black/20 border border-white/5 backdrop-blur-sm hover:border-white/20 transition-all duration-300 hover:translate-x-1">
                   <div className="flex items-center gap-2 mb-3">
                     <Github size={14} className="text-zinc-400" />
                     <span className="text-xs font-mono text-zinc-400 tracking-wider">gh api user/stats --year</span>
@@ -247,7 +247,7 @@ export default async function Home() {
          ========================================= */}
       <div className="w-full py-16">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="h-px bg-gradient-to-r from-transparent via-[#007acc]/50 to-transparent"></div>
+          <div className="h-px bg-linear-to-r from-transparent via-[#007acc]/50 to-transparent"></div>
         </div>
       </div>
 
@@ -267,7 +267,7 @@ export default async function Home() {
               whoami
             </div>
 
-            <h2 className="text-4xl md:text-5xl font-bold font-mono text-transparent bg-gradient-to-r from-white to-gray-500 bg-clip-text leading-tight hover:scale-105 transition-transform duration-300">
+            <h2 className="text-4xl md:text-5xl font-bold font-mono text-transparent bg-linear-to-r from-white to-gray-500 bg-clip-text leading-tight hover:scale-105 transition-transform duration-300">
               B.Tech Student & <br />{" "}
               <span className="text-[#888]">Systems Explorer.</span>
             </h2>
@@ -307,7 +307,7 @@ export default async function Home() {
                 ].map((item) => (
                   <span
                     key={item}
-                    className="px-4 py-2 rounded-xl bg-gradient-to-br from-[#111] to-[#0a0a0a] border border-white/10 text-sm text-white hover:border-[#007acc]/50 transition-all hover:scale-105 cursor-default shadow-lg"
+                    className="px-4 py-2 rounded-xl bg-linear-to-br from-[#111] to-[#0a0a0a] border border-white/10 text-sm text-white hover:border-[#007acc]/50 transition-all hover:scale-105 cursor-default shadow-lg"
                   >
                     {item}
                   </span>
@@ -331,7 +331,7 @@ export default async function Home() {
             <GitHubContributions />
 
             {/* 4. University Status */}
-            <div className="bg-gradient-to-br from-[#111] to-[#0a0a0a] border border-white/5 p-6 rounded-2xl shadow-xl hover:border-white/10 transition-all">
+            <div className="bg-linear-to-br from-[#111] to-[#0a0a0a] border border-white/5 p-6 rounded-2xl shadow-xl hover:border-white/10 transition-all">
               <h3 className="text-white font-mono font-bold mb-4 flex items-center gap-2">
                 <Terminal size={16} className="text-[#007acc]" />
                 cat ~/education.txt
@@ -359,7 +359,7 @@ export default async function Home() {
             </div>
 
             {/* 5. Connect */}
-            <div className="p-6 rounded-2xl border border-[#007acc]/30 bg-gradient-to-br from-[#007acc]/10 to-[#0066b3]/5 shadow-xl shadow-[#007acc]/10 hover:shadow-2xl hover:shadow-[#007acc]/20 transition-all">
+            <div className="p-6 rounded-2xl border border-[#007acc]/30 bg-linear-to-br from-[#007acc]/10 to-[#0066b3]/5 shadow-xl shadow-[#007acc]/10 hover:shadow-2xl hover:shadow-[#007acc]/20 transition-all">
               <div className="flex items-center gap-2 text-[#007acc] font-mono text-xs font-bold mb-3">
                 <Terminal size={14} />
                 echo $CONTACT_EMAIL

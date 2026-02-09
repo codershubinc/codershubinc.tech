@@ -38,7 +38,7 @@ export default async function GitHubStatsCard() {
 
     if (!stats) {
         return (
-            <div className="bg-gradient-to-br from-[#111] to-[#0a0a0a] border border-white/5 p-6 rounded-2xl shadow-xl">
+            <div className="bg-linear-to-br from-[#111] to-[#0a0a0a] border border-white/5 p-6 rounded-2xl shadow-xl">
                 <h3 className="text-white font-mono font-bold mb-4 flex items-center gap-2">
                     <Github size={16} className="text-[#007acc]" />
                     gh api user --json stats
@@ -49,7 +49,7 @@ export default async function GitHubStatsCard() {
     }
 
     return (
-        <div className="bg-gradient-to-br from-[#111] to-[#0a0a0a] border border-white/5 p-6 rounded-2xl relative overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-[#007acc]/10 transition-all group">
+        <div className="bg-linear-to-br from-[#111] to-[#0a0a0a] border border-white/5 p-6 rounded-2xl relative overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-[#007acc]/10 transition-all group">
             {/* Gradient accent */}
             <div className="absolute top-0 left-0 w-40 h-40 bg-[#007acc]/10 blur-[80px] rounded-full pointer-events-none group-hover:bg-[#007acc]/20 transition-all duration-500"></div>
 

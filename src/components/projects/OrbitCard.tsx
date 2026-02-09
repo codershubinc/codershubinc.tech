@@ -11,7 +11,7 @@ export default function OrbitCard() {
     };
 
     return (
-        <div className="group relative bg-gradient-to-br from-[#0a0a0a] to-black border border-white/5 rounded-xl p-6 hover:border-white/10 transition-all hover:-translate-y-2 overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-white/5">
+        <div className="group relative bg-linear-to-br from-[#0a0a0a] to-black border border-white/5 rounded-xl p-6 hover:border-white/10 transition-all hover:-translate-y-2 overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-white/5">
             {/* Orbital Glow Effect */}
             <div className="absolute top-0 right-0 w-40 h-40 bg-white/5 blur-[100px] rounded-full pointer-events-none group-hover:bg-white/10 transition-all duration-500"></div>
 

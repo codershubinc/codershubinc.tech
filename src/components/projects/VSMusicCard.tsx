@@ -27,9 +27,9 @@ export default async function VSMusicCard() {
     };
 
     return (
-        <div className="group relative bg-gradient-to-br from-[#0a0a0a] to-black border border-white/5 rounded-xl p-6 hover:border-emerald-500/20 transition-all hover:-translate-y-2 overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-emerald-500/10">
+        <div className="group relative bg-linear-to-br from-[#0a0a0a] to-black border border-white/5 rounded-xl p-6 hover:border-emerald-500/20 transition-all hover:-translate-y-2 overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-emerald-500/10">
             {/* Music Wave Glow */}
-            <div className="absolute top-1/2 -translate-y-1/2 left-0 w-full h-32 bg-gradient-to-r from-emerald-500/5 via-teal-500/5 to-emerald-500/5 blur-[80px] pointer-events-none group-hover:opacity-100 opacity-50 transition-opacity duration-500"></div>
+            <div className="absolute top-1/2 -translate-y-1/2 left-0 w-full h-32 bg-linear-to-r from-emerald-500/5 via-teal-500/5 to-emerald-500/5 blur-[80px] pointer-events-none group-hover:opacity-100 opacity-50 transition-opacity duration-500"></div>
 
             {/* Header */}
             <div className="flex justify-between items-start mb-6 relative z-10">

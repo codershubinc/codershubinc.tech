@@ -24,14 +24,6 @@ export default function ServerBootPanel({ children }: ServerBootPanelProps) {
     const [progress, setProgress] = useState(0);
 
     useEffect(() => {
-        // Check if already booted in this session
-        const hasBooted = sessionStorage.getItem("server-booted");
-        // if (hasBooted) {
-        //     setIsBooting(false);
-        //     return;
-        // }
-
-        // Show boot sequence
         bootSequence.forEach((step, index) => {
             setTimeout(() => {
                 setVisibleLines((prev) => [...prev, index]);
@@ -42,7 +34,6 @@ export default function ServerBootPanel({ children }: ServerBootPanelProps) {
         // Finish boot sequence
         setTimeout(() => {
             setIsBooting(false);
-            sessionStorage.setItem("server-booted", "true");
         }, 2400);
     }, []);
 
@@ -70,7 +61,7 @@ export default function ServerBootPanel({ children }: ServerBootPanelProps) {
                                 }`}
                         >
                             <div className="flex items-center gap-2 text-emerald-400">
-                                <Check size={12} className="flex-shrink-0" />
+                                <Check size={12} className="shrink-0" />
                                 <span className="text-zinc-400">{step.text}</span>
                             </div>
                         </div>
@@ -85,10 +76,10 @@ export default function ServerBootPanel({ children }: ServerBootPanelProps) {
                     </div>
                     <div className="w-full h-1.5 bg-zinc-900 rounded-full overflow-hidden">
                         <div
-                            className="h-full bg-gradient-to-r from-emerald-500 to-emerald-400 rounded-full transition-all duration-300 ease-out"
+                            className="h-full bg-linear-to-r from-emerald-500 to-emerald-400 rounded-full transition-all duration-300 ease-out"
                             style={{ width: `${progress}%` }}
                         >
-                            <div className="w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent animate-pulse"></div>
+                            <div className="w-full h-full bg-linear-to-r from-transparent via-white/30 to-transparent animate-pulse"></div>
                         </div>
                     </div>
                 </div>

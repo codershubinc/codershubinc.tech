@@ -54,7 +54,7 @@ export default async function GitHubContributions() {
 
     if (!data) {
         return (
-            <div className="bg-gradient-to-br from-[#0a0a0a] to-black border border-white/5 p-6 rounded-2xl shadow-xl">
+            <div className="bg-linear-to-br from-[#0a0a0a] to-black border border-white/5 p-6 rounded-2xl shadow-xl">
                 <h3 className="text-white font-mono font-bold mb-4 flex items-center gap-2">
                     <Activity size={16} className="text-zinc-400" />
                     git log --graph --oneline
@@ -69,7 +69,7 @@ export default async function GitHubContributions() {
     const bestDay = getBestDay(data.contributions);
 
     return (
-        <div className="bg-gradient-to-br from-[#0a0a0a] to-black border border-white/5 p-6 rounded-2xl relative overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-white/5 transition-all group">
+        <div className="bg-linear-to-br from-[#0a0a0a] to-black border border-white/5 p-6 rounded-2xl relative overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-white/5 transition-all group">
             {/* Glow Effect */}
             <div className="absolute top-0 left-0 w-40 h-40 bg-white/5 blur-[80px] rounded-full pointer-events-none group-hover:bg-white/10 transition-all duration-500"></div>
 
@@ -99,7 +99,7 @@ export default async function GitHubContributions() {
                             return (
                                 <div
                                     key={index}
-                                    className={`w-3 h-3 rounded-[2px] ${colors[intensity]} transition-all hover:scale-125 hover:ring-1 hover:ring-white/30 cursor-pointer`}
+                                    className={`w-3 h-3 rounded-xs ${colors[intensity]} transition-all hover:scale-125 hover:ring-1 hover:ring-white/30 cursor-pointer`}
                                     title={`${contrib.date}: ${contrib.contributionCount} contributions`}
                                 ></div>
                             );
