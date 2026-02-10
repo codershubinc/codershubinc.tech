@@ -52,7 +52,9 @@ export function useContributions(): UseContributionsReturn {
             const data: ContributionsData = await response.json();
             setContributionsData(data);
 
-            const todayContrib = data.contributions.find((c) => c.date === today);
+            const todayContrib = data.contributions[data.contributions.length - 1];
+            // console.log(`Today's contributions: ${todayContrib?.contributionCount || 0}`);
+
             setTodaysCount(todayContrib?.contributionCount || 0);
         } catch (err) {
             const errorMessage = err instanceof Error ? err.message : 'Failed to fetch contributions';
