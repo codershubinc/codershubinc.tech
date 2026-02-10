@@ -10,7 +10,8 @@ import TodayContributionsBadge from "@/components/TodayContributionsBadge";
 import TodayContributionsCard from "@/components/TodayContributionsCard";
 import ProfileCapsules from "@/components/ProfileCapsules";
 import WakatimeStats from "@/components/WakatimeStats";
-import { Terminal, Command, Coffee, BookOpen, Clock, Cpu, Code2 } from "lucide-react";
+import TodoList from "@/components/TodoList";
+import { Terminal, Command } from "lucide-react";
 
 export default async function Home() {
   return (
@@ -103,42 +104,8 @@ export default async function Home() {
 
           {/* Right: What I'm Doing Today */}
           <div className="lg:col-span-4 hidden lg:block space-y-4">
-            {/* Today's Focus */}
-            <div className="p-5 rounded-lg bg-linear-to-br from-[#007acc]/10 to-black/40 border border-[#007acc]/30 backdrop-blur-sm hover:border-[#007acc]/50 transition-all duration-300 shadow-lg shadow-[#007acc]/10">
-              <div className="flex items-center gap-2 mb-4">
-                <Clock size={16} className="text-[#007acc]" />
-                <span className="text-sm font-mono text-white font-bold tracking-wider">What I&apos;m Doing Today</span>
-              </div>
-              <div className="space-y-3">
-                {[
-                  { task: "Building Orbit v2.0 features", icon: Cpu, status: "in-progress", color: "text-[#007acc]" },
-                  { task: "Refactoring Go microservices", icon: Code2, status: "in-progress", color: "text-yellow-400" },
-                  { task: "Studying system design patterns", icon: BookOpen, status: "todo", color: "text-purple-400" },
-                  { task: "Coffee break ☕", icon: Coffee, status: "completed", color: "text-green-400" },
-                ].map((item, idx) => (
-                  <div key={idx} className="flex items-start gap-3 group">
-                    <div className="pt-0.5">
-                      {item.status === "completed" ? (
-                        <div className="w-4 h-4 rounded-full border-2 border-green-400 bg-green-400/20 flex items-center justify-center">
-                          <div className="w-2 h-2 rounded-full bg-green-400"></div>
-                        </div>
-                      ) : item.status === "in-progress" ? (
-                        <div className="w-4 h-4 rounded-full border-2 border-[#007acc] bg-[#007acc]/20 flex items-center justify-center animate-pulse">
-                          <div className="w-2 h-2 rounded-full bg-[#007acc]"></div>
-                        </div>
-                      ) : (
-                        <div className="w-4 h-4 rounded-full border-2 border-zinc-600 bg-zinc-800/50"></div>
-                      )}
-                    </div>
-                    <div className="flex-1">
-                      <p className={`text-xs ${item.status === "completed" ? "text-zinc-500 line-through" : "text-zinc-300"} group-hover:text-white transition-colors`}>
-                        {item.task}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+            {/* Todo List */}
+            <TodoList />
 
             {/* Today's Contributions Card */}
             <TodayContributionsCard />
