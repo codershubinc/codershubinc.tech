@@ -1,124 +1,295 @@
-# codershubinc.tech
+<div align="center">
 
-> Personal portfolio & projects site built with Next.js and Tailwind CSS — demonstrates project listings, README rendering, and GitHub integrations.
+# 🚀 codershubinc.com
 
-## Overview
+[![Next.js](https://img.shields.io/badge/Next.js-16.0-black?logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?logo=typescript)](https://www.typescriptlang.org/)
+[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.0-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-This repository is the source code for codershubinc.tech — a portfolio site showcasing open-source work, project READMEs, and project details pulled from GitHub.
+**Personal portfolio showcasing projects, live coding stats, and what I'm currently listening to**
 
-It uses Next.js (App Router), Tailwind CSS, and the GitHub REST API to fetch and render project content. The site converts Markdown to styled HTML and renders structured file trees and file counts for each project.
+[Visit Site](https://codershubinc.com) · [Report Bug](https://github.com/codershubinc/codershubinc.tech/issues) · [Request Feature](https://github.com/codershubinc/codershubinc.tech/issues)
 
-### Key Features
+</div>
 
-- Project list fetched from GitHub repos for `codershubinc`.
-- Styled, server-rendered README content with custom Tailwind typography variants.
-- File tree parsing (slash-style or ASCII) and file extension counts with language color badges.
-- Small API endpoints for supporting content rendering (README fetch/proxy, streak stats, and a Quazaar README test endpoint).
-- Server-only utilities and client components for a fast, modern UI.
+---
 
-## Tech Stack
+## 👋 About
 
-- Next.js (App Router)
-- React (Server & Client components)
-- Tailwind CSS + Typography plugin
-- marked for Markdown parsing
-- TypeScript
-- Vitest for unit tests
+Welcome to my corner of the internet! This is my personal portfolio website where I share:
 
-## Local Development
+- 🎯 **My Projects** - Cool things I've built, from deployment monitoring tools to VS Code extensions
+- 📊 **Coding Activity** - Real-time stats showing my GitHub contributions, coding streaks, and favorite programming languages
+- 🎵 **Music I'm Listening To** - What's playing on my Spotify right now (because good code needs good music!)
+- 💼 **Professional Presence** - Easy access to my GitHub, LinkedIn, and other professional profiles
 
-Install dependencies
+The site updates automatically to show live data, so you can always see what I'm working on and what technologies I'm using. Whether you're here to check out my work, looking for collaboration opportunities, or just curious about what I do - feel free to explore!
 
-```bash
-pnpm install
-# or: npm install
-# or: bun install
-```
+---
 
-Development server
+## ✨ Features
 
-```bash
-pnpm dev
-# or: npm run dev
-# or: bun dev
-```
+### 🎯 Core Functionality
 
-Build & start
+- **Project Showcase** - Featured projects with custom cards (Orbit, VS Music, Quazaar)
+- **GitHub Integration** - Real-time stats, contribution graphs, streak tracking, and language breakdown
+- **Spotify Widget** - Live "now playing" display with album artwork and playback status
+- **Markdown Rendering** - Server-side README conversion with syntax highlighting
+- **Responsive Design** - Mobile-first, fully responsive layout with smooth animations
+
+### 🛠️ Technical Highlights
+
+- **Server Components** - Optimized data fetching with Next.js App Router
+- **API Routes** - Custom endpoints for Spotify, GitHub, and README proxying
+- **Type Safety** - Full TypeScript coverage with strict mode
+- **Performance** - Image optimization, font loading, and strategic caching
+- **Modern UI** - Framer Motion animations, Lucide icons, and dark theme
+
+---
+
+## 🏗️ Tech Stack
+
+| Category              | Technologies                               |
+| --------------------- | ------------------------------------------ |
+| **Framework**         | Next.js 16 (App Router), React 19          |
+| **Language**          | TypeScript 5                               |
+| **Styling**           | TailwindCSS 4, Tailwind Typography         |
+| **UI Components**     | Radix UI, Framer Motion, Lucide Icons      |
+| **Markdown**          | Marked, React Markdown, Rehype, Remark GFM |
+| **Code Highlighting** | Highlight.js, Rehype Highlight             |
+| **Testing**           | Vitest                                     |
+| **Linting**           | ESLint 9                                   |
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- Node.js 20+ or Bun
+- pnpm (recommended), npm, or bun
+
+### Installation
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/codershubinc/codershubinc.tech.git
+   cd codershubinc.tech
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   pnpm install
+   # or: npm install
+   # or: bun install
+   ```
+
+3. **Set up environment variables** (optional)
+
+   ```bash
+   cp .env.example .env.local
+   ```
+
+   Add your tokens:
+
+   ```env
+   GITHUB_TOKEN=ghp_your_github_token_here
+   SPOTIFY_CLIENT_ID=your_spotify_client_id
+   SPOTIFY_CLIENT_SECRET=your_spotify_client_secret
+   SPOTIFY_REFRESH_TOKEN=your_spotify_refresh_token
+   ```
+
+4. **Run development server**
+
+   ```bash
+   pnpm dev
+   ```
+
+5. **Open browser**
+   Navigate to [http://localhost:3000](http://localhost:3000)
+
+### Build for Production
 
 ```bash
 pnpm build
 pnpm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view locally.
-
-## Testing
-
-Run the tests with
+### Run Tests
 
 ```bash
 pnpm test
 ```
 
-## Environment Variables
+---
 
-Some GitHub routes detect the presence of `GITHUB_TOKEN` to increase rate limits. Set it in your environment when developing or building:
+## 📁 Project Structure
 
-```bash
-export GITHUB_TOKEN=ghp_...  # or set through your environment manager
 ```
-
-## API routes
-
-This project includes a few helpful API routes used in the site and for local development:
-
-- `GET /api/readme?repo=owner/repo` — fetch repository README (raw & rendered HTML), caches locally in `/temp` for convenience.
-- `GET /api/streak?user=codershubinc` — proxies `github-readme-streak-stats` JSON output.
-- `GET /api/quazaar-readme` — returns an example Quazaar README rendered as HTML (used for testing markdown rendering).
-
-## Code Organization
-
-`src/app/` — Next.js pages and server components (e.g. `projects/`)
-`src/lib/` — application libraries (`api/gh/` and `utils/`)
-`src/components/` — React UI components (client side)
-`src/data/` — static or example data used for demo
-
-## Contributing
-
-Contributions are welcome. To keep the repo clean, please open an issue first for larger work and follow these steps:
-
-1. Fork and clone the repo
-2. Create a feature branch: `git checkout -b feat/your-feature`
-3. Make changes and add tests
-4. Submit a PR with a clear description of your work
-
-## Note for maintainers & developers
-
-- `src/lib/api/gh` holds the GitHub integrations split into helpers for fetch and per-file operations.
-- `src/lib/utils` is a small, organized utility folder with an `index.ts` barrel to keep import lines compact.
-- If reusing components outside the site or under different domains, keep in mind the server-side fetch headers and rate limits.
-
-## License
-
-This repo is licensed under the MIT License.
+codershubinc.com/
+├── src/
+│   ├── app/                  # Next.js App Router pages
+│   │   ├── page.tsx         # Home page with all widgets
+│   │   ├── layout.tsx       # Root layout
+│   │   └── api/             # API routes
+│   │       └── spotify/     # Spotify integration endpoint
+│   ├── components/          # React components
+│   │   ├── GitHubContributions.tsx
+│   │   ├── GitHubStatsCard.tsx
+│   │   ├── GitHubStreakMini.tsx
+│   │   ├── SpotifyWidget.tsx
+│   │   ├── TopLanguagesCard.tsx
+│   │   └── projects/        # Project-specific cards
+│   │       ├── OrbitCard.tsx
+│   │       ├── QuazaarCard.tsx
+│   │       └── VSMusicCard.tsx
+│   ├── constants/           # API endpoints & constants
+│   ├── data/               # Static data (projects, skills)
+│   ├── lib/                # Utilities & helpers
+│   └── types/              # TypeScript type definitions
+├── public/                 # Static assets
+├── docs/                   # Documentation
+└── [config files]
+```
 
 ---
 
-Made with ❤️ by Swapnil Ingle • @codershubinc
+## 🔌 API Routes
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Spotify Endpoint
 
-## Learn More
+```
+GET /api/spotify
+```
 
-To learn more about Next.js, take a look at the following resources:
+Returns current playback status, track info, and album artwork.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Response Example:**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```json
+{
+  "artist": "Artist Name",
+  "track": "Song Title",
+  "album": "Album Name",
+  "is_playing": true,
+  "album_images": [{ "url": "...", "height": 640, "width": 640 }],
+  "track_uri": "spotify:track:..."
+}
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## ⚙️ Environment Variables
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Variable                | Description                                                | Required                    |
+| ----------------------- | ---------------------------------------------------------- | --------------------------- |
+| `GITHUB_TOKEN`          | GitHub Personal Access Token for increased API rate limits | Optional                    |
+| `SPOTIFY_CLIENT_ID`     | Spotify App Client ID                                      | Required for Spotify widget |
+| `SPOTIFY_CLIENT_SECRET` | Spotify App Client Secret                                  | Required for Spotify widget |
+| `SPOTIFY_REFRESH_TOKEN` | Spotify User Refresh Token                                 | Required for Spotify widget |
+
+### Getting Spotify Credentials
+
+1. Go to [Spotify Developer Dashboard](https://developer.spotify.com/dashboard)
+2. Create a new app
+3. Add `http://localhost:3000/api/spotify/callback` to redirect URIs
+4. Get your Client ID and Secret
+5. Follow [this guide](https://github.com/codershubinc/spotify-refresh-token) to get your refresh token
+
+---
+
+## 🎨 Key Components
+
+### GitHub Integrations
+
+- **GitHubContributions** - Contribution graph with hover details
+- **GitHubStatsCard** - Total stars, commits, and rank
+- **GitHubStreakMini** - Current & longest streak display
+- **TopLanguagesCard** - Top 3 languages with percentages
+
+### Spotify Integration
+
+- **SpotifyWidget** - Full now-playing card with album art
+- **CurrentlyListeningMini** - Compact version for sidebar
+
+### Project Cards
+
+- **OrbitCard** - Self-hosted deployment monitoring
+- **VSMusicCard** - VS Code music extension
+- **QuazaarCard** - Cross-platform media control
+
+---
+
+## 🚢 Deployment
+
+### Deploy to Vercel (Recommended)
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/codershubinc/codershubinc.tech)
+
+1. Click the button above
+2. Configure environment variables
+3. Deploy!
+
+### Manual Deployment
+
+```bash
+pnpm build
+```
+
+The output will be in the `.next` folder. Configure your hosting provider to serve this directory.
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. **Fork** the repository
+2. **Create** a feature branch: `git checkout -b feat/amazing-feature`
+3. **Commit** your changes: `git commit -m 'Add amazing feature'`
+4. **Push** to the branch: `git push origin feat/amazing-feature`
+5. **Open** a Pull Request
+
+Please ensure:
+
+- Code follows existing style conventions
+- All tests pass (`pnpm test`)
+- ESLint shows no errors (`pnpm lint`)
+
+---
+
+## 📝 License
+
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 👨‍💻 Author
+
+**Swapnil Ingle** ([@codershubinc](https://github.com/codershubinc))
+
+- Website: [codershubinc.com](https://codershubinc.com)
+- GitHub: [@codershubinc](https://github.com/codershubinc)
+
+---
+
+## 🙏 Acknowledgments
+
+- [Next.js](https://nextjs.org/) - The React Framework
+- [Vercel](https://vercel.com/) - Hosting & Deployment
+- [TailwindCSS](https://tailwindcss.com/) - Utility-first CSS
+- [Spotify Web API](https://developer.spotify.com/documentation/web-api/) - Music integration
+- [GitHub API](https://docs.github.com/en/rest) - Stats & data
+
+---
+
+<div align="center">
+
+**If you find this project useful, please consider giving it a ⭐!**
+
+Made with ❤️ and ☕ by [Swapnil Ingle](https://github.com/codershubinc)
+
+</div>

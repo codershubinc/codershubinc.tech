@@ -7,61 +7,12 @@ import TopLanguagesCard from "@/components/TopLanguagesCard";
 import GitHubStatsCard from "@/components/GitHubStatsCard";
 import GitHubContributions from "@/components/GitHubContributions";
 import TodayContributionsBadge from "@/components/TodayContributionsBadge";
+import TodayContributionsCard from "@/components/TodayContributionsCard";
 import ProfileCapsules from "@/components/ProfileCapsules";
-import CurrentlyListeningMini from "@/components/CurrentlyListeningMini";
-import GitHubStreakMini from "@/components/GitHubStreakMini";
-import ServerBootPanel from "@/components/ServerBootPanel";
-import { Terminal, Github, Command, Coffee, BookOpen, Zap, MapPin, Clock, Cpu, Activity, Code2, Music, TrendingUp } from "lucide-react";
-import Link from "next/link";
-
-// Helper functions for sidebar data
-async function getTopLanguages() {
-  try {
-    const res = await fetch('https://github-readme-states-repo-self-inst.vercel.app/api/json-top-langs?username=codershubinc', {
-      next: { revalidate: 3600 }
-    });
-    if (res.ok) {
-      const data = await res.json();
-      const languages = Object.values(data) as any[];
-      const total = languages.reduce((acc, lang) => acc + lang.size, 0);
-      return languages
-        .sort((a, b) => b.size - a.size)
-        .slice(0, 3)
-        .map(lang => ({
-          name: lang.name,
-          percentage: ((lang.size / total) * 100).toFixed(1),
-          color: lang.color
-        }));
-    }
-  } catch (error) {
-    console.error('Failed to fetch languages:', error);
-  }
-  return [];
-}
-
-async function getGitHubStats() {
-  try {
-    const res = await fetch('https://github-readme-states-repo-self-inst.vercel.app/api/json-stats?username=codershubinc', {
-      next: { revalidate: 3600 }
-    });
-    if (res.ok) {
-      const data = await res.json();
-      return {
-        stars: data.totalStars,
-        commits: data.totalCommits,
-        rank: data.rank.level
-      };
-    }
-  } catch (error) {
-    console.error('Failed to fetch GitHub stats:', error);
-  }
-  return null;
-}
+import WakatimeStats from "@/components/WakatimeStats";
+import { Terminal, Command, Coffee, BookOpen, Clock, Cpu, Code2 } from "lucide-react";
 
 export default async function Home() {
-  // Fetch sidebar data
-  const topLanguages = await getTopLanguages();
-  const githubStats = await getGitHubStats();
   return (
     <main className="min-h-screen bg-linear-to-b from-[#0a0a0a] via-[#050505] to-[#000000] text-[#b0b0b0] selection:bg-[#007acc] selection:text-white font-sans overflow-x-hidden">
       {/* 1. Navbar (Professional) */}
@@ -150,59 +101,51 @@ export default async function Home() {
             </div>
           </div>
 
-          {/* Right: System Status Panel */}
-          <ServerBootPanel>
-            <div className="lg:col-span-4 hidden lg:block space-y-4">
-              {/* Top 3 Languages */}
-              <div className="p-4 rounded-lg bg-linear-to-br from-black/40 to-black/20 border border-white/5 backdrop-blur-sm hover:border-white/20 transition-all duration-300 hover:translate-x-1">
-                <div className="flex items-center gap-2 mb-3">
-                  <Code2 size={14} className="text-[#007acc]" />
-                  <span className="text-xs font-mono text-zinc-400 tracking-wider">ls ~/.languages/</span>
-                </div>
-                <div className="space-y-2">
-                  {topLanguages.map((lang: { name: string; percentage: string; color: string }, idx: number) => (
-                    <div key={idx} className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 rounded-full" style={{ backgroundColor: lang.color }}></div>
-                        <span className="text-xs text-white font-medium">{lang.name}</span>
-                      </div>
-                      <span className="text-xs font-mono text-zinc-500">{lang.percentage}%</span>
-                    </div>
-                  ))}
-                </div>
+          {/* Right: What I'm Doing Today */}
+          <div className="lg:col-span-4 hidden lg:block space-y-4">
+            {/* Today's Focus */}
+            <div className="p-5 rounded-lg bg-linear-to-br from-[#007acc]/10 to-black/40 border border-[#007acc]/30 backdrop-blur-sm hover:border-[#007acc]/50 transition-all duration-300 shadow-lg shadow-[#007acc]/10">
+              <div className="flex items-center gap-2 mb-4">
+                <Clock size={16} className="text-[#007acc]" />
+                <span className="text-sm font-mono text-white font-bold tracking-wider">What I&apos;m Doing Today</span>
               </div>
-
-              {/* Currently Listening */}
-              <CurrentlyListeningMini />
-
-              {/* GitHub Streak */}
-              <GitHubStreakMini />
-
-              {/* GitHub Stats */}
-              {githubStats && (
-                <div className="p-4 rounded-lg bg-linear-to-br from-black/40 to-black/20 border border-white/5 backdrop-blur-sm hover:border-white/20 transition-all duration-300 hover:translate-x-1">
-                  <div className="flex items-center gap-2 mb-3">
-                    <Github size={14} className="text-zinc-400" />
-                    <span className="text-xs font-mono text-zinc-400 tracking-wider">gh api user/stats --year</span>
+              <div className="space-y-3">
+                {[
+                  { task: "Building Orbit v2.0 features", icon: Cpu, status: "in-progress", color: "text-[#007acc]" },
+                  { task: "Refactoring Go microservices", icon: Code2, status: "in-progress", color: "text-yellow-400" },
+                  { task: "Studying system design patterns", icon: BookOpen, status: "todo", color: "text-purple-400" },
+                  { task: "Coffee break ☕", icon: Coffee, status: "completed", color: "text-green-400" },
+                ].map((item, idx) => (
+                  <div key={idx} className="flex items-start gap-3 group">
+                    <div className="pt-0.5">
+                      {item.status === "completed" ? (
+                        <div className="w-4 h-4 rounded-full border-2 border-green-400 bg-green-400/20 flex items-center justify-center">
+                          <div className="w-2 h-2 rounded-full bg-green-400"></div>
+                        </div>
+                      ) : item.status === "in-progress" ? (
+                        <div className="w-4 h-4 rounded-full border-2 border-[#007acc] bg-[#007acc]/20 flex items-center justify-center animate-pulse">
+                          <div className="w-2 h-2 rounded-full bg-[#007acc]"></div>
+                        </div>
+                      ) : (
+                        <div className="w-4 h-4 rounded-full border-2 border-zinc-600 bg-zinc-800/50"></div>
+                      )}
+                    </div>
+                    <div className="flex-1">
+                      <p className={`text-xs ${item.status === "completed" ? "text-zinc-500 line-through" : "text-zinc-300"} group-hover:text-white transition-colors`}>
+                        {item.task}
+                      </p>
+                    </div>
                   </div>
-                  <div className="grid grid-cols-3 gap-2">
-                    <div className="text-center">
-                      <div className="text-lg font-bold text-white">{githubStats.stars}</div>
-                      <div className="text-[10px] text-zinc-500 uppercase">Total Stars</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-lg font-bold text-white">{githubStats.commits}</div>
-                      <div className="text-[10px] text-zinc-500 uppercase">Commits</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-lg font-bold text-[#007acc]">{githubStats.rank}</div>
-                      <div className="text-[10px] text-zinc-500 uppercase">Rank</div>
-                    </div>
-                  </div>
-                </div>
-              )}
+                ))}
+              </div>
             </div>
-          </ServerBootPanel>
+
+            {/* Today's Contributions Card */}
+            <TodayContributionsCard />
+
+            {/* Wakatime Stats */}
+            <WakatimeStats />
+          </div>
         </div>
       </section>
 
