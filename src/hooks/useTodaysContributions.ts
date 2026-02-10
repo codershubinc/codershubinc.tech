@@ -69,7 +69,7 @@ export function useContributions(): UseContributionsReturn {
         // Set up interval to refetch every 5 seconds
         const interval = setInterval(() => {
             fetchContributions();
-        }, 5000);
+        }, 10000);
 
         // Cleanup interval on unmount
         return () => clearInterval(interval);

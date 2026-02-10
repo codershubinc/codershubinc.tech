@@ -35,12 +35,12 @@ export default function ServerBootPanel({ children }: ServerBootPanelProps) {
         // Start fade out
         setTimeout(() => {
             setIsFadingOut(true);
-        }, 1000);
+        }, 2400);
 
         // Finish boot sequence
         setTimeout(() => {
             setIsBooting(false);
-        }, 2500);
+        }, 3000);
     }, []);
 
     if (!isBooting) {
