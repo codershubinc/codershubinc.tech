@@ -3,7 +3,7 @@ import { Music, ArrowRight, Github, Headphones, Download, Star } from 'lucide-re
 
 async function fetchVSMusicStats() {
     try {
-        const res = await fetch('http://192.168.1.109:3000/api/capsule-info', {
+        const res = await fetch('https://vsmusic.codershubinc.com/api/capsule-info', {
             next: { revalidate: 60 }
         });
         if (res.ok) {

@@ -1,32 +1,6 @@
 import React from 'react';
 import { Activity, Flame, TrendingUp, Calendar } from 'lucide-react';
-
-interface Contribution {
-    color: string;
-    contributionCount: number;
-    contributionLevel: string;
-    date: string;
-}
-
-interface ContributionsData {
-    contributions: Contribution[];
-    totalContributions: number;
-}
-
-async function fetchContributions(): Promise<ContributionsData | null> {
-    try {
-        const today = new Date().toISOString().split('T')[0];
-        const res = await fetch(`https://github-contributions-api.deno.dev/codershubinc.json?flat=true&to=${today}`, {
-            cache: 'no-store'
-        });
-        if (res.ok) {
-            return await res.json();
-        }
-    } catch (error) {
-        console.error('Failed to fetch contributions:', error);
-    }
-    return null;
-}
+import { fetchGitHubContributions, type Contribution } from '@/lib/githubContributions';
 
 function calculateStreak(contributions: Contribution[]): number {
     let streak = 0;
@@ -50,7 +24,7 @@ function getBestDay(contributions: Contribution[]): { count: number; date: strin
 }
 
 export default async function GitHubContributions() {
-    const data = await fetchContributions();
+    const data = await fetchGitHubContributions();
 
     if (!data) {
         return (

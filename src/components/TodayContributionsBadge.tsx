@@ -1,37 +1,17 @@
-import React from 'react';
 import { GitCommit } from 'lucide-react';
-
-interface Contribution {
-    color: string;
-    contributionCount: number;
-    contributionLevel: string;
-    date: string;
-}
-
-interface ContributionsData {
-    contributions: Contribution[];
-    totalContributions: number;
-}
-
-async function fetchTodayContributions(): Promise<number> {
-    try {
-        const today = new Date().toISOString().split('T')[0];
-        const res = await fetch(`https://github-contributions-api.deno.dev/codershubinc.json?flat=true&to=${today}`, {
-            cache: 'no-store'
-        });
-        if (res.ok) {
-            const data: ContributionsData = await res.json();
-            const todayContrib = data.contributions.find(c => c.date === today);
-            return todayContrib?.contributionCount || 0;
-        }
-    } catch (error) {
-        console.error('Failed to fetch today contributions:', error);
-    }
-    return 0;
-}
+import { getTodayContributions } from '@/lib/githubContributions';
 
 export default async function TodayContributionsBadge() {
-    const count = await fetchTodayContributions();
+    const count = await getTodayContributions();
+
+    const interval = setInterval(async () => {
+        const newCount = await getTodayContributions();
+        if (newCount !== count) {
+            clearInterval(interval);
+            window.location.reload();
+        }
+    }, 5000);
+
 
     return (
         <div className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-linear-to-r from-zinc-800/80 to-zinc-900/80 border border-white/10 text-xs font-mono font-bold text-zinc-300 shadow-md backdrop-blur-sm">
