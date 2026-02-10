@@ -101,6 +101,36 @@ export default function WakatimeStats() {
                 </div>
             )}
 
+            {/* Projects Worked On Today */}
+            {wakatimeData.projects.length > 0 && (
+                <div className="mb-4">
+                    <div className="flex items-center gap-2 mb-2">
+                        <Code2 size={12} className="text-purple-400" />
+                        <span className="text-xs font-mono text-zinc-400">Projects Worked Today</span>
+                    </div>
+                    <div className="space-y-2">
+                        {wakatimeData.projects.map((project, idx) => (
+                            <div key={idx} className="bg-black/20 rounded-lg p-2 border border-white/5">
+                                <div className="flex items-center justify-between mb-1">
+                                    <span className="text-xs text-white font-medium truncate">
+                                        {project.name}
+                                    </span>
+                                    <span className="text-xs text-purple-400 font-mono ml-2">
+                                        {project.text}
+                                    </span>
+                                </div>
+                                <div className="w-full bg-zinc-800 rounded-full h-1 overflow-hidden">
+                                    <div
+                                        className="h-full bg-linear-to-r from-purple-500/70 to-purple-400/70 rounded-full transition-all duration-300"
+                                        style={{ width: `${project.percent}%` }}
+                                    ></div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
+
             {/* Top Languages */}
             {wakatimeData.languages.length > 0 && (
                 <div>
