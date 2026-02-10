@@ -17,7 +17,7 @@ async function fetchContributions(): Promise<ContributionsData | null> {
     try {
         const today = new Date().toISOString().split('T')[0];
         const res = await fetch(`https://github-contributions-api.deno.dev/codershubinc.json?flat=true&to=${today}`, {
-            next: { revalidate: 3600 }
+            cache: 'no-store'
         });
         if (res.ok) {
             return await res.json();
