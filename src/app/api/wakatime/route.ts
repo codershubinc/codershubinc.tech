@@ -20,7 +20,7 @@ export async function GET() {
                 headers: {
                     Authorization: `Basic ${Buffer.from(WAKATIME_API_KEY).toString('base64')}`,
                 },
-                next: { revalidate: 300 }, // Cache for 5 minutes
+                cache: 'no-store',
             }
         );
 
