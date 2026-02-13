@@ -15,7 +15,7 @@ const bootSequence = [
     { time: 1200, text: "[ OK ] Starting GitHub API service...", status: "ok" },
     { time: 1500, text: "[ OK ] Connecting to Spotify service...", status: "ok" },
     { time: 1800, text: "[ OK ] Loading language data...", status: "ok" },
-    { time: 2100, text: "[ OK ] System ready", status: "ok" },
+    { time: 1900, text: "[ OK ] System ready", status: "ok" },
 ];
 
 export default function ServerBootPanel({ children }: ServerBootPanelProps) {
@@ -55,7 +55,7 @@ export default function ServerBootPanel({ children }: ServerBootPanelProps) {
                     }`}
             >
                 {/* Animated background grid */}
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,#0a0a0a_1px,transparent_1px),linear-gradient(to_bottom,#0a0a0a_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-20"></div>
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#0a0a0a_1px,transparent_1px),linear-gradient(to_bottom,#0a0a0a_1px,transparent_1px)] bg-size-[4rem_4rem] opacity-20"></div>
 
                 {/* Animated glow effect */}
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,#047857_0%,transparent_70%)] opacity-10 animate-pulse"></div>
@@ -94,17 +94,17 @@ export default function ServerBootPanel({ children }: ServerBootPanelProps) {
                         </div>
                         <div className="w-full h-2 bg-zinc-900 rounded-full overflow-hidden shadow-inner">
                             <div
-                                className="h-full bg-gradient-to-r from-emerald-600 via-emerald-500 to-emerald-400 rounded-full transition-all duration-300 ease-out relative"
+                                className="h-full bg-linear-to-r from-emerald-600 via-emerald-500 to-emerald-400 rounded-full transition-all duration-300 ease-out relative"
                                 style={{ width: `${progress}%` }}
                             >
-                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-pulse"></div>
+                                <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/40 to-transparent animate-pulse"></div>
                             </div>
                         </div>
                     </div>
 
                     {/* System Info */}
                     <div className="mt-6 pt-6 border-t border-emerald-500/20 text-xs text-zinc-600 space-y-1.5 text-center md:text-left">
-                        <div>KERNEL: Linux 6.1.0-codershub</div>
+                        <div>KERNEL: Linux 6.1.0-codershub INC</div>
                         <div>HOSTNAME: portfolio.codershubinc.local</div>
                         <div>ARCH: x86_64</div>
                     </div>
