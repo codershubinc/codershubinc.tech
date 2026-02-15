@@ -112,7 +112,6 @@ export default function WakatimeStats() {
                 <h3 className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-5">
                     Languages Today I Worked
                 </h3>
-
                 <div className="space-y-5">
                     {data.languages.slice(0, 3).map((lang) => {
                         const iconConfig = getLanguageIcon(lang.name);
