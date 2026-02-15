@@ -13,31 +13,58 @@ export async function GET() {
     }
 
     try {
+        const authHeader = `Basic ${Buffer.from(WAKATIME_API_KEY).toString('base64')}`;
+
         // Fetch today's stats
-        const statsResponse = await fetch(
+        const todayResponse = await fetch(
             'https://wakatime.com/api/v1/users/current/summaries?range=Today',
             {
                 headers: {
-                    Authorization: `Basic ${Buffer.from(WAKATIME_API_KEY).toString('base64')}`,
+                    Authorization: authHeader,
                 },
                 cache: 'no-store',
             }
         );
 
-        if (!statsResponse.ok) {
+        // Fetch last 7 days stats for weekly hours
+        const weekResponse = await fetch(
+            'https://wakatime.com/api/v1/users/current/summaries?range=Last%207%20Days',
+            {
+                headers: {
+                    Authorization: authHeader,
+                },
+                cache: 'no-store',
+            }
+        );
+
+        if (!todayResponse.ok) {
             throw new Error('Failed to fetch Wakatime data');
         }
 
-        const data = await statsResponse.json();
-        const todayData = data.data[0];
+        const todayData = (await todayResponse.json()).data[0];
+        const weekData = weekResponse.ok ? (await weekResponse.json()).data : [];
 
         if (!todayData) {
             return NextResponse.json({
                 total_seconds: 0,
+                total_time: '0 secs',
                 projects: [],
                 languages: [],
+                editors: [],
+                operating_systems: [],
+                weekly_total: '0 hrs 0 mins',
+                weekly_seconds: 0,
             });
         }
+
+        // Calculate weekly total
+        const weeklySeconds = weekData.reduce(
+            (acc: number, day: any) => acc + (day.grand_total?.total_seconds || 0),
+            0
+        );
+        const weeklyHours = Math.floor(weeklySeconds / 3600);
+        const weeklyMinutes = Math.floor((weeklySeconds % 3600) / 60);
+        const weeklyTotal = `${weeklyHours} hrs ${weeklyMinutes} mins`;
 
         // Get top project and total time
         const topProject = todayData.projects[0] || null;
@@ -46,15 +73,27 @@ export async function GET() {
         return NextResponse.json({
             total_seconds: totalSeconds,
             total_time: todayData.grand_total.text,
+            weekly_total: weeklyTotal,
+            weekly_seconds: weeklySeconds,
             projects: todayData.projects.slice(0, 3).map((p: { name: string; text: string; percent: number }) => ({
                 name: p.name,
                 text: p.text,
                 percent: p.percent,
             })),
-            languages: todayData.languages.slice(0, 3).map((l: { name: string; text: string; percent: number }) => ({
+            languages: todayData.languages.slice(0, 5).map((l: { name: string; text: string; percent: number }) => ({
                 name: l.name,
                 text: l.text,
                 percent: l.percent,
+            })),
+            editors: todayData.editors.slice(0, 3).map((e: { name: string; text: string; percent: number }) => ({
+                name: e.name,
+                text: e.text,
+                percent: e.percent,
+            })),
+            operating_systems: todayData.operating_systems.slice(0, 3).map((os: { name: string; text: string; percent: number }) => ({
+                name: os.name,
+                text: os.text,
+                percent: os.percent,
             })),
             top_project: topProject
                 ? {

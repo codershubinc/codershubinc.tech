@@ -1,6 +1,7 @@
 import React from 'react';
 import { Code2, TrendingUp, FileCode } from 'lucide-react';
 import Image from 'next/image';
+import { getLanguageIcon } from '@/lib/icons';
 
 interface Language {
     name: string;
@@ -11,42 +12,6 @@ interface Language {
 
 interface TopLanguagesData {
     [key: string]: Language;
-}
-
-function getLanguageIconUrl(langName: string): string | null {
-    const name = langName.toLowerCase();
-
-    const iconMap: { [key: string]: string } = {
-        'javascript': 'javascript',
-        'typescript': 'typescript',
-        'python': 'python',
-        'java': 'java',
-        'go': 'go',
-        'rust': 'rust',
-        'c++': 'cplusplus',
-        'c': 'c',
-        'c#': 'csharp',
-        'ruby': 'ruby',
-        'php': 'php',
-        'swift': 'swift',
-        'kotlin': 'kotlin',
-        'shell': 'bash',
-        'html': 'html5',
-        'css': 'css3',
-        'scss': 'sass',
-        'vue': 'vuejs',
-        'react': 'react',
-        'node': 'nodejs',
-        'lua': 'lua',
-        'dart': 'dart',
-        'elixir': 'elixir',
-    };
-
-    const iconName = iconMap[name];
-    if (iconName) {
-        return `https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${iconName}/${iconName}-original.svg`;
-    }
-    return null;
 }
 
 async function fetchTopLanguages(): Promise<TopLanguagesData | null> {
@@ -101,15 +66,15 @@ export default async function TopLanguagesCard() {
                 <div className="space-y-3">
                     {topLanguages.map((lang) => {
                         const percentage = ((lang.size / totalSize) * 100).toFixed(1);
-                        const iconUrl = getLanguageIconUrl(lang.name);
+                        const iconConfig = getLanguageIcon(lang.name);
                         return (
                             <div key={lang.name}>
                                 <div className="flex items-center justify-between mb-1.5">
                                     <div className="flex items-center gap-2">
                                         <div className="flex items-center justify-center w-5 h-5 rounded bg-white/5 border border-white/10">
-                                            {iconUrl ? (
+                                            {iconConfig ? (
                                                 <Image
-                                                    src={iconUrl}
+                                                    src={iconConfig.url}
                                                     alt={lang.name}
                                                     width={32}
                                                     height={32}

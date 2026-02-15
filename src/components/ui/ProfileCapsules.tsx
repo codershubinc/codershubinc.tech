@@ -53,4 +53,5 @@ export default async function ProfileCapsules() {
             </a>
         </div>
     );
+
 }
