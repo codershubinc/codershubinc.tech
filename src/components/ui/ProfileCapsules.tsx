@@ -33,7 +33,7 @@ export default async function ProfileCapsules() {
             >
                 <div className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-black/60 border border-white/10 hover:border-[#007acc]/50 transition-all font-mono text-xs hover:scale-105">
                     <Terminal size={12} className="text-[#007acc]" />
-                    <span className="text-zinc-500">--followers</span>
+                    <span className="text-zinc-500">--cult-members</span>
                     <span className="text-white font-bold">{profile.followers}</span>
                 </div>
             </a>
@@ -47,7 +47,7 @@ export default async function ProfileCapsules() {
             >
                 <div className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-black/60 border border-white/10 hover:border-[#007acc]/50 transition-all font-mono text-xs hover:scale-105">
                     <GitBranch size={12} className="text-[#007acc]" />
-                    <span className="text-zinc-500">--repos</span>
+                    <span className="text-zinc-500">--PUBLIC.repos</span>
                     <span className="text-white font-bold">{profile.repos}</span>
                 </div>
             </a>

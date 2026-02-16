@@ -22,12 +22,6 @@ interface UseContributionsReturn {
     refetch: () => void;
 }
 
-/**
- * Custom hook to fetch GitHub contributions data.
- * Automatically fetches on mount and provides loading/error states.
- * 
- * @returns Object containing full contributions data, today's count, loading state, error, and refetch function
- */
 export function useContributions(): UseContributionsReturn {
     const [contributionsData, setContributionsData] = useState<ContributionsData | null>(null);
     const [todaysCount, setTodaysCount] = useState<number>(0);
@@ -67,13 +61,10 @@ export function useContributions(): UseContributionsReturn {
 
     useEffect(() => {
         fetchContributions();
-
-        // Set up interval to refetch every 5 seconds
         const interval = setInterval(() => {
             fetchContributions();
         }, 10000);
 
-        // Cleanup interval on unmount
         return () => clearInterval(interval);
     }, []);
 

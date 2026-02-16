@@ -1,49 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { Music } from "lucide-react";
 import Image from "next/image";
-
-interface SpotifyData {
-    is_playing: boolean;
-    track: string;
-    artist: string;
-    album_images: Array<{ url: string; height: number; width: number }>;
-    raw?: {
-        progress_ms: number;
-        item: {
-            duration_ms: number;
-        };
-    };
-}
+import { useSpotify } from "@/hooks/useSpotify";
 
 export default function CurrentlyListeningMini() {
-    const [data, setData] = useState<SpotifyData | null>(null);
+    const { spotifyData } = useSpotify();
+    const data = spotifyData
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const res = await fetch("/api/spotify", {
-                    cache: "no-store",
-                });
-                if (res.ok) {
-                    const json = await res.json();
-                    if (json.is_playing) {
-                        setData(json);
-                    } else {
-                        setData(null);
-                    }
-                }
-            } catch (error) {
-                console.error("Failed to fetch Spotify data:", error);
-            }
-        };
-
-        fetchData();
-        const interval = setInterval(fetchData, 5000);
-
-        return () => clearInterval(interval);
-    }, []);
 
     if (!data) return null;
 
@@ -54,7 +18,6 @@ export default function CurrentlyListeningMini() {
     // Calculate remaining time
     const formatRemainingTime = () => {
         if (!data.raw?.progress_ms || !data.raw?.item?.duration_ms) return null;
-
         const remainingMs = data.raw.item.duration_ms - data.raw.progress_ms;
         const totalSeconds = Math.floor(remainingMs / 1000);
         const minutes = Math.floor(totalSeconds / 60);

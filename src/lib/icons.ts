@@ -86,7 +86,7 @@ export function getLanguageIcon(langName: string): IconConfig | null {
 /**
  * Get icon URL for an operating system
  */
-export function getOSIcon(osName: string): IconConfig | null {
+export function getOSIcon(osName: string): string {
     const name = osName.toLowerCase().trim();
 
     const iconMap: { [key: string]: string } = {
@@ -111,17 +111,15 @@ export function getOSIcon(osName: string): IconConfig | null {
 
     const iconName = iconMap[name];
     if (iconName) {
-        return {
-            url: `https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${iconName}/${iconName}-original.svg`,
-        };
+        return `https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${iconName}/${iconName}-original.svg`
     }
-    return null;
+    return "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg"; // Default to Linux icon
 }
 
 /**
  * Get icon URL for an editor/IDE
  */
-export function getEditorIcon(editorName: string): IconConfig | null {
+export function getEditorIcon(editorName: string): string {
     const name = editorName.toLowerCase().trim();
 
     const iconMap: { [key: string]: string } = {
@@ -153,11 +151,10 @@ export function getEditorIcon(editorName: string): IconConfig | null {
 
     const iconName = iconMap[name];
     if (iconName) {
-        return {
-            url: `https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${iconName}/${iconName}-original.svg`,
-        };
+        return `https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${iconName}/${iconName}-original.svg`
+
     }
-    return null;
+    return "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg";
 }
 
 /**
@@ -170,28 +167,4 @@ export function getFallbackIcon(category: 'language' | 'os' | 'editor'): string 
         'editor': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg',
     };
     return fallbackMap[category];
-}
-
-/**
- * Get icon URL with fallback support
- */
-export function getIconWithFallback(
-    name: string,
-    category: 'language' | 'os' | 'editor'
-): string {
-    let iconConfig: IconConfig | null = null;
-
-    switch (category) {
-        case 'language':
-            iconConfig = getLanguageIcon(name);
-            break;
-        case 'os':
-            iconConfig = getOSIcon(name);
-            break;
-        case 'editor':
-            iconConfig = getEditorIcon(name);
-            break;
-    }
-
-    return iconConfig?.url || getFallbackIcon(category);
-}
+} 

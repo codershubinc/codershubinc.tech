@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Clock, Code2, Monitor, Laptop, Terminal } from 'lucide-react';
 import Image from 'next/image';
-import { getLanguageIcon } from '@/lib/icons'; // Keep your existing icon helper
+import { getEditorIcon, getLanguageIcon, getOSIcon } from '@/lib/icons'; // Keep your existing icon helper
 
 // Types
 interface WakatimeData {
@@ -143,6 +143,7 @@ export default function WakatimeStats() {
                                         style={{ width: `${lang.percent}%` }}
                                     />
                                 </div>
+
                             </div>
                         );
                     })}
@@ -156,17 +157,31 @@ export default function WakatimeStats() {
             <div className="flex items-center justify-between text-xs text-zinc-500">
                 {data.editors[0] && (
                     <div className="flex items-center gap-2">
-                        <Code2 size={14} />
+                        <Image
+                            src={getEditorIcon(data.editors[0].name)}
+                            alt={data.editors[0].name}
+                            width={16}
+                            height={16}
+                            className="w-4 h-4"
+                        />
                         <span>{data.editors[0].name}</span>
                     </div>
                 )}
 
-                {data.operating_systems[0] && (
-                    <div className="flex items-center gap-2">
-                        <span>{data.operating_systems[0].name}</span>
-                        <Terminal size={14} />
-                    </div>
-                )}
+                {
+                    data.operating_systems[0] && (
+                        <div className="flex items-center gap-2">
+                            <Image
+                                src={getOSIcon(data.operating_systems[0].name)}
+                                alt={data.operating_systems[0].name}
+                                width={16}
+                                height={16}
+                                className="w-4 h-4"
+                            />
+                            <span>{data.operating_systems[0].name}</span>
+                            <Terminal size={14} />
+                        </div>
+                    )}
             </div>
         </div>
     );

@@ -1,76 +1,11 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { Headphones, Music, Play, Pause, Loader2 } from 'lucide-react';
+import { Headphones, Music, Play, Pause } from 'lucide-react';
 import Image from 'next/image';
-
-interface SpotifyData {
-    artist: string;
-    track: string;
-    album: string;
-    album_images: Array<{ url: string; height: number; width: number }>;
-    is_playing: boolean;
-    status: string;
-    track_uri: string;
-    raw: {
-        progress_ms: number;
-        item: {
-            duration_ms: number;
-        }
-    };
-}
+import { useSpotify } from '@/hooks/useSpotify';
 
 export default function SpotifyWidget() {
-    const [spotifyData, setSpotifyData] = useState<SpotifyData | null>(null);
-    const [isLoading, setIsLoading] = useState(true);
-
-    const fetchSpotifyData = async () => {
-        try {
-            const res = await fetch('/api/spotify', {
-                cache: 'no-store'
-            });
-            if (res.ok) {
-                const data = await res.json();
-
-                setSpotifyData(data);
-            }
-        } catch (error) {
-            console.error('Failed to fetch Spotify data:', error);
-        } finally {
-            setIsLoading(false);
-
-        }
-    };
-
-    useEffect(() => {
-        // Initial fetch
-        fetchSpotifyData();
-
-        // Set up interval for fetching every 5 seconds
-        const interval = setInterval(() => {
-            fetchSpotifyData();
-        }, 5000);
-
-
-        // Cleanup interval on unmount
-        return () => clearInterval(interval);
-    }, []);
-
-    if (isLoading) {
-        return (
-            <div className="bg-linear-to-br from-[#111] to-[#0a0a0a] border border-white/5 p-6 rounded-2xl relative overflow-hidden group shadow-xl hover:shadow-2xl hover:shadow-green-500/10 transition-all">
-                <div className="absolute top-0 right-0 w-40 h-40 bg-green-500/10 blur-[60px] rounded-full pointer-events-none group-hover:bg-green-500/20 transition-all duration-500"></div>
-                <div className="flex items-center gap-2 text-green-500 font-mono text-xs font-bold mb-4 relative z-10">
-                    <Headphones size={14} />
-                    Music Player
-                </div>
-                <div className="flex items-center gap-2 text-[#666] text-sm relative z-10">
-                    <Loader2 size={16} className="animate-spin" />
-                    Loading...
-                </div>
-            </div>
-        );
-    }
+    const { spotifyData } = useSpotify();
 
 
 
