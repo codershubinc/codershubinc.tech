@@ -27,12 +27,12 @@ export default function QuazaarCard() {
                 <div className="flex justify-between items-center mb-6 text-[8px] font-mono uppercase tracking-widest">
                     <span className="text-orange-400/60">Linux</span>
                     <div className="flex gap-2">
-                        <a href={projectData.githubUrl} target="_blank" rel="noopener noreferrer" 
-                           className="p-1.5 bg-white/5 border border-white/10 rounded hover:border-orange-500/30 hover:bg-orange-500/10 transition-all">
+                        <a href={projectData.githubUrl} target="_blank" rel="noopener noreferrer"
+                            className="p-1.5 bg-white/5 border border-white/10 rounded hover:border-orange-500/30 hover:bg-orange-500/10 transition-all">
                             <Github size={12} className="text-zinc-400" />
                         </a>
-                        <a href={projectData.liveUrl} target="_blank" rel="noopener noreferrer" 
-                           className="px-2 py-1.5 bg-white/5 border border-white/10 rounded text-[10px] font-mono text-zinc-400 hover:text-orange-400 hover:border-orange-500/30 transition-all flex items-center gap-1">
+                        <a href={projectData.liveUrl} target="_blank" rel="noopener noreferrer"
+                            className="px-2 py-1.5 bg-white/5 border border-white/10 rounded text-[10px] font-mono text-zinc-400 hover:text-orange-400 hover:border-orange-500/30 transition-all flex items-center gap-1">
                             Site <ArrowRight size={10} />
                         </a>
                     </div>

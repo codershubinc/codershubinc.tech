@@ -30,15 +30,15 @@ export default async function VSMusicCard() {
         <div className="group relative bg-linear-to-br from-emerald-950/20 via-black to-black border border-emerald-500/20 rounded-2xl overflow-hidden hover:border-emerald-500/40 transition-all duration-500 shadow-xl hover:shadow-2xl hover:shadow-emerald-500/20">
             {/* Animated Background */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(16,185,129,0.1),transparent_50%)] group-hover:bg-[radial-gradient(circle_at_50%_120%,rgba(16,185,129,0.15),transparent_60%)] transition-all duration-500"></div>
-            
+
             {/* Action Buttons - Top Right */}
             <div className="absolute top-4 right-4 z-20 flex gap-2">
-                <a href={projectData.githubUrl} target="_blank" rel="noopener noreferrer" 
-                   className="p-2 bg-black/50 backdrop-blur-sm border border-white/10 rounded-lg hover:border-emerald-500/30 hover:bg-emerald-500/10 transition-all group/btn">
+                <a href={projectData.githubUrl} target="_blank" rel="noopener noreferrer"
+                    className="p-2 bg-black/50 backdrop-blur-sm border border-white/10 rounded-lg hover:border-emerald-500/30 hover:bg-emerald-500/10 transition-all group/btn">
                     <Github size={14} className="text-zinc-400 group-hover/btn:text-emerald-400" />
                 </a>
-                <a href={projectData.liveUrl} target="_blank" rel="noopener noreferrer" 
-                   className="px-3 py-2 bg-black/50 backdrop-blur-sm border border-white/10 rounded-lg text-[10px] font-mono text-zinc-400 hover:text-emerald-400 hover:border-emerald-500/30 hover:bg-emerald-500/10 transition-all flex items-center gap-1.5">
+                <a href={projectData.liveUrl} target="_blank" rel="noopener noreferrer"
+                    className="px-3 py-2 bg-black/50 backdrop-blur-sm border border-white/10 rounded-lg text-[10px] font-mono text-zinc-400 hover:text-emerald-400 hover:border-emerald-500/30 hover:bg-emerald-500/10 transition-all flex items-center gap-1.5">
                     Website <ArrowRight size={10} />
                 </a>
             </div>
