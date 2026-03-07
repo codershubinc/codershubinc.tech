@@ -2,8 +2,7 @@ import React from "react";
 import { Command, Heart, ArrowLeft, ExternalLink, Terminal } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { SPONSORS, FEATURED_SPONSORS, SPONSOR_TIERS } from "@/components/sponsors/data";
-import { SponsorTierSection } from "@/components/sponsors/SponsorTierSection";
+import { FEATURED_SPONSORS } from "@/components/sponsors/data";
 import { FeaturedSponsorSection } from "@/components/sponsors/FeaturedSponsorSection";
 
 export const metadata: Metadata = {
@@ -12,9 +11,6 @@ export const metadata: Metadata = {
 };
 
 export default function SponsorsPage() {
-  const goldSponsors = SPONSORS.filter((s) => s.tier === "gold");
-  const silverSponsors = SPONSORS.filter((s) => s.tier === "silver");
-  const bronzeSponsors = SPONSORS.filter((s) => s.tier === "bronze");
 
   return (
     <main className="min-h-screen bg-linear-to-b from-[#0a0a0a] via-[#050505] to-[#000000] text-[#b0b0b0] selection:bg-[#007acc] selection:text-white font-sans overflow-x-hidden">
