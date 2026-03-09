@@ -1,4 +1,3 @@
-import React from "react";
 import { Command, Heart, ArrowLeft, ExternalLink, Terminal } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -13,7 +12,7 @@ export const metadata: Metadata = {
 export default function SponsorsPage() {
 
   return (
-    <main className="min-h-screen bg-linear-to-b from-[#0a0a0a] via-[#050505] to-[#000000] text-[#b0b0b0] selection:bg-[#007acc] selection:text-white font-sans overflow-x-hidden">
+    <main className="min-h-screen bg-linear-to-b from-[#0a0a0a] via-[#050505] to-[#000000] text-[#b0b0b0] selection:bg-[#007acc] selection:text-white font-sans  ">
       {/* Navbar */}
       <header className="fixed top-0 w-full z-50 border-b border-white/5 bg-black/60 backdrop-blur-xl shadow-lg shadow-black/5">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
