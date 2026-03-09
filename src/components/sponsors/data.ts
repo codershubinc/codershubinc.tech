@@ -19,7 +19,7 @@ export const FEATURED_SPONSORS: {
     images: string[];
     url?: string;
     joinedDate: string;
-    spooredAmount: number;
+    spooredAmount: string | number;
     currency: string;
     sponsoredProjects: string[];
 
@@ -27,7 +27,7 @@ export const FEATURED_SPONSORS: {
         {
             id: "ra",
             name: "Rahul Arjun",
-            handle: "@rnd",
+            handle: "@rand",
             tier: "gold",
             description:
                 "One of the earliest believers in this project. Rahul jumped on board before the road map was even clear — a true early adopter whose support directly funded the infrastructure, tooling, and late-night coffee that keeps the open-source work alive. Grateful doesn't begin to cover it.",
@@ -39,7 +39,7 @@ export const FEATURED_SPONSORS: {
                 "/assets/sponcers/rh/IMG20260309190645.jpg",
             ],
             joinedDate: "9 th March 2026",
-            spooredAmount: 25,
+            spooredAmount: "*40 - 15 = 25",
             currency: "INR",
             sponsoredProjects: ["Aaxion"],
         },
