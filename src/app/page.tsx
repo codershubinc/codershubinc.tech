@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { Terminal, Command } from "lucide-react";
 import { OrbitCard, VSMusicCard, QuazaarCard } from "@/components/projects";
 import { SpotifyWidget, CurrentlyListeningMini } from "@/components/spotify";
@@ -35,6 +36,9 @@ export default async function Home() {
                 <a href="#about" className="hover:text-white transition-colors">
                   ~/profile
                 </a>
+                <Link href="/sponsors" className="hover:text-white transition-colors">
+                  ~/sponsors
+                </Link>
               </nav>
             </div>
           </div>
