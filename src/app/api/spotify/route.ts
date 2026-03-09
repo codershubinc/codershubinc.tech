@@ -24,7 +24,7 @@ export async function GET() {
             },
         });
     } catch (error) {
-        console.error('Spotify API proxy error:', error);
+        console.log('Spotify API proxy error:', error);
         return NextResponse.json(
             { error: 'Internal server error' },
             { status: 500 }
