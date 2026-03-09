@@ -20,6 +20,7 @@ export const FEATURED_SPONSORS: {
     url?: string;
     joinedDate: string;
     spooredAmount: string | number;
+    amountDescription?: string;
     currency: string;
     sponsoredProjects: string[];
 
@@ -39,7 +40,8 @@ export const FEATURED_SPONSORS: {
                 "/assets/sponcers/rh/IMG20260309190645.jpg",
             ],
             joinedDate: "9 th March 2026",
-            spooredAmount: "*40 - 15 = 25",
+            spooredAmount: 25,
+            amountDescription: "Given 40 upi but 15 rupees he eaten at  *nasta* center",
             currency: "INR",
             sponsoredProjects: ["Aaxion"],
         },

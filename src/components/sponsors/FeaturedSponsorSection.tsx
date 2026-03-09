@@ -129,11 +129,18 @@ export function FeaturedSponsorSection({
                             </div>
                             <div className="flex items-center gap-3">
                                 {/* Sponsored amount badge */}
-                                <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[#007acc]/20 bg-[#007acc]/5">
-                                    <span className="font-mono text-[10px] text-[#007acc]/60 uppercase tracking-widest">sponsored</span>
-                                    <span className="font-mono text-xs font-bold text-[#007acc]">
-                                        {sponsor.currency}&nbsp;{sponsor.spooredAmount}
-                                    </span>
+                                <div className="flex flex-col gap-1">
+                                    <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[#007acc]/20 bg-[#007acc]/5">
+                                        <span className="font-mono text-[10px] text-[#007acc]/60 uppercase tracking-widest">sponsored</span>
+                                        <span className="font-mono text-xs font-bold text-[#007acc]">
+                                            {sponsor.currency}&nbsp;{sponsor.spooredAmount}
+                                        </span>
+                                    </div>
+                                    {sponsor.amountDescription && (
+                                        <p className="font-mono text-[10px] text-[#444] italic px-1 max-w-[220px]">
+                                            {sponsor.amountDescription}
+                                        </p>
+                                    )}
                                 </div>
                                 {sponsor.url && (
                                     <a
