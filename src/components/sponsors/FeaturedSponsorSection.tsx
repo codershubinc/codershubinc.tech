@@ -137,7 +137,7 @@ export function FeaturedSponsorSection({
                                         </span>
                                     </div>
                                     {sponsor.amountDescription && (
-                                        <p className="font-mono text-[10px] text-[#444] italic px-1 max-w-[220px]">
+                                        <p className="font-mono text-sm text-white italic px-1 max-w-[220px]">
                                             {sponsor.amountDescription}
                                         </p>
                                     )}

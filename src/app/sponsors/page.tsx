@@ -136,45 +136,12 @@ export default function SponsorsPage() {
         <div className="h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
       </div>
 
-      {/* Current Sponsors */}
-      <section className="py-16 px-6 max-w-6xl mx-auto">
-        <div className="animate-in fade-in slide-in-from-left duration-700 mb-12">
-          <h2 className="text-3xl font-bold font-mono text-white flex items-center gap-3 mb-2 hover:text-[#007acc] transition-colors duration-300">
-            <Terminal className="text-[#007acc] animate-pulse" size={24} />
-            cat ./sponsors.json
-          </h2>
-          <p className="font-mono text-sm text-[#555]">
-            # The amazing people fueling this work
-          </p>
-        </div>
-
-        {/* Gold Sponsors */}
-        <SponsorTierSection tier={SPONSOR_TIERS[0]} sponsors={goldSponsors} />
-
-        {/* Silver Sponsors */}
-        <SponsorTierSection tier={SPONSOR_TIERS[1]} sponsors={silverSponsors} />
-
-        {/* Bronze Sponsors */}
-        <SponsorTierSection tier={SPONSOR_TIERS[2]} sponsors={bronzeSponsors} />
-      </section>
 
       {/* Divider */}
       <div className="max-w-6xl mx-auto px-6 py-4">
         <div className="h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
       </div>
 
-      {/* Tier Cards */}
-      <section className="py-16 px-6 max-w-6xl mx-auto">
-        <div className="animate-in fade-in slide-in-from-left duration-700 mb-12">
-          <h2 className="text-3xl font-bold font-mono text-white flex items-center gap-3 mb-2 hover:text-[#007acc] transition-colors duration-300">
-            <Terminal className="text-[#007acc] animate-pulse" size={24} />
-            ls -la ./tiers
-          </h2>
-          <p className="font-mono text-sm text-[#555]">
-            # Pick the tier that works for you
-          </p>
-        </div>
-      </section>
 
       {/* Footer CTA */}
       <section className="py-24 px-6 max-w-6xl mx-auto text-center relative">
