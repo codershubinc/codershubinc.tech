@@ -94,11 +94,30 @@ export function FeaturedSponsorSection({
                                 {sponsor.description}
                             </p>
                             {sponsor.quote && (
-                                <div className="relative border-l-2 border-[#007acc]/40 pl-4 mb-8">
+                                <div className="relative border-l-2 border-[#007acc]/40 pl-4 mb-6">
                                     <Quote size={14} className="text-[#007acc]/40 mb-1" />
                                     <p className="font-mono text-xs text-[#555] italic leading-relaxed">
                                         &ldquo;{sponsor.quote}&rdquo;
                                     </p>
+                                </div>
+                            )}
+
+                            {/* Sponsored Projects */}
+                            {sponsor.sponsoredProjects?.length > 0 && (
+                                <div className="mb-6">
+                                    <p className="font-mono text-[10px] text-[#444] uppercase tracking-widest mb-2">
+                                        # sponsoring projects
+                                    </p>
+                                    <div className="flex flex-wrap gap-2">
+                                        {sponsor.sponsoredProjects.map((project) => (
+                                            <span
+                                                key={project}
+                                                className="px-3 py-1 rounded-full border border-[#007acc]/30 bg-[#007acc]/5 font-mono text-xs text-[#007acc] font-semibold"
+                                            >
+                                                {project}
+                                            </span>
+                                        ))}
+                                    </div>
                                 </div>
                             )}
                         </div>
