@@ -29,7 +29,11 @@ export function HeroContent() {
                 <TodayContributionsBadge />
             </motion.div>
 
-        <motion.h1
+            <p className="text-xl sm:text-2xl md:text-3xl text-transparent bg-linear-to-r from-white to-gray-500 bg-clip-text font-medium font-mono">
+                $ whoami
+            </p>
+
+            <motion.h1
                 className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-mono font-bold text-white tracking-tighter leading-[0.9] bg-linear-to-b from-white to-gray-400 bg-clip-text"
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -44,9 +48,7 @@ export function HeroContent() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
             >
-                <p className="text-xl sm:text-2xl md:text-3xl text-transparent bg-linear-to-r from-white to-gray-500 bg-clip-text font-medium font-mono">
-                    $ whoami
-                </p>
+
                 <p className="text-[#888] leading-relaxed max-w-lg text-base">
                     Backend Engineer &amp; Linux Enthusiast. Building high-performance
                     tools and self-hosted infrastructure. Converting caffeine into{" "}

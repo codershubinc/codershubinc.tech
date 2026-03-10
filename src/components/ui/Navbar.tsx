@@ -16,7 +16,7 @@ export function Navbar({ capsules }: { capsules?: React.ReactNode }) {
 
     const navLinks = [
         { href: "#projects", label: "~/deployments" },
-        { href: "#about", label: "~/profile" },
+        { href: "#whoami", label: "~/profile" },
     ];
 
     return (

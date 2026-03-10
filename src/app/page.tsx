@@ -1,14 +1,11 @@
 import React from "react";
 import { Terminal } from "lucide-react";
 import { OrbitCard, VSMusicCard, QuazaarCard } from "@/components/projects";
-import { SpotifyWidget, CurrentlyListeningMini } from "@/components/spotify";
+import { CurrentlyListeningMini } from "@/components/spotify";
 import {
-  GitHubContributions,
-  GitHubStatsCard,
   TodayContributionsCard,
-  TopLanguagesCard
 } from "@/components/github";
-import { ServerBootPanel, Navbar, ScrollReveal, HeroContent } from "@/components/ui";
+import { ServerBootPanel, Navbar, ScrollReveal, HeroContent, WhoAmISection } from "@/components/ui";
 import ProfileCapsules from "@/components/ui/ProfileCapsules";
 import { WakatimeStats } from "@/components/wakatime";
 
@@ -46,7 +43,20 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* Projects Grid (Zone A) */}
+        {/* ── divider ── */}
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="h-px bg-linear-to-r from-transparent via-white/8 to-transparent" />
+        </div>
+
+        {/* Who Am I */}
+        <WhoAmISection />
+
+        {/* ── divider ── */}
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="h-px bg-linear-to-r from-transparent via-[#007acc]/40 to-transparent" />
+        </div>
+
+        {/* Projects Grid */}
         <section
           id="projects"
           className="py-16 sm:py-24 px-4 sm:px-6 max-w-6xl mx-auto border-t border-white/5 relative"
@@ -82,141 +92,10 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* =========================================
-          TRANSITION: THE BREAK
-         ========================================= */}
-        <div className="w-full py-16">
-          <div className="max-w-6xl mx-auto px-6">
-            <div className="h-px bg-linear-to-r from-transparent via-[#007acc]/50 to-transparent"></div>
-          </div>
+        {/* ── divider ── */}
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="h-px bg-linear-to-r from-transparent via-white/8 to-transparent" />
         </div>
-
-        {/* =========================================
-          ZONE B: THE HUMAN SIDE (Casual)
-         ========================================= */}
-
-        <section id="about" className="py-16 sm:py-24 px-4 sm:px-6 max-w-6xl mx-auto relative">
-          {/* Background Accent */}
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-green-500/5 blur-[100px] rounded-full pointer-events-none"></div>
-
-          <div className="grid md:grid-cols-12 gap-12 relative z-10">
-            {/* Left Column: Bio & Story */}
-            <ScrollReveal direction="left" delay={100} className="md:col-span-7 space-y-8">
-              <div className="inline-flex items-center gap-2 text-[#007acc] font-mono text-xs font-bold uppercase tracking-widest mb-2 px-3 py-1 bg-[#007acc]/10 rounded-full border border-[#007acc]/20 hover:bg-[#007acc]/20 hover:scale-105 transition-all">
-                <Terminal size={14} className="animate-pulse" />
-                whoami
-              </div>
-
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-mono text-transparent bg-linear-to-r from-white to-gray-500 bg-clip-text leading-tight">
-                B.Tech Student & <br />{" "}
-                <span className="text-[#888]">Systems Explorer.</span>
-              </h2>
-
-              <div className="prose prose-invert text-[#b0b0b0] leading-7 space-y-4">
-                <p>
-                  Hi, I&apos;m <b>Swapnil</b>. I&apos;m currently a{" "}
-                  <b>2nd Year B.Tech AIML student</b> based in Panvel, Mumbai.
-                </p>
-                <p>
-                  While I&apos;m still in university, I don&apos;t just study
-                  theory. I spend my nights digging into low-level systems,
-                  customizing <b>Arch Linux</b>, and building tools that improve
-                  my own workflow.
-                </p>
-                <p>
-                  My goal is simple: bridge the gap between simple web apps and
-                  high-performance system architecture. That&apos;s why I love{" "}
-                  <b>Go</b> and <b>Rust</b>—they let me touch the metal.
-                </p>
-              </div>
-
-              {/* Tech Stack List (Casual) */}
-              <div className="pt-6">
-                <h3 className="text-white font-mono font-bold mb-4 flex items-center gap-2">
-                  <Terminal size={16} className="text-yellow-400" />
-                  ls ~/tech-stack
-                </h3>
-                <div className="flex flex-wrap gap-3">
-                  {[
-                    "Go (Golang)",
-                    "TypeScript",
-                    "Rust",
-                    "Node.js",
-                    "Linux (Arch/Kali)",
-                    "Docker",
-                  ].map((item) => (
-                    <span
-                      key={item}
-                      className="px-4 py-2 rounded-xl bg-linear-to-br from-[#111] to-[#0a0a0a] border border-white/10 text-sm text-white hover:border-[#007acc]/50 transition-all hover:scale-105 cursor-default shadow-lg"
-                    >
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </ScrollReveal>
-
-            {/* Right Column: "The Vibe" (Music & Stats) */}
-            <ScrollReveal direction="right" delay={200} className="md:col-span-5 space-y-6">
-              {/* 1. The Music Widget */}
-              <SpotifyWidget />
-
-              {/* 2. Top Languages */}
-              <TopLanguagesCard />
-
-              {/* 3. GitHub Stats */}
-              <GitHubStatsCard />
-
-              {/* 3.5 GitHub Contributions */}
-              <GitHubContributions />
-
-              {/* 4. University Status */}
-              <div className="bg-linear-to-br from-[#111] to-[#0a0a0a] border border-white/5 p-6 rounded-2xl shadow-xl hover:border-white/10 transition-all">
-                <h3 className="text-white font-mono font-bold mb-4 flex items-center gap-2">
-                  <Terminal size={16} className="text-[#007acc]" />
-                  cat ~/education.txt
-                </h3>
-                <ul className="space-y-3 text-sm">
-                  <li className="flex justify-between items-center group">
-                    <span className="text-[#888]">Institution</span>
-                    <span className="text-white font-medium group-hover:text-[#007acc] transition-colors">
-                      CSMU, Panvel
-                    </span>
-                  </li>
-                  <li className="flex justify-between items-center group">
-                    <span className="text-[#888]">Degree</span>
-                    <span className="text-white font-medium group-hover:text-[#007acc] transition-colors">
-                      B.Tech AIML
-                    </span>
-                  </li>
-                  <li className="flex justify-between items-center group">
-                    <span className="text-[#888]">Year</span>
-                    <span className="text-white font-medium group-hover:text-[#007acc] transition-colors">
-                      2nd Year
-                    </span>
-                  </li>
-                </ul>
-              </div>
-
-              {/* 5. Connect */}
-              <div className="p-6 rounded-2xl border border-[#007acc]/30 bg-linear-to-br from-[#007acc]/10 to-[#0066b3]/5 shadow-xl shadow-[#007acc]/10 hover:shadow-2xl hover:shadow-[#007acc]/20 transition-all">
-                <div className="flex items-center gap-2 text-[#007acc] font-mono text-xs font-bold mb-3">
-                  <Terminal size={14} />
-                  echo $CONTACT_EMAIL
-                </div>
-                <p className="text-zinc-400 font-medium mb-3 text-sm">
-                  Want to build something?
-                </p>
-                <a
-                  href="mailto:ingleswapnil2004@gmail.com"
-                  className="text-white hover:text-[#007acc] text-sm font-mono font-medium transition-colors underline decoration-white/50 hover:decoration-[#007acc]"
-                >
-                  ingleswapnil2004@gmail.com
-                </a>
-              </div>
-            </ScrollReveal>
-          </div>
-        </section>
 
         {/* Footer */}
         <footer className="relative mt-32 border-t border-white/5 bg-black/60 backdrop-blur-xl overflow-hidden">
