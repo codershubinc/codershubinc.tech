@@ -41,8 +41,10 @@ export function useContributions(): UseContributionsReturn {
         try {
             const today = new Date().toLocaleString().split('T')[0];
             const response = await fetch(
-                `https://github-contributions-api.deno.dev/codershubinc.json?flat=true&to=${today}`,
-                { cache: 'no-store' }
+                `https://github-contributions-api.deno.dev/codershubinc.json?flat=true&to=${today}&nocache=${Date.now().toLocaleString()}`,
+                {
+                    cache: 'no-store',
+                }
             );
 
             if (!response.ok) {
