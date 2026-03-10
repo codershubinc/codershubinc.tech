@@ -23,7 +23,7 @@ export default async function Home() {
           ZONE A: THE SYSTEM INTERFACE (Professional)
          ========================================= */}
 
-        <section className="pt-32 pb-24 px-6 max-w-6xl mx-auto relative">
+        <section className="pt-24 sm:pt-32 pb-16 sm:pb-24 px-4 sm:px-6 max-w-6xl mx-auto relative">
           {/* Background Accent */}
           <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[#007acc]/5 blur-[120px] rounded-full pointer-events-none"></div>
 
@@ -49,14 +49,14 @@ export default async function Home() {
         {/* Projects Grid (Zone A) */}
         <section
           id="projects"
-          className="py-24 px-6 max-w-6xl mx-auto border-t border-white/5 relative"
+          className="py-16 sm:py-24 px-4 sm:px-6 max-w-6xl mx-auto border-t border-white/5 relative"
         >
           {/* Accent Glow */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-purple-500/5 blur-[100px] rounded-full pointer-events-none"></div>
 
           <div className="flex items-end justify-between mb-16 relative z-10">
             <ScrollReveal direction="left">
-              <h2 className="text-4xl font-bold  font-mono text-white flex items-center gap-3 mb-2 hover:text-[#007acc] transition-colors duration-300">
+              <h2 className="text-2xl sm:text-4xl font-bold font-mono text-white flex items-center gap-3 mb-2 hover:text-[#007acc] transition-colors duration-300">
                 <Terminal className="text-[#007acc] animate-pulse" size={28} />
                 ls -la ./projects
               </h2>
@@ -95,7 +95,7 @@ export default async function Home() {
           ZONE B: THE HUMAN SIDE (Casual)
          ========================================= */}
 
-        <section id="about" className="py-24 px-6 max-w-6xl mx-auto relative">
+        <section id="about" className="py-16 sm:py-24 px-4 sm:px-6 max-w-6xl mx-auto relative">
           {/* Background Accent */}
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-green-500/5 blur-[100px] rounded-full pointer-events-none"></div>
 
@@ -107,7 +107,7 @@ export default async function Home() {
                 whoami
               </div>
 
-              <h2 className="text-4xl md:text-5xl font-bold font-mono text-transparent bg-linear-to-r from-white to-gray-500 bg-clip-text leading-tight hover:scale-105 transition-transform duration-300">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-mono text-transparent bg-linear-to-r from-white to-gray-500 bg-clip-text leading-tight">
                 B.Tech Student & <br />{" "}
                 <span className="text-[#888]">Systems Explorer.</span>
               </h2>
@@ -223,7 +223,7 @@ export default async function Home() {
           {/* Background Gradient */}
           <div className="absolute inset-0 bg-linear-to-b from-[#007acc]/5 via-transparent to-transparent pointer-events-none"></div>
 
-          <ScrollReveal direction="up" className="relative z-10 max-w-6xl mx-auto px-6 py-16">
+          <ScrollReveal direction="up" className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
             {/* Main Footer Content */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
               {/* Brand Column */}

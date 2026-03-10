@@ -29,8 +29,8 @@ export function HeroContent() {
                 <TodayContributionsBadge />
             </motion.div>
 
-            <motion.h1
-                className="text-6xl md:text-9xl font-mono font-bold gap-0.5 text-white tracking-tighter leading-[0.9] bg-linear-to-b from-white to-gray-400 bg-clip-text"
+        <motion.h1
+                className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-mono font-bold text-white tracking-tighter leading-[0.9] bg-linear-to-b from-white to-gray-400 bg-clip-text"
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 0.68, 0, 1.1] }}
@@ -44,7 +44,7 @@ export function HeroContent() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
             >
-                <p className="text-2xl md:text-3xl text-transparent bg-linear-to-r from-white to-gray-500 bg-clip-text font-medium font-mono">
+                <p className="text-xl sm:text-2xl md:text-3xl text-transparent bg-linear-to-r from-white to-gray-500 bg-clip-text font-medium font-mono">
                     $ whoami
                 </p>
                 <p className="text-[#888] leading-relaxed max-w-lg text-base">
@@ -65,7 +65,7 @@ export function HeroContent() {
                     href="https://github.com/codershubinc"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center gap-2 bg-white text-black px-8 py-4 rounded-xl font-bold hover:bg-[#007acc] hover:text-white transition-all hover:scale-110 hover:shadow-xl hover:shadow-[#007acc]/30 active:scale-95"
+                    className="group flex items-center gap-2 bg-white text-black px-5 py-3 sm:px-8 sm:py-4 rounded-xl font-bold hover:bg-[#007acc] hover:text-white transition-all hover:scale-105 hover:shadow-xl hover:shadow-[#007acc]/30 active:scale-95 text-xs sm:text-sm"
                 >
                     <Terminal
                         size={18}
@@ -75,7 +75,7 @@ export function HeroContent() {
                 </a>
                 <a
                     href="#projects"
-                    className="flex items-center gap-2 border-2 border-white/10 bg-white/5 text-white px-8 py-4 rounded-xl font-medium hover:border-[#007acc] hover:bg-[#007acc]/10 transition-all hover:scale-110 backdrop-blur-sm active:scale-95"
+                    className="flex items-center gap-2 border-2 border-white/10 bg-white/5 text-white px-5 py-3 sm:px-8 sm:py-4 rounded-xl font-medium hover:border-[#007acc] hover:bg-[#007acc]/10 transition-all hover:scale-105 backdrop-blur-sm active:scale-95 text-xs sm:text-sm"
                 >
                     <Terminal
                         size={18}
