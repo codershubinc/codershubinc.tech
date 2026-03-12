@@ -1,11 +1,21 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import {
     Terminal, Code2, Server, Cpu, Globe, Mail,
     GraduationCap, MapPin, Coffee, Github, Linkedin,
     BookOpen, Layers
 } from "lucide-react";
+import Image from "next/image";
+import { getLanguageIcon } from "@/lib/icons";
+
+interface TopLang {
+    name: string;
+    color: string;
+    size: number;
+    count: number;
+}
 
 const stack = [
     { label: "Go", color: "#00ADD8", category: "Backend" },
@@ -34,7 +44,29 @@ const fadeUp = {
     visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 0.68, 0, 1.2] as [number, number, number, number] } },
 };
 
+function useTopLanguages() {
+    const [langs, setLangs] = useState<TopLang[]>([]);
+
+    useEffect(() => {
+        fetch('/api/top-langs')
+            .then((r) => r.ok ? r.json() : null)
+            .then((data) => {
+                if (!data) return;
+                const sorted: TopLang[] = Object.values(data as Record<string, TopLang>)
+                    .sort((a, b) => b.size - a.size)
+                    .slice(0, 10);
+                setLangs(sorted);
+            })
+            .catch(() => { });
+    }, []);
+
+    return langs;
+}
+
 export function WhoAmISection() {
+    const topLangs = useTopLanguages();
+    const totalSize = topLangs.reduce((acc, l) => acc + l.size, 0);
+
     return (
         <section
             id="whoami"
@@ -52,7 +84,7 @@ export function WhoAmISection() {
                 transition={{ duration: 0.6, ease: "easeOut" }}
             >
                 <div>
-                    <div className="inline-flex items-center gap-2 text-[#007acc] font-mono text-xs font-bold uppercase tracking-widest mb-4 px-3 py-1.5 bg-[#007acc]/10 rounded-full border border-[#007acc]/20">
+                    <div className="inline-flex items-center gap-2 text-[#007acc] font-sans text-xs  uppercase tracking-widest mb-4 px-3 py-1.5 bg-[#007acc]/10 rounded-full border border-[#007acc]/20">
                         <Terminal size={12} className="animate-pulse" />
                         cat ~/about.md
                     </div>
@@ -221,28 +253,109 @@ export function WhoAmISection() {
                         </motion.div>
                     </div>
 
-                    {/* Currently focused on */}
+                    {/* Top Languages */}
                     <div className="bg-linear-to-br from-[#111]/80 to-[#0a0a0a]/80 border border-white/8 rounded-2xl p-6 backdrop-blur-sm">
-                        <h3 className="font-mono font-bold text-white text-sm flex items-center gap-2 mb-4">
+                        <h3 className="font-mono font-bold text-white text-sm flex items-center gap-2 mb-5">
                             <Terminal size={14} className="text-[#007acc]" />
-                            cat ~/focus.txt
+                            cat ~/langs.txt
                         </h3>
-                        <ul className="space-y-3">
-                            {[
-                                { dot: "#007acc", text: "High-performance Go microservices" },
-                                { dot: "#CE422B", text: "Systems programming with Rust" },
-                                { dot: "#1793D1", text: "Self-hosted Linux infrastructure" },
-                                { dot: "#68A063", text: "Full-stack TypeScript / Next.js" },
-                            ].map((item) => (
-                                <li key={item.text} className="flex items-start gap-3 text-sm text-[#888] hover:text-[#ccc] transition-colors">
-                                    <span
-                                        className="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0"
-                                        style={{ backgroundColor: item.dot }}
-                                    />
-                                    {item.text}
-                                </li>
-                            ))}
-                        </ul>
+                        {topLangs.length === 0 ? (
+                            <div className="grid grid-cols-2 gap-2">
+                                {[...Array(8)].map((_, i) => (
+                                    <div key={i} className="animate-pulse flex items-center gap-2 px-3 py-2.5 rounded-xl bg-white/4 border border-white/6">
+                                        <div className="w-2 h-2 rounded-full bg-zinc-700 shrink-0" />
+                                        <div className="h-3 w-16 bg-zinc-800 rounded" />
+                                        <div className="ml-auto h-3 w-8 bg-zinc-800 rounded" />
+                                    </div>
+                                ))}
+                            </div>
+                        ) : (
+                            <motion.div
+                                className="grid grid-cols-2 gap-2"
+                                variants={staggerContainer}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true }}
+                            >
+                                {topLangs.map((lang) => {
+                                    const pct = totalSize > 0 ? ((lang.size / totalSize) * 100) : 0;
+                                    const iconConfig = getLanguageIcon(lang.name);
+                                    return (
+                                        <motion.div
+                                            key={lang.name}
+                                            variants={fadeUp}
+                                            whileHover={{ scale: 1.04, y: -2 }}
+                                            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                                            className="group relative flex flex-col gap-1.5 px-3 py-2.5 rounded-xl bg-white/4 border border-white/6 hover:bg-white/8 cursor-default overflow-hidden"
+                                            style={{
+                                                borderColor: `${lang.color}00`,
+                                            }}
+                                            onMouseEnter={(e) => {
+                                                (e.currentTarget as HTMLDivElement).style.borderColor = `${lang.color}55`;
+                                                (e.currentTarget as HTMLDivElement).style.boxShadow = `0 0 16px ${lang.color}20`;
+                                            }}
+                                            onMouseLeave={(e) => {
+                                                (e.currentTarget as HTMLDivElement).style.borderColor = `${lang.color}00`;
+                                                (e.currentTarget as HTMLDivElement).style.boxShadow = "none";
+                                            }}
+                                        >
+                                            {/* Color bar top */}
+                                            <div
+                                                className="absolute top-0 left-0 right-0 h-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                                                style={{ backgroundColor: lang.color }}
+                                            />
+
+                                            {/* Row 1: icon + name + % */}
+                                            <div className="flex items-center gap-2">
+                                                <div className="flex items-center justify-center w-4 h-4 shrink-0">
+                                                    {iconConfig ? (
+                                                        <Image
+                                                            src={iconConfig.url}
+                                                            alt={lang.name}
+                                                            width={14}
+                                                            height={14}
+                                                        />
+                                                    ) : (
+                                                        <span
+                                                            className="w-2 h-2 rounded-full shrink-0"
+                                                            style={{ backgroundColor: lang.color }}
+                                                        />
+                                                    )}
+                                                </div>
+                                                <span className="text-xs font-mono text-[#ccc] group-hover:text-white transition-colors truncate">
+                                                    {lang.name}
+                                                </span>
+                                                <span
+                                                    className="ml-auto text-[10px] font-mono shrink-0 font-bold"
+                                                    style={{ color: lang.color }}
+                                                >
+                                                    {pct.toFixed(1)}%
+                                                </span>
+                                            </div>
+
+                                            {/* Row 2: mini bar + repo count (revealed on hover) */}
+                                            <div className="overflow-hidden transition-all duration-300 max-h-0 group-hover:max-h-8">
+                                                <div className="flex items-center gap-2 pt-0.5">
+                                                    <div className="flex-1 h-[3px] bg-white/10 rounded-full overflow-hidden">
+                                                        <div
+                                                            className="h-full rounded-full transition-all duration-500"
+                                                            style={{
+                                                                width: `${pct}%`,
+                                                                backgroundColor: lang.color,
+                                                                boxShadow: `0 0 6px ${lang.color}80`,
+                                                            }}
+                                                        />
+                                                    </div>
+                                                    <span className="text-[9px] font-mono text-zinc-600 shrink-0">
+                                                        {lang.count} repo{lang.count !== 1 ? "s" : ""}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </motion.div>
+                                    );
+                                })}
+                            </motion.div>
+                        )}
                     </div>
 
                     {/* Education */}
