@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Clock, Code2, Monitor, Laptop, Terminal } from 'lucide-react';
+import { Clock, Code2, Terminal } from 'lucide-react';
 import Image from 'next/image';
 import { getEditorIcon, getLanguageIcon, getOSIcon } from '@/lib/icons'; // Keep your existing icon helper
 
@@ -80,8 +80,8 @@ export default function WakatimeStats() {
             {/* --- Header --- */}
             <div className="flex items-center gap-2 mb-8 opacity-60">
                 <Clock size={14} className="text-zinc-100" />
-                <span className="text-xs font-bold tracking-widest text-zinc-100 uppercase">
-                    Realtime Coding
+                <span className="text-xs font-mono font-semibold tracking-wide text-zinc-300">
+                    wakatime-cli --coding --today
                 </span>
             </div>
 
@@ -92,15 +92,15 @@ export default function WakatimeStats() {
                     <span className="text-3xl font-mono text-white font-medium tracking-tight">
                         {data.total_time}
                     </span>
-                    <span className="text-xs text-zinc-500 font-medium mt-1">Today</span>
+                    <span className="text-xs text-zinc-500 font-medium mt-1">-- today</span>
                 </div>
 
                 {/* This Week */}
                 <div className="flex flex-col items-end text-right">
-                    <span className="text-3xl font-mono font-medium tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
+                    <span className="text-3xl font-mono font-medium tracking-tight text-transparent bg-clip-text bg-linear-to-r from-purple-400 to-pink-400">
                         {data.weekly_total}
                     </span>
-                    <span className="text-xs text-zinc-500 font-medium mt-1">This Week</span>
+                    <span className="text-xs text-zinc-500 font-medium mt-1">-- Week</span>
                 </div>
             </div>
 
@@ -139,7 +139,7 @@ export default function WakatimeStats() {
                                 {/* Progress Bar */}
                                 <div className="h-1.5 w-full bg-zinc-800/50 rounded-full overflow-hidden">
                                     <div
-                                        className="h-full bg-gradient-to-r from-purple-600 to-indigo-500 rounded-full"
+                                        className="h-full bg-linear-to-r from-purple-600 to-indigo-500 rounded-full"
                                         style={{ width: `${lang.percent}%` }}
                                     />
                                 </div>
