@@ -28,7 +28,7 @@ export function Navbar({ capsules }: { capsules?: React.ReactNode }) {
                 <div
                     className="transition-all duration-500 ease-in-out flex items-center justify-between w-full"
                     style={{
-                        maxWidth: scrolled ? "48rem" : "72rem",
+                        maxWidth: scrolled ? "48rem" : "100%",
                         width: scrolled ? "calc(100% - 2rem)" : "100%",
                         height: scrolled ? "3rem" : "4rem",
                         padding: scrolled ? "0 1.25rem" : "0 1.5rem",
@@ -50,10 +50,10 @@ export function Navbar({ capsules }: { capsules?: React.ReactNode }) {
                     </div>
 
                     {/* Desktop nav */}
-                    <div className="hidden md:flex items-center gap-4">
+                    <div className="hidden md:flex items-center gap-4 max-w-fit w-max ">
                         <div
-                            className="transition-all duration-300 overflow-hidden"
-                            style={{ maxWidth: scrolled ? "0" : "300px", opacity: scrolled ? 0 : 1 }}
+                            className="transition-all duration-300  max-w-fit w-max "
+                            style={{ maxWidth: scrolled ? "0" : "600px", opacity: scrolled ? 0 : 1 }}
                         >
                             {capsules}
                         </div>
