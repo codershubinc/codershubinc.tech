@@ -33,10 +33,13 @@ export function useContributions(): UseContributionsReturn {
         setError(null);
 
         try {
-            const today = new Date().toLocaleString().split('T')[0];
+            const d = new Date();
+            const today = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
             const response = await fetch(
-                `https://github-contributions-api.deno.dev/codershubinc.json?flat=true&to=${today}`,
-                { cache: 'no-store' }
+                `https://github-contributions-api.deno.dev/codershubinc.json?flat=true&to=${today}&nocache=${Date.now()}`,
+                {
+                    cache: 'no-store',
+                }
             );
 
             if (!response.ok) {
@@ -47,7 +50,8 @@ export function useContributions(): UseContributionsReturn {
             setContributionsData(data);
 
             const todayContrib = data.contributions[data.contributions.length - 1];
-            // console.log(`Today's contributions: ${todayContrib?.contributionCount || 0}`);
+            // toast(`Fetched contributions for ${today}: ${JSON.stringify(todayContrib) || 0}`);
+            // console.log(`Today's contributions: ${todayContrib || 0}`);
 
             setTodaysCount(todayContrib?.contributionCount || 0);
         } catch (err) {

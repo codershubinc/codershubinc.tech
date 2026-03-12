@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import { GitCommit, Activity, RefreshCw } from 'lucide-react';
 import { useContributions } from '@/hooks/useTodaysContributions';
 
@@ -11,7 +10,7 @@ export default function TodayContributionsCard() {
         <div className="p-5 rounded-lg bg-linear-to-br from-green-500/10 to-black/40 border border-green-500/30 backdrop-blur-sm hover:border-green-500/50 transition-all duration-300 shadow-lg shadow-green-500/10">
             <div className="flex items-center gap-2 mb-4">
                 <Activity size={16} className="text-green-400" />
-                <span className="text-sm font-mono text-white font-bold">Today&apos;s Stats</span>
+                <span className="text-sm font-mono text-white font-bold">git --contributions --date={(() => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; })()}</span>
                 {loading && <RefreshCw size={12} className="text-green-400 animate-spin" />}
             </div>
 
