@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { Clock, Code2, Terminal } from 'lucide-react';
-import Image from 'next/image';
-import { getEditorIcon, getLanguageIcon, getOSIcon } from '@/lib/icons'; // Keep your existing icon helper
+import React, { useState, useEffect } from "react";
+import { Clock, Code2, Terminal } from "lucide-react";
+import Image from "next/image";
+import { getEditorIcon, getLanguageIcon, getOSIcon } from "@/lib/icons"; // Keep your existing icon helper
 
 // Types
 interface WakatimeData {
@@ -46,12 +46,12 @@ export default function WakatimeStats() {
 
     const fetchWakatimeData = async () => {
         try {
-            const res = await fetch('/api/wakatime', { cache: 'no-store' });
+            const res = await fetch("/api/wakatime", { cache: "no-store" });
             if (res.ok) {
                 setData(await res.json());
             }
         } catch (error) {
-            console.error('Wakatime error:', error);
+            console.error("Wakatime error:", error);
         } finally {
             setIsLoading(false);
         }
@@ -76,7 +76,6 @@ export default function WakatimeStats() {
 
     return (
         <div className="p-6 rounded-2xl bg-[#0a0a0a] border border-white/5 shadow-2xl w-full max-w-sm font-sans">
-
             {/* --- Header --- */}
             <div className="flex items-center gap-2 mb-8 opacity-60">
                 <Clock size={14} className="text-zinc-100" />
@@ -92,7 +91,9 @@ export default function WakatimeStats() {
                     <span className="text-3xl font-mono text-white font-medium tracking-tight">
                         {data.total_time}
                     </span>
-                    <span className="text-xs text-zinc-500 font-medium mt-1">-- today</span>
+                    <span className="text-xs text-zinc-500 font-medium mt-1">
+                        -- today
+                    </span>
                 </div>
 
                 {/* This Week */}
@@ -100,7 +101,9 @@ export default function WakatimeStats() {
                     <span className="text-3xl font-mono font-medium tracking-tight text-transparent bg-clip-text bg-linear-to-r from-purple-400 to-pink-400">
                         {data.weekly_total}
                     </span>
-                    <span className="text-xs text-zinc-500 font-medium mt-1">-- Week</span>
+                    <span className="text-xs text-zinc-500 font-medium mt-1">
+                        -- Week
+                    </span>
                 </div>
             </div>
 
@@ -131,9 +134,13 @@ export default function WakatimeStats() {
                                         ) : (
                                             <Code2 size={14} className="text-zinc-400" />
                                         )}
-                                        <span className="text-sm text-zinc-200 font-medium">{lang.name}</span>
+                                        <span className="text-sm text-zinc-200 font-medium">
+                                            {lang.name}
+                                        </span>
                                     </div>
-                                    <span className="text-xs font-mono text-zinc-500">{lang.text}</span>
+                                    <span className="text-xs font-mono text-zinc-500">
+                                        {lang.text}
+                                    </span>
                                 </div>
 
                                 {/* Progress Bar */}
@@ -143,7 +150,6 @@ export default function WakatimeStats() {
                                         style={{ width: `${lang.percent}%` }}
                                     />
                                 </div>
-
                             </div>
                         );
                     })}
@@ -168,20 +174,19 @@ export default function WakatimeStats() {
                     </div>
                 )}
 
-                {
-                    data.operating_systems[0] && (
-                        <div className="flex items-center gap-2">
-                            <Image
-                                src={getOSIcon(data.operating_systems[0].name)}
-                                alt={data.operating_systems[0].name}
-                                width={16}
-                                height={16}
-                                className="w-4 h-4"
-                            />
-                            <span>{data.operating_systems[0].name}</span>
-                            <Terminal size={14} />
-                        </div>
-                    )}
+                {data.operating_systems[0] && (
+                    <div className="flex items-center gap-2">
+                        <Image
+                            src={getOSIcon(data.operating_systems[0].name)}
+                            alt={data.operating_systems[0].name}
+                            width={16}
+                            height={16}
+                            className="w-4 h-4"
+                        />
+                        <span>{data.operating_systems[0].name}</span>
+                        <Terminal size={14} />
+                    </div>
+                )}
             </div>
         </div>
     );
