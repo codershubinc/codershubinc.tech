@@ -28,7 +28,7 @@ export const FEATURED_SPONSORS: {
         {
             id: "ra",
             name: "Rahul Arjun",
-            handle: "@rand",
+            handle: "@rahul",
             tier: "gold",
             description:
                 "One of the earliest believers in this project. Rahul jumped on board before the road map was even clear — a true early adopter whose support directly funded the infrastructure, tooling, and late-night coffee that keeps the open-source work alive. Grateful doesn't begin to cover it.",

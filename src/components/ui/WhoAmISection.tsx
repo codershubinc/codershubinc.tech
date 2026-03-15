@@ -74,7 +74,7 @@ function useTopLanguages() {
           .slice(0, 10);
         setLangs(sorted);
       })
-      .catch(() => {});
+      .catch(() => { });
   }, []);
 
   return langs;
@@ -291,7 +291,7 @@ export function WhoAmISection() {
                   className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl bg-white/4 border border-white/6 hover:border-white/15 hover:bg-white/8 transition-all group cursor-default"
                 >
                   <span
-                    className="w-2 h-2 rounded-full flex-shrink-0"
+                    className="w-2 h-2 rounded-full shrink-0"
                     style={{ backgroundColor: item.color }}
                   />
                   <span className="text-xs font-mono text-[#ccc] group-hover:text-white transition-colors truncate">
