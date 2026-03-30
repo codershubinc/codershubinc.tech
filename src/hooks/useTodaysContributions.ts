@@ -17,6 +17,7 @@ interface ContributionsData {
 interface UseContributionsReturn {
     contributionsData: ContributionsData | null;
     todaysCount: number;
+    previousDaysCount: number;
     loading: boolean;
     error: string | null;
     refetch: () => void;
@@ -25,6 +26,7 @@ interface UseContributionsReturn {
 export function useContributions(): UseContributionsReturn {
     const [contributionsData, setContributionsData] = useState<ContributionsData | null>(null);
     const [todaysCount, setTodaysCount] = useState<number>(0);
+    const [previousDaysCount, setPreviousDaysCount] = useState<number>(0);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -50,10 +52,12 @@ export function useContributions(): UseContributionsReturn {
             setContributionsData(data);
 
             const todayContrib = data.contributions[data.contributions.length - 1];
+            const prevDayContrib = data.contributions[data.contributions.length - 2];
             // toast(`Fetched contributions for ${today}: ${JSON.stringify(todayContrib) || 0}`);
             // console.log(`Today's contributions: ${todayContrib || 0}`);
 
             setTodaysCount(todayContrib?.contributionCount || 0);
+            setPreviousDaysCount(prevDayContrib?.contributionCount || 0);
         } catch (err) {
             const errorMessage = err instanceof Error ? err.message : 'Failed to fetch contributions';
             setError(errorMessage);
@@ -75,6 +79,7 @@ export function useContributions(): UseContributionsReturn {
     return {
         contributionsData,
         todaysCount,
+        previousDaysCount,
         loading,
         error,
         refetch: fetchContributions,
