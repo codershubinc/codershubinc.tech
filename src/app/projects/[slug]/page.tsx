@@ -53,10 +53,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
             url: `https://codershubinc.com/projects/${slug}`,
             images: [
                 {
-                    url: `/api/og?slug=${slug}`,
+                    url: `https://codershubinc.com/api/og?slug=${slug}`,
                     width: 1200,
                     height: 630,
                     alt: title,
+                    type: "image/png",
                 },
             ],
         },
@@ -64,7 +65,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
             card: "summary_large_image",
             title,
             description,
-            images: [`/api/og?slug=${slug}`],
+            images: [`https://codershubinc.com/api/og?slug=${slug}`],
         },
     };
 }

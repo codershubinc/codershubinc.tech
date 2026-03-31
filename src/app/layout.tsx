@@ -29,10 +29,11 @@ export const metadata: Metadata = {
     siteName: "CodersHubInc",
     images: [
       {
-        url: "/api/og?slug=home",
+        url: "https://codershubinc.com/api/og?slug=home",
         width: 1200,
         height: 630,
         alt: "CodersHubInc Portfolio",
+        type: "image/png",
       },
     ],
   },
@@ -41,7 +42,7 @@ export const metadata: Metadata = {
     title: "CodersHubInc | Swapnil Ingle",
     description: "Backend Developer & Linux Enthusiast. Building high-performance systems and open-source tools.",
     creator: "@codershubinc",
-    images: ["/api/og?slug=home"],
+    images: ["https://codershubinc.com/api/og?slug=home"],
   },
   robots: {
     index: true,

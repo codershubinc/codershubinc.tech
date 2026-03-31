@@ -1,10 +1,8 @@
-import React from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/atom-one-dark.css";
-import { Terminal } from "lucide-react";
 import { CodeBlockWrapper } from "./CodeBlockWrapper";
 
 interface MarkdownRendererProps {
@@ -31,8 +29,7 @@ export function MarkdownRenderer({ content, rawBaseUrl }: MarkdownRendererProps)
         prose-table:border-collapse prose-table:w-full prose-table:my-8 prose-table:text-sm
         prose-th:text-left prose-th:text-white/90 prose-th:px-4 prose-th:py-3 prose-th:bg-white/5 prose-th:border prose-th:border-white/10 prose-th:font-medium
         prose-td:border prose-td:border-white/10 prose-td:px-4 prose-td:py-3 prose-td:text-zinc-400
-        [&>*:first-child]:mt-0 [&>*:last-child]:mb-0
-        /* custom style for pre blocks to look like code editors */
+        [&>*:first-child]:mt-0 [&>*:last-child]:mb-0 
         [&_pre]:relative
     ">
             <ReactMarkdown
