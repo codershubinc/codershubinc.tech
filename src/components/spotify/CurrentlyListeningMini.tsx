@@ -15,7 +15,7 @@ export default function CurrentlyListeningMini() {
         data.album_images.find((img) => img.height === 640)?.url ||
         data.album_images[0]?.url;
 
-    // Calculate remaining time
+
     const formatRemainingTime = () => {
         if (!data.raw?.progress_ms || !data.raw?.item?.duration_ms) return null;
         const remainingMs = data.raw.item.duration_ms - data.raw.progress_ms;

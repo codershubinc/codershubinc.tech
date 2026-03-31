@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { Project } from "@/types";
-import { ArrowUpRight, Github, Code2, Network, Database, Activity, Music, Terminal, Download } from "lucide-react";
+import { ArrowUpRight, Github, Code2, Network, Database, Activity, Music, Terminal, Download, ArrowRight } from "lucide-react";
 
 interface ProjectCardProps {
     project: Project;
@@ -103,7 +104,7 @@ export const ProjectCard = ({ project, index }: ProjectCardProps) => {
                 </p>
 
                 {/* Tech Stack */}
-                <div className="flex flex-wrap gap-2 mt-auto">
+                <div className="flex flex-wrap gap-2 mt-auto pb-4">
                     {project.techStack.map((tech) => (
                         <span
                             key={tech}
@@ -113,6 +114,19 @@ export const ProjectCard = ({ project, index }: ProjectCardProps) => {
                         </span>
                     ))}
                 </div>
+            </div>
+
+            {/* View More Bar (Fused bottom popup) */}
+            <div className="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-20">
+                <Link 
+                    href={`/projects/${project.slug}`}
+                    className="flex items-center justify-center w-full py-3.5 bg-black/60 backdrop-blur-md border-t border-white/5 text-zinc-400 hover:text-white transition-colors group/link"
+                >
+                    <span className="flex items-center gap-2 text-sm font-medium">
+                        View Project
+                        <ArrowRight size={16} className="group-hover/link:translate-x-1 group-hover/link:text-[#007acc] transition-transform duration-300" />
+                    </span>
+                </Link>
             </div>
         </motion.div>
     );

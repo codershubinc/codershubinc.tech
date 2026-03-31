@@ -1,4 +1,4 @@
-import { SpotifyData } from "@/constants/constantApis";
+import { SpotifyData } from "@/types";
 import { useEffect, useState } from "react";
 
 export function useSpotify() {

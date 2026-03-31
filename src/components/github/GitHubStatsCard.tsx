@@ -1,23 +1,6 @@
 import React from 'react';
 import { Github, GitPullRequest, GitCommit, Star, AlertCircle, Award } from 'lucide-react';
-
-interface GitHubStats {
-    name: string;
-    totalPRs: number;
-    totalPRsMerged: number;
-    mergedPRsPercentage: number;
-    totalReviews: number;
-    totalCommits: number;
-    totalIssues: number;
-    totalStars: number;
-    totalDiscussionsStarted: number;
-    totalDiscussionsAnswered: number;
-    contributedTo: number;
-    rank: {
-        level: string;
-        percentile: number;
-    };
-}
+import { GitHubStatsResponse as GitHubStats } from '@/types';
 
 async function fetchGitHubStats(): Promise<GitHubStats | null> {
     try {

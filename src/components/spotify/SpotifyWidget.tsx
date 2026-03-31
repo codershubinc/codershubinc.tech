@@ -24,7 +24,7 @@ export default function SpotifyWidget() {
 
     const albumArt = spotifyData.album_images.find(img => img.height === 640)?.url || spotifyData.album_images[0]?.url;
 
-    // Format time from milliseconds to mm:ss
+
     const formatTime = (ms?: number) => {
         if (!ms) return '0:00';
         const totalSeconds = Math.floor(ms / 1000);

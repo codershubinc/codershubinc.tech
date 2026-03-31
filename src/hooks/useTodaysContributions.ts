@@ -1,13 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-
-interface Contribution {
-    color: string;
-    contributionCount: number;
-    contributionLevel: string;
-    date: string;
-}
+import { GitHubContribution as Contribution } from '@/types';
 
 interface ContributionsData {
     contributions: Contribution[];

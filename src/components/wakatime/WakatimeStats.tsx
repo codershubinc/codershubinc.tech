@@ -18,7 +18,6 @@ interface WakatimeData {
     top_project: { name: string; text: string; percent: number } | null;
 }
 
-// Skeleton Loader to match the specific layout
 const StatsSkeleton = () => (
     <div className="animate-pulse w-full">
         <div className="h-4 w-32 bg-zinc-800 rounded mb-6" />
@@ -71,7 +70,6 @@ export default function WakatimeStats() {
         );
     }
 
-    // Fallback if no data
     if (!data) return null;
 
     return (

@@ -13,3 +13,7 @@ export interface SkillCategory {
   category: string;
   items: string[];
 }
+
+export * from './github';
+export * from './spotify';
+export * from './vsmusic';

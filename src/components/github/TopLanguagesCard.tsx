@@ -2,13 +2,7 @@ import React from 'react';
 import { Code2, TrendingUp, FileCode } from 'lucide-react';
 import Image from 'next/image';
 import { getLanguageIcon } from '@/lib/icons';
-
-interface Language {
-    name: string;
-    color: string;
-    size: number;
-    count: number;
-}
+import { GitHubLanguage as Language } from '@/types';
 
 interface TopLanguagesData {
     [key: string]: Language;

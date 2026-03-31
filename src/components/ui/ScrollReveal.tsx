@@ -8,9 +8,7 @@ interface ScrollRevealProps {
     children: React.ReactNode;
     className?: string;
     direction?: Direction;
-    /** delay in ms */
     delay?: number;
-    /** duration in ms */
     duration?: number;
 }
 

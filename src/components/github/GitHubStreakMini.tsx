@@ -1,22 +1,6 @@
 import { Flame } from "lucide-react";
 import { github, REVALIDATE } from "@/constants/constantApis";
-
-interface StreakData {
-    mode: string;
-    totalContributions: number;
-    firstContribution: string;
-    longestStreak: {
-        start: string;
-        end: string;
-        length: number;
-    };
-    currentStreak: {
-        start: string;
-        end: string;
-        length: number;
-    };
-    excludedDays: string[];
-}
+import { GitHubStreakData as StreakData } from "@/types";
 
 async function fetchStreakData(): Promise<StreakData | null> {
     try {
