@@ -42,13 +42,13 @@ export const ProjectCard = ({ project, index }: ProjectCardProps) => {
             className="group relative flex flex-col justify-between overflow-hidden rounded-2xl bg-[#0a0a0a] border border-white/5 hover:border-white/15 transition-colors duration-500 p-6 sm:p-8"
         >
             {/* Giant Background Icon Peaking from Bottom Right */}
-            <div className="absolute -bottom-8 -right-8 z-0 text-white/[0.02] group-hover:text-[#007acc]/10 transition-all duration-500 transform group-hover:-translate-x-6 group-hover:-translate-y-6 group-hover:-rotate-12 group-hover:scale-110 pointer-events-none">
+            <div className="absolute -bottom-8 -right-8 z-0 text-white/2 group-hover:text-[#007acc]/10 transition-all duration-500 transform group-hover:-translate-x-6 group-hover:-translate-y-6 group-hover:-rotate-12 group-hover:scale-110 pointer-events-none">
                 {getProjectIcon(project.id, "w-48 h-48 sm:w-56 sm:h-56")}
             </div>
 
             {/* Background Hover Effect */}
             <div className="absolute -inset-px bg-linear-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl pointer-events-none" />
-            <div className="absolute top-0 inset-x-0 h-[2px] bg-linear-to-r from-transparent via-[#007acc]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+            <div className="absolute top-0 inset-x-0 h-0.5 bg-linear-to-r from-transparent via-[#007acc]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
             <div className="relative z-10 flex flex-col grow">
                 {/* Header */}
@@ -118,7 +118,7 @@ export const ProjectCard = ({ project, index }: ProjectCardProps) => {
 
             {/* View More Bar (Fused bottom popup) */}
             <div className="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-20">
-                <Link 
+                <Link
                     href={`/projects/${project.slug}`}
                     className="flex items-center justify-center w-full py-3.5 bg-black/60 backdrop-blur-md border-t border-white/5 text-zinc-400 hover:text-white transition-colors group/link"
                 >

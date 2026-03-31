@@ -37,7 +37,7 @@ export function Navbar({ capsules }: { capsules?: React.ReactNode }) {
                         backdropFilter: "blur(20px)",
                         WebkitBackdropFilter: "blur(20px)",
                         borderBottom: scrolled ? "none" : "1px solid rgba(255,255,255,0.05)",
-                        border: scrolled ? "1px solid rgba(255,255,255,0.1)" : "none",
+                        border: scrolled ? "1px solid rgba(255,250,255,0.1)" : "none",
                         boxShadow: scrolled
                             ? "0 20px 60px rgba(0,0,0,0.5)"
                             : "0 4px 6px rgba(0,0,0,0.05)",

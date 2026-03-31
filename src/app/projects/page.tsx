@@ -2,12 +2,12 @@ import React from "react";
 import { Terminal } from "lucide-react";
 import { ProjectCard } from "@/components/projects";
 import { projects } from "@/data/projects";
-import { Navbar, ServerBootPanel, ScrollReveal } from "@/components/ui";
+import { Navbar, ScrollReveal } from "@/components/ui";
 import ProfileCapsules from "@/components/ui/ProfileCapsules";
 
 export default function ProjectsPage() {
     return (
-        <ServerBootPanel>
+        <>
             <main className="min-h-screen bg-linear-to-b from-[#0a0a0a] via-[#050505] to-[#000000] text-[#b0b0b0] selection:bg-[#007acc] selection:text-white font-sans overflow-x-hidden">
                 <Navbar capsules={<ProfileCapsules />} />
 
@@ -31,13 +31,13 @@ export default function ProjectsPage() {
                         </span>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10 flex-grow">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10 grow">
                         {projects.map((project, i) => (
                             <ProjectCard key={project.id} project={project} index={i} />
                         ))}
                     </div>
                 </section>
             </main>
-        </ServerBootPanel>
+        </>
     );
 }

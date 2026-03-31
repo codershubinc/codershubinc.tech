@@ -4,13 +4,17 @@ import { Terminal, ArrowRight } from "lucide-react";
 import { ProjectCard } from "@/components/projects";
 import { projects } from "@/data/projects";
 import { CurrentlyListeningMini } from "@/components/spotify";
-import { TodayContributionsCard } from "@/components/github";
+import {
+  TodayContributionsCard,
+  GitHubSection,
+} from "@/components/github";
 import {
   ServerBootPanel,
   Navbar,
   ScrollReveal,
   HeroContent,
   WhoAmISection,
+  SystemLogsTimeline,
 } from "@/components/ui";
 import ProfileCapsules from "@/components/ui/ProfileCapsules";
 import { WakatimeStats } from "@/components/wakatime";
@@ -55,6 +59,22 @@ export default async function Home() {
 
         {/* Who Am I */}
         <WhoAmISection />
+
+        {/* ── divider ── */}
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="h-px bg-linear-to-r from-transparent via-[#007acc]/40 to-transparent" />
+        </div>
+
+        {/* GitHub stats/Contributions */}
+        <GitHubSection />
+
+        {/* ── divider ── */}
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="h-px bg-linear-to-r from-transparent via-[#007acc]/40 to-transparent" />
+        </div>
+
+        {/* Career Timeline */}
+        <SystemLogsTimeline />
 
         {/* ── divider ── */}
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -271,7 +291,7 @@ export default async function Home() {
             <div className="pt-8 border-t border-white/5">
               <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                 <div className="flex items-center gap-4 text-xs text-zinc-500 font-mono">
-                  <span>© 2026 Swapnil Ingle</span>
+                  <span>© 2026 Swapnil Ingle @codershubinc </span>
                   <span className="hidden md:inline">•</span>
                   <span className="flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
