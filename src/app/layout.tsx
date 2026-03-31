@@ -7,10 +7,52 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const jetbrains = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
 export const metadata: Metadata = {
-  title: "CodersHubInc | Swapnil Ingle",
-  description: "Backend Developer & Linux Enthusiast. Creator of Orbit, Quazaar, and VS Music.",
+  metadataBase: new URL("https://codershubinc.com"),
+  title: {
+    default: "CodersHubInc | Swapnil Ingle",
+    template: "%s | CodersHubInc",
+  },
+  description: "Backend Developer & Linux Enthusiast. Creator of Orbit, Quazaar, and VS Music. Building high-performance systems and open-source tools.",
+  keywords: ["Swapnil Ingle", "CodersHubInc", "Backend Developer", "Go", "TypeScript", "Linux", "Open Source", "Software Engineer"],
+  authors: [{ name: "Swapnil Ingle", url: "https://codershubinc.com" }],
+  creator: "Swapnil Ingle",
+  publisher: "CodersHubInc",
   icons: {
     icon: "/favicon.ico",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://codershubinc.com",
+    title: "CodersHubInc | Swapnil Ingle",
+    description: "Backend Developer & Linux Enthusiast. Creator of Orbit, Quazaar, and VS Music.",
+    siteName: "CodersHubInc",
+    images: [
+      {
+        url: "/api/og?slug=home",
+        width: 1200,
+        height: 630,
+        alt: "CodersHubInc Portfolio",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "CodersHubInc | Swapnil Ingle",
+    description: "Backend Developer & Linux Enthusiast. Building high-performance systems and open-source tools.",
+    creator: "@codershubinc",
+    images: ["/api/og?slug=home"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 

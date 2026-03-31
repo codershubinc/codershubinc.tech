@@ -1,5 +1,6 @@
 import React from "react";
-import { Terminal } from "lucide-react";
+import Link from "next/link";
+import { Terminal, ArrowLeft } from "lucide-react";
 import { ProjectCard } from "@/components/projects";
 import { projects } from "@/data/projects";
 import { Navbar, ScrollReveal } from "@/components/ui";
@@ -15,6 +16,19 @@ export default function ProjectsPage() {
                 <section className="pt-32 pb-24 px-4 sm:px-6 max-w-6xl mx-auto relative min-h-screen flex flex-col">
                     {/* Background Accent glow */}
                     <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[#007acc]/5 blur-[120px] rounded-full pointer-events-none"></div>
+
+                    <div className="relative z-10 w-full mb-12">
+                        {/* Back Navigation */}
+                        <ScrollReveal direction="up">
+                            <Link
+                                href="/"
+                                className="inline-flex items-center gap-2 text-sm font-mono text-zinc-400 hover:text-[#007acc] transition-colors group"
+                            >
+                                <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+                                cd ..
+                            </Link>
+                        </ScrollReveal>
+                    </div>
 
                     <div className="flex items-end justify-between mb-16 relative z-10">
                         <ScrollReveal direction="left">

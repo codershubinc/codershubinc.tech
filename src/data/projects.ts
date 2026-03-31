@@ -7,7 +7,7 @@ export const projects: Project[] = [
     slug: "open-api",
     description: "An open-source API toolkit featuring a versioned routing architecture that provides developers with instant mock data, secure cryptographic tools, and server-side proxies to bypass client-side CORS.",
     techStack: ["TypeScript", "Node.js", "Express", "REST API"],
-    liveUrl: "[https://api.codershubinc.tech](https://api.codershubinc.tech)",
+    liveUrl: "[https://api.codershubinc.com](https://api.codershubinc.com)",
     githubUrl: "[https://github.com/codershubinc/open-api](https://github.com/codershubinc/open-api)",
     featured: true,
   },

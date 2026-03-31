@@ -1,5 +1,6 @@
 import React from "react";
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, Github, Globe, Terminal, Activity, Calendar } from "lucide-react";
 import { projects } from "@/data/projects";
@@ -28,6 +29,44 @@ async function fetchReadme(repoPath: string) {
         console.error("Failed to fetch README", error);
     }
     return null;
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> | { slug: string } }): Promise<Metadata> {
+    const resolvedParams = await Promise.resolve(params);
+    const slug = resolvedParams.slug;
+    const project = projects.find((p) => p.slug === slug);
+
+    if (!project) {
+        return { title: 'Project Not Found' };
+    }
+
+    const title = `${project.title} | CodersHubInc`;
+    const description = project.description;
+
+    return {
+        title,
+        description,
+        openGraph: {
+            title,
+            description,
+            type: "article",
+            url: `https://codershubinc.com/projects/${slug}`,
+            images: [
+                {
+                    url: `/api/og?slug=${slug}`,
+                    width: 1200,
+                    height: 630,
+                    alt: title,
+                },
+            ],
+        },
+        twitter: {
+            card: "summary_large_image",
+            title,
+            description,
+            images: [`/api/og?slug=${slug}`],
+        },
+    };
 }
 
 export default async function ProjectDetailPage({ params }: { params: Promise<{ slug: string }> | { slug: string } }) {

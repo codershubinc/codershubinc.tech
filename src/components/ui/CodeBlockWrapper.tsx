@@ -11,7 +11,6 @@ export function CodeBlockWrapper({ children }: CodeBlockWrapperProps) {
     const preRef = useRef<HTMLPreElement>(null);
 
     const handleCopy = () => {
-        // Extract text from the pre element
         if (preRef.current) {
             return preRef.current.innerText;
         }
