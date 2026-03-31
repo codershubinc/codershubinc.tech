@@ -17,7 +17,7 @@ export const projects: Project[] = [
     slug: "aaxion",
     description: "A high-performance, self-hosted cloud storage and media streaming server. Utilizes Go goroutines for concurrent video delivery and WebSockets for real-time state synchronization.",
     techStack: ["Go", "SQLite", "WebSockets", "Concurrency"],
-    liveUrl: "[https://github.com/codershubinc/aaxion](https://github.com/codershubinc/aaxion)", 
+    liveUrl: "[https://github.com/codershubinc/aaxion](https://github.com/codershubinc/aaxion)",
     githubUrl: "[https://github.com/codershubinc/aaxion](https://github.com/codershubinc/aaxion)",
     featured: true,
   },

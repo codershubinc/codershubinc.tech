@@ -1,6 +1,8 @@
 import React from "react";
-import { Terminal } from "lucide-react";
-import { OrbitCard, VSMusicCard, QuazaarCard } from "@/components/projects";
+import Link from "next/link";
+import { Terminal, ArrowRight } from "lucide-react";
+import { ProjectCard } from "@/components/projects";
+import { projects } from "@/data/projects";
 import { CurrentlyListeningMini } from "@/components/spotify";
 import { TodayContributionsCard } from "@/components/github";
 import {
@@ -74,24 +76,31 @@ export default async function Home() {
                 ls -la ./projects
               </h2>
               <p className="font-mono text-sm text-[#666]">
-                drwxr-xr-x 3 codershubinc staff
+                drwxr-xr-x {projects.length} codershubinc staff
               </p>
             </ScrollReveal>
             <span className="font-mono text-xs text-[#444] hidden md:block px-3 py-1 bg-white/5 rounded-lg border border-white/5">
-              total 3
+              total {projects.length}
             </span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
-            <ScrollReveal direction="left" delay={100}>
-              <VSMusicCard />
-            </ScrollReveal>
-            <ScrollReveal direction="right" delay={200}>
-              <OrbitCard />
-            </ScrollReveal>
-            <ScrollReveal direction="up" delay={300}>
-              <QuazaarCard />
-            </ScrollReveal>
+            {projects.map((project, i) => (
+              <ProjectCard key={project.id} project={project} index={i} />
+            ))}
+          </div>
+
+          <div className="mt-16 flex justify-center relative z-10">
+            <Link
+              href="/projects"
+              className="group flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 border border-white/10 hover:border-[#007acc]/30 hover:bg-[#007acc]/10 text-zinc-400 hover:text-white transition-all duration-300 backdrop-blur-md"
+            >
+              View All Projects
+              <ArrowRight
+                size={16}
+                className="group-hover:translate-x-1 group-hover:text-[#007acc] transition-transform duration-300"
+              />
+            </Link>
           </div>
         </section>
 
