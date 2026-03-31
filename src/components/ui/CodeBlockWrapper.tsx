@@ -28,10 +28,9 @@ export function CodeBlockWrapper({ children }: CodeBlockWrapperProps) {
                         <div className="w-3 h-3 rounded-full bg-green-500/20 border border-green-500/50"></div>
                     </div>
                 </div>
-                {/* We use a specialized button that takes a getter function or we can just pass the string if we knew it. But we don't so we'll rewrite CopyButton to take a function */}
                 <CopyButton textToCopy="" getCopyText={handleCopy} />
             </div>
-            <pre ref={preRef} className="!bg-transparent !m-0 !p-4 overflow-x-auto text-[13px] leading-relaxed">
+            <pre ref={preRef} className="bg-transparent! m-0! p-4! overflow-x-auto text-[13px] leading-relaxed">
                 {children}
             </pre>
         </div>

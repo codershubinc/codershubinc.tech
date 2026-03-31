@@ -21,8 +21,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
-      <Toaster />
       <body className={`${inter.variable} ${jetbrains.variable} font-sans antialiased bg-[#0a0a0a]`}>
+        <Toaster position="bottom-right" toastOptions={{ style: { background: '#111', color: '#fff', border: '1px solid rgba(255,255,255,0.1)' } }} />
         {children}
       </body>
     </html>
