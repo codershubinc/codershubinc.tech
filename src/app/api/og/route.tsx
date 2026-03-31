@@ -85,17 +85,34 @@ export async function GET(request: Request) {
                             <span style={{ color: "#ffffff", fontWeight: "bold" }}>{isHome ? "" : (slug || "all")}</span>
                         </div>
 
-                        <div
-                            style={{
-                                display: "flex",
-                                fontSize: 72,
-                                fontWeight: "bolder",
-                                letterSpacing: "-2px",
-                                marginBottom: 24,
-                                lineHeight: 1.1,
-                            }}
-                        >
-                            {title}
+                        {/* Title & Avatar Section */}
+                        <div style={{ display: "flex", alignItems: "center", marginBottom: 24 }}>
+                            {/* Show GitHub Avatar specifically on the home screen */}
+                            {isHome && (
+                                <img
+                                    src="https://github.com/codershubinc.png"
+                                    alt="Avatar"
+                                    style={{
+                                        width: 100,
+                                        height: 100,
+                                        borderRadius: "50%",
+                                        marginRight: 24,
+                                        border: "2px solid rgba(255,255,255,0.1)",
+                                        boxShadow: "0 0 20px rgba(0, 122, 204, 0.4)",
+                                    }}
+                                />
+                            )}
+                            <div
+                                style={{
+                                    display: "flex",
+                                    fontSize: 72,
+                                    fontWeight: "bolder",
+                                    letterSpacing: "-2px",
+                                    lineHeight: 1.1,
+                                }}
+                            >
+                                {title}
+                            </div>
                         </div>
 
                         <div
