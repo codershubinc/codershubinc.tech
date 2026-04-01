@@ -38,23 +38,18 @@ export function MarkdownRenderer({ content, rawBaseUrl }: MarkdownRendererProps)
                 components={{
                     img: (props) => {
                         let src = props.src;
-                        // Transform relative URLs to raw GitHub URLs if a base URL is provided
                         if (typeof src === 'string' && rawBaseUrl && !src.startsWith("http") && !src.startsWith("data:")) {
-                            // Trim leading slash to avoid double slashes
                             const cleanPath = src.replace(/^\/+/, "");
                             src = `${rawBaseUrl}/${cleanPath}`;
                         }
 
                         const isBadge = typeof src === 'string' && src?.match(/shields\.io|badge|wakatime\.com/i);
                         if (isBadge) {
-                            // Render badges inline without heavy prose styles
                             return <img {...props} src={src} className="not-prose inline-block !m-0 !mr-2 !mb-2 align-middle border-0 shadow-none bg-transparent" style={{ marginTop: 0, marginBottom: 0 }} />;
                         }
-                        // Render regular images with rich styles
                         return <img {...props} src={src} className="rounded-xl border border-white/10 my-8 shadow-xl max-w-full" />;
                     },
                     pre: ({ node, ...props }) => {
-                        // The pre element typically wraps a code element. So we pass the children inside.
                         const { children } = props;
                         return (
                             <CodeBlockWrapper>
