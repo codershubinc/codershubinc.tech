@@ -409,9 +409,6 @@ export function WhoAmISection() {
                               }}
                             />
                           </div>
-                          <span className="text-[9px] font-mono text-zinc-600 shrink-0">
-                            {lang.count} repo{lang.count !== 1 ? "s" : ""}
-                          </span>
                         </div>
                       </div>
                     </motion.div>
