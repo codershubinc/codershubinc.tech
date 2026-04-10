@@ -1,12 +1,13 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { Terminal } from "lucide-react";
+import { Terminal, Maximize2 } from "lucide-react";
+import Link from "next/link";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
-import { getCommandOutput } from "./commands";
 import { listKonsoleDirectory } from "./actions";
-import { doodles, gitTexts, availableCommands, getRandom } from "./constants";
+import { availableCommands } from "./constants";
 import { PromptHeader } from "./PromptHeader";
+import { useKonsoleHistory, generateId } from "./useKonsoleHistory";
 
 export interface CommandOutput {
     id: string;
@@ -18,39 +19,19 @@ export interface CommandOutput {
     };
 }
 
-const idGen = () => Math.random().toString(36).substring(2, 9);
-const generateId = idGen;
+export default function Konsole({ fullScreen }: { fullScreen?: boolean }) {
+    const {
+        history,
+        currentPromptState,
+        handleCommand,
+        navigateHistoryUp,
+        navigateHistoryDown,
+        appendToHistory,
+        refreshPromptState
+    } = useKonsoleHistory();
 
-export default function Konsole() {
-    const [history, setHistory] = useState<CommandOutput[]>([
-        {
-            id: generateId(),
-            type: 'output',
-            content: (
-                <div className="text-zinc-300">
-                    Welcome to codershubinc zsh terminal. Type <span className="text-emerald-400">help</span> to see available commands.
-                </div>
-            )
-        }
-    ]);
     const [input, setInput] = useState("");
-    const [commandHistory, setCommandHistory] = useState<string[]>([]);
-    const [historyIndex, setHistoryIndex] = useState<number>(-1);
     const [availableFiles, setAvailableFiles] = useState<string[]>([]);
-
-    // Maintain a stable theme state for the active interactive prompt
-    const [currentPromptState, setCurrentPromptState] = useState({
-        doodle: "",
-        git: ""
-    });
-
-    // Initialize prompt state on mount
-    useEffect(() => {
-        setCurrentPromptState({
-            doodle: getRandom(doodles),
-            git: getRandom(gitTexts)
-        });
-    }, []);
 
     const inputRef = useRef<HTMLInputElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
@@ -93,62 +74,16 @@ export default function Konsole() {
         }
     }
 
-    const handleCommand = async (cmd: string) => {
-        const trimmedCmd = cmd.trim().toLowerCase();
-
-        if (!trimmedCmd) return;
-
-        if (trimmedCmd === "clear") {
-            setHistory([]);
-            return;
-        }
-
-        setCommandHistory(prev => [...prev, trimmedCmd]);
-        setHistoryIndex(-1);
-
-        const outputContent = await getCommandOutput(trimmedCmd);
-
-        setHistory(prev => [
-            ...prev,
-            {
-                id: generateId(),
-                type: 'input',
-                content: cmd,
-                promptInfo: currentPromptState,
-            },
-            { id: generateId(), type: 'output', content: outputContent }
-        ]);
-
-        // roll new random prompt for next input
-        setCurrentPromptState({
-            doodle: getRandom(doodles),
-            git: getRandom(gitTexts)
-        });
-    };
-
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
             handleCommand(input);
             setInput("");
         } else if (e.key === "ArrowUp") {
             e.preventDefault();
-            if (commandHistory.length > 0) {
-                const nextIndex = historyIndex === -1 ? commandHistory.length - 1 : Math.max(0, historyIndex - 1);
-                setHistoryIndex(nextIndex);
-                setInput(commandHistory[nextIndex]);
-            }
+            setInput(navigateHistoryUp(input));
         } else if (e.key === "ArrowDown") {
             e.preventDefault();
-            if (historyIndex !== -1) {
-                const nextIndex = historyIndex + 1;
-                if (nextIndex >= commandHistory.length) {
-                    setHistoryIndex(-1);
-                    setInput("");
-                } else {
-                    setHistoryIndex(nextIndex);
-                    setInput(commandHistory[nextIndex]);
-                }
-            }
+            setInput(navigateHistoryDown(input));
         } else if (e.key === "Tab") {
             e.preventDefault();
             if (!input.trim() || suggestions.length === 0) return;
@@ -162,23 +97,21 @@ export default function Konsole() {
                 }
             } else if (suggestions.length > 1) {
                 // If multiples, display the alternatives in the terminal
-                setHistory(prev => [
-                    ...prev,
-                    {
-                        id: generateId(),
-                        type: 'input',
-                        content: input,
-                        promptInfo: currentPromptState
-                    },
-                    {
-                        id: generateId(), type: 'output', content: (
-                            <div className="flex gap-4 flex-wrap text-zinc-300 font-mono">
-                                {suggestions.map(s => <span key={s} className="text-emerald-400">{s}</span>)}
-                            </div>
-                        )
-                    }
-                ]);
-                setCurrentPromptState({ doodle: getRandom(doodles), git: getRandom(gitTexts) });
+                appendToHistory([{
+                    id: generateId(),
+                    type: 'input',
+                    content: input,
+                    promptInfo: currentPromptState,
+                }, {
+                    id: generateId(),
+                    type: 'output',
+                    content: (
+                        <div className="flex gap-4 flex-wrap text-zinc-300 font-mono">
+                            {suggestions.map(s => <span key={s} className="text-emerald-400">{s}</span>)}
+                        </div>
+                    )
+                }]);
+                refreshPromptState();
             }
         } else if (e.key === "ArrowRight") {
             if (suggestionText && inputRef.current?.selectionStart === input.length) {
@@ -189,23 +122,36 @@ export default function Konsole() {
     };
 
     return (
-        <section className="py-16 sm:py-24 px-4 sm:px-6 max-w-6xl mx-auto border-t border-white/5 relative">
-            <div className="absolute top-1/2 right-1/4 w-[400px] h-[400px] bg-emerald-500/5 blur-[120px] rounded-full pointer-events-none transform -translate-y-1/2"></div>
+        <section className={fullScreen ? "w-full h-full p-4 relative" : "py-16 sm:py-24 px-4 sm:px-6 max-w-6xl mx-auto border-t border-white/5 relative"}>
+            {!fullScreen && <div className="absolute top-1/2 right-1/4 w-[400px] h-[400px] bg-emerald-500/5 blur-[120px] rounded-full pointer-events-none transform -translate-y-1/2"></div>}
 
-            <div className="flex items-end justify-between mb-12 relative z-10">
-                <ScrollReveal direction="left">
-                    <h2 className="text-2xl sm:text-4xl font-bold font-mono text-white flex items-center gap-3 mb-2 hover:text-[#007acc] transition-colors duration-300">
-                        <Terminal className="text-[#007acc] animate-pulse" size={28} />
-                        interactive-shell
-                    </h2>
-                    <p className="font-mono text-sm text-[#666]">
-                        Type commands to explore more about me...
-                    </p>
-                </ScrollReveal>
-            </div>
+            {!fullScreen && (
+                <div className="flex items-end justify-between mb-12 relative z-10 w-full">
+                    <ScrollReveal direction="left">
+                        <h2 className="text-2xl sm:text-4xl font-bold font-mono text-white flex items-center gap-3 mb-2 hover:text-[#007acc] transition-colors duration-300">
+                            <Terminal className="text-[#007acc] animate-pulse" size={28} />
+                            interactive-shell
+                        </h2>
+                        <p className="font-mono text-sm text-[#666]">
+                            Type commands to explore more about me...
+                        </p>
+                    </ScrollReveal>
+                    
+                    <ScrollReveal direction="right">
+                        <Link 
+                            href="/zsh"
+                            className="group flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 hover:border-emerald-500/50 transition-all duration-300 font-mono text-sm text-zinc-300 hover:text-emerald-400"
+                            title="Open full screen terminal"
+                        >
+                            <span className="hidden sm:inline">Launch /zsh</span>
+                            <Maximize2 size={16} className="group-hover:scale-110 transition-transform" />
+                        </Link>
+                    </ScrollReveal>
+                </div>
+            )}
 
             <div
-                className="relative z-10 bg-[#0a0a0a] border border-white/10 rounded-xl p-4 sm:p-6 font-mono text-xs sm:text-sm shadow-xl shadow-black/50 h-[400px] overflow-hidden flex flex-col cursor-text"
+                className={`relative z-10 bg-[#0a0a0a] border border-white/10 rounded-xl p-4 sm:p-6 font-mono text-xs sm:text-sm shadow-xl shadow-black/50 overflow-hidden flex flex-col cursor-text ${fullScreen ? "h-full w-full" : "h-[400px]"}`}
                 onClick={focusInput}
             >
                 <div className="flex items-center gap-2 mb-6 pb-4 border-b border-white/5 shrink-0">

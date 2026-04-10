@@ -1,5 +1,7 @@
 import React from "react";
 import { readKonsoleFile, listKonsoleDirectory } from "./actions";
+import { fastfetchCommand } from "./commands/fastfetch";
+import { getIpCommand } from "./commands/ip";
 
 export const staticCommands: Record<string, React.ReactNode> = {
     help: (
@@ -12,11 +14,17 @@ export const staticCommands: Record<string, React.ReactNode> = {
             <div><span className="text-emerald-400">date</span> - Print current date and time</div>
             <div><span className="text-emerald-400">echo [text]</span> - Print text</div>
             <div><span className="text-emerald-400">cat [file]</span> - Read a file (try: <span className="text-blue-400">cat hire-me.txt</span>)</div>
+            <div><span className="text-emerald-400">ip addr</span> - Show current IP address</div>
+            <div><span className="text-emerald-400">fastfetch</span> - Fetch system information</div>
             <div><span className="text-emerald-400">clear</span> - Clear terminal</div>
         </div>
     ),
+    fastfetch: fastfetchCommand,
     pwd: (
-        <div className="text-zinc-300">/home/codershubinc</div>
+        <>
+            <div className="text-zinc-300">/home/codershubinc</div>
+            <div className="text-zinc-300">/home/codershubinc</div>
+        </>
     ),
     whoami: (
         <div className="text-zinc-300">guest</div>
@@ -45,6 +53,10 @@ export const getCommandOutput = async (cmd: string): Promise<React.ReactNode> =>
 
     if (lowerCmd.startsWith("mkdir ") || lowerCmd.startsWith("rm ") || lowerCmd.startsWith("touch ")) {
         return <div className="text-red-400">permission denied: running as guest</div>;
+    }
+
+    if (lowerCmd === "ip" || lowerCmd === "ip addr" || lowerCmd === "ip address") {
+        return await getIpCommand();
     }
 
     if (lowerCmd === "ls" || lowerCmd === "ll" || lowerCmd === "ls -la" || lowerCmd === "ls -l") {
@@ -94,7 +106,7 @@ export const getCommandOutput = async (cmd: string): Promise<React.ReactNode> =>
 
     return (
         <div className="text-red-400">
-            zsh: command not found: {cmd.split(" ")[0]}. Type 'help' for available commands.
+            zsh: command not found: {cmd.split(" ")[0]}. Type &apos;help&apos; for available commands.
         </div>
     );
 };
