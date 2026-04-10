@@ -5,6 +5,7 @@ import GitHubContributions from "./GitHubContributions";
 import GitHubStatsCard from "./GitHubStatsCard";
 import TopLanguagesCard from "./TopLanguagesCard";
 import GitHubStreakMini from "./GitHubStreakMini";
+import MyReposRanked from "./MyReposRanked";
 
 export default function GitHubSection() {
     return (
@@ -38,8 +39,11 @@ export default function GitHubSection() {
                 </div>
 
                 {/* Right column for side elements */}
-                <div className="space-y-6">
+                <div className="space-y-6 flex flex-col h-full">
                     <GitHubStreakMini />
+                    <div className="flex-1 min-h-[400px]">
+                        <MyReposRanked />
+                    </div>
                 </div>
             </div>
         </section>

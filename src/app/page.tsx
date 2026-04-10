@@ -47,7 +47,7 @@ export default async function Home() {
               <WakatimeStats />
 
               {/* Spotify mini  */}
-              <CurrentlyListeningMini />
+              {/* <CurrentlyListeningMini />  ~ currently  not using it  */}
             </div>
           </div>
         </section>
