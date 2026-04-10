@@ -6,4 +6,5 @@ export { ScrollReveal } from './ScrollReveal';
 export { HeroContent } from './HeroContent';
 export { WhoAmISection } from './WhoAmISection';
 export { SystemLogsTimeline } from './SystemLogsTimeline';
+export { default as Konsole } from '../konsole/konsole';
 export { MarkdownRenderer } from './MarkdownRenderer';

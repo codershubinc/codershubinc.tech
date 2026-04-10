@@ -1,0 +1,2 @@
+A software engineer focused on building robust, scalable solutions.
+Passionate about Linux, Go, and Next.js.

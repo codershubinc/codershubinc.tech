@@ -15,6 +15,7 @@ import {
   HeroContent,
   WhoAmISection,
   SystemLogsTimeline,
+  Konsole,
 } from "@/components/ui";
 import ProfileCapsules from "@/components/ui/ProfileCapsules";
 import { WakatimeStats } from "@/components/wakatime";
@@ -73,8 +74,8 @@ export default async function Home() {
           <div className="h-px bg-linear-to-r from-transparent via-[#007acc]/40 to-transparent" />
         </div>
 
-        {/* Career Timeline */}
-        <SystemLogsTimeline />
+        {/* Console Interactive CLI */}
+        <Konsole />
 
         {/* ── divider ── */}
         <div className="max-w-6xl mx-auto px-4 sm:px-6">

@@ -1,0 +1,6 @@
+=== Support My Work ===
+Enjoying my open-source projects or this terminal portfolio? 
+Consider buying me a coffee or becoming a sponsor!
+
+GitHub Sponsors: https://github.com/sponsors/codershubinc
+Sponsorship Tiers: You can also visit the /sponsors page.

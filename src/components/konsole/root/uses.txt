@@ -1,0 +1,14 @@
+=== My Setup & Gear ===
+Looking to upgrade your environment? Here's what I use daily:
+
+HARDWARE:
+- Primary: MacBook Pro (Apple Silicon)
+- Monitor: 27" 4K IPS Display
+
+SOFTWARE:
+- Editor: VS Code / Cursor
+- Terminal: iTerm2 + zsh (Oh My Zsh)
+- Frameworks: Next.js, React, TailwindCSS
+- Backend: Go, Node.js
+
+(Want this exact portfolio template? I'll be releasing the source code soon! Email to get on the waitlist.)

@@ -1,0 +1,5 @@
+{
+  "frontend": ["React", "Next.js", "TailwindCSS"],
+  "backend": ["Node.js", "Go", "Python"],
+  "infra": ["Linux", "Docker", "AWS"]
+}
