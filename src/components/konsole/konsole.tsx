@@ -195,7 +195,7 @@ export default function Konsole({ fullScreen }: { fullScreen?: boolean }) {
                                     onChange={(e) => setInput(e.target.value)}
                                     onKeyDown={handleKeyDown}
                                     className="relative z-10 bg-transparent border-none outline-none text-white w-full focus:ring-0 focus:outline-none p-0 m-0"
-                                    autoFocus
+                                    autoFocus={fullScreen}
                                     spellCheck="false"
                                     autoComplete="off"
                                 />

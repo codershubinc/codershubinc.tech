@@ -3,7 +3,6 @@ import Link from "next/link";
 import { Terminal, ArrowRight } from "lucide-react";
 import { ProjectCard } from "@/components/projects";
 import { projects } from "@/data/projects";
-import { CurrentlyListeningMini } from "@/components/spotify";
 import {
   TodayContributionsCard,
   GitHubSection,
@@ -14,7 +13,6 @@ import {
   ScrollReveal,
   HeroContent,
   WhoAmISection,
-  SystemLogsTimeline,
   Konsole,
 } from "@/components/ui";
 import ProfileCapsules from "@/components/ui/ProfileCapsules";
@@ -46,9 +44,6 @@ export default async function Home() {
 
               {/* Wakatime Stats */}
               <WakatimeStats />
-
-              {/* Spotify mini  */}
-              {/* <CurrentlyListeningMini />  ~ currently  not using it  */}
             </div>
           </div>
         </section>
