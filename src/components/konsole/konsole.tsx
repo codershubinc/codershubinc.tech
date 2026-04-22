@@ -136,9 +136,9 @@ export default function Konsole({ fullScreen }: { fullScreen?: boolean }) {
                             Type commands to explore more about me...
                         </p>
                     </ScrollReveal>
-                    
+
                     <ScrollReveal direction="right">
-                        <Link 
+                        <Link
                             href="/zsh"
                             className="group flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 hover:border-emerald-500/50 transition-all duration-300 font-mono text-sm text-zinc-300 hover:text-emerald-400"
                             title="Open full screen terminal"
