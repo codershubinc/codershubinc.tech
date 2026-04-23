@@ -37,7 +37,7 @@ export const projects: Project[] = [
     slug: "vs-music",
     description: "A cross-platform VS Code extension bridging the editor's Webview API with native OS media controls via custom Node.js and C# background services. 550+ active installations.",
     techStack: ["TypeScript", "Node.js", "C#", "VS Code API"],
-    liveUrl: "[https://marketplace.visualstudio.com/items?itemName=codershubinc.vs-music](https://marketplace.visualstudio.com/items?itemName=codershubinc.vs-music)",
+    liveUrl: "[https://marketplace.visualstudio.com/items?itemName=codershubinc.music](https://marketplace.visualstudio.com/items?itemName=codershubinc.music)",
     githubUrl: "[https://github.com/codershubinc/vs-music](https://github.com/codershubinc/vs-music)",
     featured: true,
   }
