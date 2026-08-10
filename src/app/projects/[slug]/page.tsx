@@ -4,7 +4,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, Github, Globe, Terminal, Activity, Calendar } from "lucide-react";
 import { projects } from "@/data/projects";
-import { Navbar, ScrollReveal, MarkdownRenderer } from "@/components/ui";
+import { Navbar, ScrollReveal, MarkdownRenderer, AdBanner } from "@/components/ui";
 import ProfileCapsules from "@/components/ui/ProfileCapsules";
 
 // Helper to extract exact owner/repo from GitHub URLs
@@ -147,10 +147,22 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                             </div>
                         </ScrollReveal>
 
+                        {/* Ad Placement: Top of Readme */}
+                        <div className="my-6">
+                            <AdBanner />
+                        </div>
+
                         {/* Readme Content */}
                         <ScrollReveal direction="up" delay={200}>
                             {readmeContent ? (
-                                <MarkdownRenderer content={readmeContent} rawBaseUrl={rawBaseUrl} />
+                                <>
+                                    <MarkdownRenderer content={readmeContent} rawBaseUrl={rawBaseUrl} />
+                                    
+                                    {/* Ad Placement: Bottom of Readme */}
+                                    <div className="mt-12">
+                                        <AdBanner />
+                                    </div>
+                                </>
                             ) : (
                                 <div className="py-20 text-center border border-dashed border-white/10 rounded-2xl bg-white/[0.02]">
                                     <Activity className="mx-auto text-zinc-500 mb-4 animate-pulse" size={32} />

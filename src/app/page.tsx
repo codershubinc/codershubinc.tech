@@ -14,6 +14,7 @@ import {
   HeroContent,
   WhoAmISection,
   Konsole,
+  AdBanner,
 } from "@/components/ui";
 import ProfileCapsules from "@/components/ui/ProfileCapsules";
 import { WakatimeStats } from "@/components/wakatime";
@@ -72,6 +73,11 @@ export default async function Home() {
         {/* Console Interactive CLI */}
         <Konsole />
 
+        {/* Ad Placement: Homepage Mid Section */}
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 my-6">
+          <AdBanner />
+        </div>
+
         {/* ── divider ── */}
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="h-px bg-linear-to-r from-transparent via-[#007acc]/40 to-transparent" />
@@ -120,13 +126,18 @@ export default async function Home() {
           </div>
         </section>
 
+        {/* Ad Placement: Homepage Bottom */}
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 my-8">
+          <AdBanner />
+        </div>
+
         {/* ── divider ── */}
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="h-px bg-linear-to-r from-transparent via-white/8 to-transparent" />
         </div>
 
         {/* Footer */}
-        <footer className="relative mt-32 border-t border-white/5 bg-black/60 backdrop-blur-xl overflow-hidden">
+        <footer className="relative mt-20 border-t border-white/5 bg-black/60 backdrop-blur-xl overflow-hidden">
           {/* Background Gradient */}
           <div className="absolute inset-0 bg-linear-to-b from-[#007acc]/5 via-transparent to-transparent pointer-events-none"></div>
 

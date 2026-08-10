@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Terminal, ArrowLeft } from "lucide-react";
 import { ProjectCard } from "@/components/projects";
 import { projects } from "@/data/projects";
-import { Navbar, ScrollReveal } from "@/components/ui";
+import { Navbar, ScrollReveal, AdBanner } from "@/components/ui";
 import ProfileCapsules from "@/components/ui/ProfileCapsules";
 
 export default function ProjectsPage() {
@@ -49,6 +49,11 @@ export default function ProjectsPage() {
                         {projects.map((project, i) => (
                             <ProjectCard key={project.id} project={project} index={i} />
                         ))}
+                    </div>
+
+                    {/* Ad Placement: Bottom of Projects Archive */}
+                    <div className="w-full max-w-4xl mx-auto mt-12 relative z-10">
+                        <AdBanner />
                     </div>
                 </section>
             </main>

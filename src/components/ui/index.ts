@@ -8,3 +8,4 @@ export { WhoAmISection } from './WhoAmISection';
 export { SystemLogsTimeline } from './SystemLogsTimeline';
 export { default as Konsole } from '../konsole/konsole';
 export { MarkdownRenderer } from './MarkdownRenderer';
+export { AdBanner } from './AdBanner';

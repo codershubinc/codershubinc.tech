@@ -16,7 +16,8 @@ export function Navbar({ capsules }: { capsules?: React.ReactNode }) {
 
     const navLinks = [
         { href: "#projects", label: "~/deployments" },
-        { href: "#whoami", label: "~/profile" },
+        { href: "/aboutme", label: "~/about-me" },
+        { href: "/sponsor", label: "~/sponsor" },
     ];
 
     return (
@@ -53,7 +54,7 @@ export function Navbar({ capsules }: { capsules?: React.ReactNode }) {
                     <div className="hidden md:flex items-center gap-4 max-w-fit w-max ">
                         <div
                             className="transition-all duration-300  max-w-fit w-max "
-                            style={{ maxWidth: scrolled ? "0" : "600px", opacity: scrolled ? 0 : 1 }}
+                            style={{ maxWidth: scrolled ? "0" : "600px", opacity: scrolled ? 0 : 1, display: scrolled ? "none" : "block" }}
                         >
                             {capsules}
                         </div>
@@ -63,9 +64,6 @@ export function Navbar({ capsules }: { capsules?: React.ReactNode }) {
                                     {l.label}
                                 </a>
                             ))}
-                            <Link href="/sponsors" className="hover:text-white transition-colors">
-                                ~/sponsors
-                            </Link>
                         </nav>
                     </div>
 

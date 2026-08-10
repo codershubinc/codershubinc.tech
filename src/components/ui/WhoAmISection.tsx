@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { getLanguageIcon } from "@/lib/icons";
+import SocialLinks from "./SocialLinks";
 
 interface TopLang {
   name: string;
@@ -224,39 +225,9 @@ export function WhoAmISection() {
           </motion.div>
 
           {/* Social links */}
-          <div className="flex flex-wrap gap-3">
-            <a
-              href="https://github.com/codershubinc"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-2 px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-xs font-mono text-[#888] hover:text-white hover:border-white/25 hover:bg-white/10 transition-all"
-            >
-              <Github
-                size={14}
-                className="group-hover:text-white transition-colors"
-              />
-              github.com/codershubinc
-            </a>
-            <a
-              href="https://linkedin.com/in/codershubinc"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-2 px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-xs font-mono text-[#888] hover:text-white hover:border-[#0A66C2]/40 hover:bg-[#0A66C2]/10 transition-all"
-            >
-              <Linkedin
-                size={14}
-                className="group-hover:text-[#0A66C2] transition-colors"
-              />
-              linkedin/codershubinc
-            </a>
-            <a
-              href="mailto:ingleswapnil2004@gmail.com"
-              className="group flex items-center gap-2 px-4 py-2.5 bg-[#007acc]/10 border border-[#007acc]/20 rounded-xl text-xs font-mono text-[#007acc] hover:bg-[#007acc]/20 hover:border-[#007acc]/40 transition-all"
-            >
-              <Mail size={14} />
-              ingleswapnil2004@gmail.com
-            </a>
-          </div>
+          <SocialLinks
+            variant="tile"
+          />
         </motion.div>
 
         {/* Right: Tech stack + current focus */}
