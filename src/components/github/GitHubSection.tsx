@@ -1,6 +1,6 @@
 import React from "react";
 import { Github } from "lucide-react";
-import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { ScrollReveal } from "@/components/ui/animations/ScrollReveal";
 import GitHubContributions from "./GitHubContributions";
 import GitHubStatsCard from "./GitHubStatsCard";
 import TopLanguagesCard from "./TopLanguagesCard";

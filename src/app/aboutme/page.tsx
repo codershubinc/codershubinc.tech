@@ -1,4 +1,4 @@
-import SocialLinks from '@/components/ui/SocialLinks'
+import SocialLinks from '@/components/ui/common/SocialLinks'
 import { Terminal, Server, Wrench, Cpu } from 'lucide-react'
 import { AdBanner } from '@/components/ui'
 import React from 'react'

@@ -19,7 +19,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { getLanguageIcon } from "@/lib/icons";
-import SocialLinks from "./SocialLinks";
+import SocialLinks from "../common/SocialLinks";
 
 interface TopLang {
   name: string;

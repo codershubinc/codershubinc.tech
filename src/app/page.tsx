@@ -16,7 +16,7 @@ import {
   Konsole,
   AdBanner,
 } from "@/components/ui";
-import ProfileCapsules from "@/components/ui/ProfileCapsules";
+import ProfileCapsules from "@/components/ui/common/ProfileCapsules";
 import { WakatimeStats } from "@/components/wakatime";
 
 export default async function Home() {

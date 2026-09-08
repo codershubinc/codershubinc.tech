@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ArrowLeft, Github, Globe, Terminal, Activity, Calendar } from "lucide-react";
 import { projects } from "@/data/projects";
 import { Navbar, ScrollReveal, MarkdownRenderer, AdBanner } from "@/components/ui";
-import ProfileCapsules from "@/components/ui/ProfileCapsules";
+import ProfileCapsules from "@/components/ui/common/ProfileCapsules";
 
 // Helper to extract exact owner/repo from GitHub URLs
 function getRepoPath(url?: string) {

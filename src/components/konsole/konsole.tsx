@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Terminal, Maximize2 } from "lucide-react";
 import Link from "next/link";
-import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { ScrollReveal } from "@/components/ui/animations/ScrollReveal";
 import { listKonsoleDirectory } from "./actions";
 import { availableCommands } from "./constants";
 import { PromptHeader } from "./PromptHeader";

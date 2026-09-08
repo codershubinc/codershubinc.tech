@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Terminal, Cpu, Database, Network } from "lucide-react";
-import { ScrollReveal } from "./ScrollReveal";
+import { ScrollReveal } from "../animations/ScrollReveal";
 
 const logs = [
     {

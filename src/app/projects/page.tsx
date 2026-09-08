@@ -4,7 +4,7 @@ import { Terminal, ArrowLeft } from "lucide-react";
 import { ProjectCard } from "@/components/projects";
 import { projects } from "@/data/projects";
 import { Navbar, ScrollReveal, AdBanner } from "@/components/ui";
-import ProfileCapsules from "@/components/ui/ProfileCapsules";
+import ProfileCapsules from "@/components/ui/common/ProfileCapsules";
 
 export default function ProjectsPage() {
     return (
