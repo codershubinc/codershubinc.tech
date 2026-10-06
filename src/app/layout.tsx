@@ -69,6 +69,7 @@ export default function RootLayout({
       <head>
         <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1775178587078079"
           crossOrigin="anonymous"></Script>
+        <meta name="google-adsense-account" content="ca-pub-1775178587078079"></meta>
       </head>
       <body className={`${inter.variable} ${jetbrains.variable} font-sans antialiased bg-[#0a0a0a]`}>
         <Toaster position="bottom-right" toastOptions={{ style: { background: '#111', color: '#fff', border: '1px solid rgba(255,255,255,0.1)' } }} />
