@@ -1,4 +1,4 @@
-import { SkillCategory } from "@/types";
+import { CodingLanguages, SkillCategory } from "@/types";
 
 export const skills: SkillCategory[] = [
   {
@@ -12,5 +12,15 @@ export const skills: SkillCategory[] = [
   {
     category: "Frontend & Tools",
     items: ["TypeScript", "Next.js", "Tailwind CSS", "Git", "VS Code API"]
+  }
+];
+
+export const langs: CodingLanguages[] = [
+  {
+    category: "Programming Languages",
+    items: ["Go (Golang)", "TypeScript", "C#", "Python", "JavaScript"]
+  }, {
+    category: "Web Technologies",
+    items: ["HTML", "CSS", "SASS", "Tailwind CSS", "React", "Next.js"]
   }
 ];

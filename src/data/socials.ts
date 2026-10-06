@@ -42,6 +42,16 @@ export const SOCIAL_LINKS = [
         iconHover: 'group-hover:text-[#E1306C]'
     },
     {
+        id: 'instagram',
+        url: 'https://instagram.com/swapnil.ing.in',
+        label: 'instagram/swapnil.ing.in',
+        shortLabel: 'Instagram',
+        Icon: Instagram,
+        baseStyles: 'text-[#888] bg-white/5 border-white/10',
+        hoverStyles: 'hover:text-white hover:border-[#E1306C]/40 hover:bg-[#E1306C]/10',
+        iconHover: 'group-hover:text-[#E1306C]'
+    },
+    {
         id: 'youtube',
         url: 'https://youtube.com/@codershubinc',
         label: 'youtube/codershubinc',

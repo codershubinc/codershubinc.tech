@@ -14,6 +14,10 @@ export interface SkillCategory {
   items: string[];
 }
 
+export interface CodingLanguages {
+  category: string;
+  items: string[];
+}
 export * from './github';
 export * from './spotify';
 export * from './vsmusic';
