@@ -154,15 +154,20 @@ export default function Konsole({ fullScreen }: { fullScreen?: boolean }) {
                 className={`relative z-10 bg-[#0a0a0a] border border-white/10 rounded-xl p-4 sm:p-6 font-mono text-xs sm:text-sm shadow-xl shadow-black/50 overflow-hidden flex flex-col cursor-text ${fullScreen ? "h-full w-full" : "h-[400px]"}`}
                 onClick={focusInput}
             >
-                <div className="flex items-center gap-2 mb-6 pb-4 border-b border-white/5 shrink-0">
-                    <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
-                    <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-                    <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
-                    <div className="ml-2 flex items-center gap-2">
-                        <span className="text-emerald-400 font-semibold">➜</span>
-                        <span className="text-[#007acc] font-semibold">~</span>
-                        <span className="text-zinc-500">zsh</span>
+                <div className="flex items-center justify-between mb-6 pb-4 border-b border-white/5 shrink-0">
+                    <div className="flex items-center gap-2">
+                        <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
+                        <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                        <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
+                        <div className="ml-2 flex items-center gap-2">
+                            <span className="text-emerald-400 font-semibold">➜</span>
+                            <span className="text-[#007acc] font-semibold">~</span>
+                            <span className="text-zinc-500">zsh</span>
+                        </div>
                     </div>
+                    <a href="https://naty-zsh.codershubinc.com/" target="_blank" rel="noopener noreferrer" className="text-[8px] text-zinc-500 hover:text-zinc-300 transition-all uppercase tracking-widest font-bold border border-white/10 hover:border-white/30 hover:bg-white/5 px-2 py-1 rounded-md">
+                        POWERED BY NATY-ZSH
+                    </a>
                 </div>
 
                 <div ref={containerRef} className="flex-1 overflow-y-auto space-y-3 pb-4 custom-scrollbar scroll-smooth">
