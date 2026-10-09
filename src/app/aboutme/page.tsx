@@ -1,7 +1,6 @@
 import SocialLinks from '@/components/ui/common/SocialLinks'
 import { Terminal, Server, Wrench, Cpu } from 'lucide-react'
 import { AdBanner } from '@/components/ui'
-import React from 'react'
 
 export default function AboutPage() {
     return (
@@ -69,7 +68,7 @@ export default function AboutPage() {
                     </h2>
                     <div className="space-y-4">
                         {/* Project 1 */}
-                        <div className="group border border-white/10 bg-white/[0.02] hover:bg-white/5 p-6 rounded-2xl transition-colors">
+                        <div className="group border border-white/10 bg-white/2 hover:bg-white/5 p-6 rounded-2xl transition-colors">
                             <div className="flex justify-between items-start mb-2">
                                 <h3 className="text-lg font-medium text-white group-hover:text-teal-400 transition-colors">
                                     Aaxion & Quazaar
@@ -82,7 +81,7 @@ export default function AboutPage() {
                         </div>
 
                         {/* Project 2 */}
-                        <div className="group border border-white/10 bg-white/[0.02] hover:bg-white/5 p-6 rounded-2xl transition-colors">
+                        <div className="group border border-white/10 bg-white/2 hover:bg-white/5 p-6 rounded-2xl transition-colors">
                             <div className="flex justify-between items-start mb-2">
                                 <h3 className="text-lg font-medium text-white group-hover:text-teal-400 transition-colors">
                                     VS Music v0.2.2

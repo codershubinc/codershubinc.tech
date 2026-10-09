@@ -8,12 +8,9 @@ import {
   Server,
   Cpu,
   Globe,
-  Mail,
   GraduationCap,
   MapPin,
   Coffee,
-  Github,
-  Linkedin,
   BookOpen,
   Layers,
 } from "lucide-react";
