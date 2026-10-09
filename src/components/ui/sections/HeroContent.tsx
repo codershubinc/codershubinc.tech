@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Terminal } from "lucide-react";
 import TodayContributionsBadge from "@/components/github/TodayContributionsBadge";
+import { MusicWidget } from "@/components/music";
 
 export function HeroContent() {
     return (
@@ -85,6 +86,15 @@ export function HeroContent() {
                     />
                     cd ~/projects
                 </a>
+            </motion.div>
+
+            <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.6, ease: "easeOut" }}
+                className="pt-2"
+            >
+                <MusicWidget />
             </motion.div>
         </motion.div>
     );

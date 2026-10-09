@@ -32,7 +32,7 @@ export function useContributions(): UseContributionsReturn {
             const d = new Date();
             const today = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
             const response = await fetch(
-                `https://github-contributions-api.deno.dev/codershubinc.json?flat=true&to=${today}&nocache=${Date.now()}`,
+                `/api/github?nocache=${Date.now()}`,
                 {
                     cache: 'no-store',
                 }

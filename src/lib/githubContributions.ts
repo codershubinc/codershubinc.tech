@@ -15,10 +15,9 @@ let cachedData: ContributionsData | null = null;
 let cacheTimestamp: number = 0;
 const CACHE_DURATION = 5000;
 
-
 /**
  * Fetches GitHub contributions data with caching to reduce API calls.
- * Data is cached for 10 seconds to avoid excessive requests.
+ * Data is cached for 5 seconds to avoid excessive requests.
  */
 export async function fetchGitHubContributions(): Promise<ContributionsData | null> {
     const now = Date.now();
@@ -29,24 +28,42 @@ export async function fetchGitHubContributions(): Promise<ContributionsData | nu
     }
 
     try {
-        const today = new Date().toISOString().split('T')[0];
         const res = await fetch(
-            `https://github-contributions-api.deno.dev/codershubinc.json?flat=true&to=${today}`,
+            `https://github-contributions-api.jogruber.de/v4/codershubinc`,
             { cache: 'no-store' }
         );
 
         if (res.ok) {
-            const data: ContributionsData = await res.json();
+            const data = await res.json();
+            
+            const today = new Date();
+            const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+            
+            const allContribs = data.contributions.sort((a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime());
+            const pastAndToday = allContribs.filter((c: any) => c.date <= todayStr);
+            const last365Days = pastAndToday.slice(-365);
+            const totalAllTime = Object.values(data.total).reduce((a: any, b: any) => a + b, 0);
+
+            const mappedData: ContributionsData = {
+                contributions: last365Days.map((c: any) => ({
+                    date: c.date,
+                    contributionCount: c.count,
+                    color: '#ebedf0',
+                    contributionLevel: String(c.level)
+                })),
+                totalContributions: totalAllTime as number
+            };
+
             // Update cache
-            cachedData = data;
+            cachedData = mappedData;
             cacheTimestamp = now;
-            return data;
+            return mappedData;
         }
     } catch (error) {
         console.error('Failed to fetch GitHub contributions:', error);
     }
 
-    return null;
+    return cachedData || null;
 }
 
 /**
@@ -56,8 +73,9 @@ export async function getTodayContributions(): Promise<number> {
     const data = await fetchGitHubContributions();
     if (!data) return 0;
 
-    const today = new Date().toISOString().split('T')[0];
-    const todayContrib = data.contributions.find(c => c.date === today);
+    const today = new Date();
+    const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+    const todayContrib = data.contributions.find(c => c.date === todayStr);
     return todayContrib?.contributionCount || 0;
 }
 

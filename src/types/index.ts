@@ -19,5 +19,5 @@ export interface CodingLanguages {
   items: string[];
 }
 export * from './github';
-export * from './spotify';
+export * from './music';
 export * from './vsmusic';

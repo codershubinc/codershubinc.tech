@@ -9,7 +9,9 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'opengraph.githubassets.com' },
       { protocol: 'https', hostname: 'i.scdn.co' },
       { protocol: 'https', hostname: 'img.shields.io' },
-      { protocol: 'https', hostname: 'cdn.jsdelivr.net' }
+      { protocol: 'https', hostname: 'cdn.jsdelivr.net' },
+      { protocol: 'http', hostname: 'quazaar-sync.codershubinc.com' },
+      { protocol: 'https', hostname: 'quazaar-sync.codershubinc.com' }
     ],
   },
 };

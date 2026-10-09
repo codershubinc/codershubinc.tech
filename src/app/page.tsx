@@ -8,7 +8,6 @@ import {
   GitHubSection,
 } from "@/components/github";
 import {
-  ServerBootPanel,
   Navbar,
   ScrollReveal,
   HeroContent,
@@ -18,6 +17,7 @@ import {
 } from "@/components/ui";
 import ProfileCapsules from "@/components/ui/common/ProfileCapsules";
 import { WakatimeStats } from "@/components/wakatime";
+import { MusicWidget, MusicStatsWidget } from "@/components/music";
 
 export default async function Home() {
   return (
@@ -44,6 +44,9 @@ export default async function Home() {
 
             {/* Wakatime Stats */}
             <WakatimeStats />
+
+            {/* Music Stats Widget */}
+            <MusicStatsWidget />
           </div>
         </div>
       </section>

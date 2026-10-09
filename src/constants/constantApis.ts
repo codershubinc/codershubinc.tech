@@ -3,7 +3,7 @@ export const GITHUB_USERNAME = 'codershubinc';
 
 export const github = {
     baseUrl: 'https://github-readme-states-repo-self-inst.vercel.app/api',
-    contributionsBaseUrl: 'https://github-contributions-api.deno.dev',
+    contributionsBaseUrl: 'https://github-contributions.vercel.app',
     apiBaseUrl: 'https://api.github.com',
 
     endpoints: {
@@ -14,8 +14,7 @@ export const github = {
             `https://github-readme-states-repo-self-inst.vercel.app/api/json-top-langs?username=${username}`,
 
         contributions: (username: string = GITHUB_USERNAME, toDate?: string) => {
-            const date = toDate || new Date().toISOString().split('T')[0];
-            return `https://github-contributions-api.deno.dev/${username}.json?flat=true&to=${date}`;
+            return `https://github-contributions.vercel.app/api/v1/${username}`;
         },
 
         userProfile: (username: string = GITHUB_USERNAME) =>
@@ -26,10 +25,10 @@ export const github = {
     },
 } as const;
 
-// Spotify API Endpoints
-export const spotify = {
-    proxy: '/api/spotify',
-    external: 'https://sp-card-t.vercel.app/json',
+// Music API Endpoints
+export const music = {
+    proxy: '/api/music',
+    external: 'https://quazaar-sync.codershubinc.com/api/v1/summary',
 } as const;
 
 export const vsMusic = {

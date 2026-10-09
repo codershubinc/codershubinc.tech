@@ -23,7 +23,7 @@ export default function TodayContributionsCard() {
                             <span className="text-xs text-zinc-400">GitHub Commits</span>
                         </div>
                         <span className="text-xl font-bold text-white font-mono">
-                            {error ? '—' : todaysCount}
+                            {(error && todaysCount === 0) ? '—' : todaysCount}
                         </span>
                     </div>
                 </div>

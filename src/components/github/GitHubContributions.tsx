@@ -96,7 +96,7 @@ export default async function GitHubContributions() {
 
                     {/* Legend matched to 10px sizing */}
                     <div className="flex items-center justify-between w-full mt-3 text-[10px] text-zinc-500 font-mono px-1">
-                        <span>8 weeks ago</span>
+                        <span>1 year ago</span>
                         <div className="flex items-center gap-1.5">
                             <span>Less</span>
                             <div className="flex gap-[2px]">

@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 export async function GET() {
     try {
-        const response = await fetch('https://sp-card-t.vercel.app/json', {
+        const response = await fetch('https://quazaar-sync.codershubinc.com/api/v1/summary', {
             cache: 'no-store',
             headers: {
                 'Content-Type': 'application/json',
@@ -11,7 +11,7 @@ export async function GET() {
 
         if (!response.ok) {
             return NextResponse.json(
-                { error: 'Failed to fetch Spotify data' },
+                { error: 'Failed to fetch Music data' },
                 { status: response.status }
             );
         }
@@ -24,7 +24,7 @@ export async function GET() {
             },
         });
     } catch (error) {
-        console.log('Spotify API proxy error:', error);
+        console.log('Music API proxy error:', error);
         return NextResponse.json(
             { error: 'Internal server error' },
             { status: 500 }
