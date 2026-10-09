@@ -149,7 +149,7 @@ export function WhoAmISection() {
               <p>
                 Hi, I&apos;m a{" "}
                 <span className="text-white font-medium rounded-xl  border-slate-900 px-3 border-solid border-2">
-                  2nd-year B.Tech AIML student
+                  3rd-year B.Tech AIML student
                 </span>{" "}
                 based in{" "}
                 <span className="inline-flex items-center gap-1 text-white font-medium">
@@ -188,7 +188,7 @@ export function WhoAmISection() {
             <div className="flex flex-wrap gap-3 pt-2 border-t border-white/5">
               <span className="inline-flex items-center gap-1.5 text-xs font-mono text-[#666] px-3 py-1.5 bg-white/5 rounded-lg border border-white/6">
                 <GraduationCap size={12} className="text-[#007acc]" />
-                B.Tech AIML · CSMU · 2nd Year
+                B.Tech AIML · CSMU · 3rd Year
               </span>
               <span className="inline-flex items-center gap-1.5 text-xs font-mono text-[#666] px-3 py-1.5 bg-white/5 rounded-lg border border-white/6">
                 <Globe size={12} className="text-green-400" />
@@ -399,7 +399,7 @@ export function WhoAmISection() {
               {[
                 { label: "Institution", value: "CSMU, Panvel" },
                 { label: "Degree", value: "B.Tech AIML" },
-                { label: "Year", value: "2nd Year" },
+                { label: "Year", value: "3rd Year" },
                 { label: "Expected", value: "2027" },
               ].map((row) => (
                 <li
