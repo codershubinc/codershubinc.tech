@@ -45,8 +45,13 @@ export function useContributions(): UseContributionsReturn {
             const data: ContributionsData = await response.json();
             setContributionsData(data);
 
-            const todayContrib = data.contributions[data.contributions.length - 1];
-            const prevDayContrib = data.contributions[data.contributions.length - 2];
+            const todayContrib = data.contributions.find((c) => c.date === today);
+            
+            const prev = new Date();
+            prev.setDate(prev.getDate() - 1);
+            const prevDayStr = `${prev.getFullYear()}-${String(prev.getMonth() + 1).padStart(2, '0')}-${String(prev.getDate()).padStart(2, '0')}`;
+            const prevDayContrib = data.contributions.find((c) => c.date === prevDayStr);
+
             // toast(`Fetched contributions for ${today}: ${JSON.stringify(todayContrib) || 0}`);
             // console.log(`Today's contributions: ${todayContrib || 0}`);
 
