@@ -18,6 +18,7 @@ export function useMusic() {
     }
 
     useEffect(() => {
+        getMusicData(); // Fetch immediately on mount
         const interval = setInterval(() => {
             getMusicData();
         }, 5000);
